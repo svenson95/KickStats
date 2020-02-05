@@ -67,7 +67,7 @@ class ListItems extends React.Component<any, any> {
     render() {
         const items = standing.map((team, index) => {
             return (
-                <IonItem key={index}>
+                <IonItem key={index} className="team__item">
                     <div className="team__container">
                         <div className="team__info">
                             <div className="team__position">{standing[index].position}.</div>

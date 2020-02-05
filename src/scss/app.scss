@@ -1,8 +1,10 @@
 @import "./mixins";
 
+$font-family-base: Avenir, Roboto, "Helvetica Neue", sans-serif !important;
+
 html {
   background-color: #fcfcfc;
-  font-family: Avenir, sans-serif !important;
+  --ion-font-family: Avenir, Roboto, "Helvetica Neue", sans-serif !important;
 }
 
 /* +++ CONTENT +++ */
@@ -12,6 +14,12 @@ html {
     max-width: 12% !important;
   }
 }
+
+// hide ionic header shadow
+.header-md:after {
+  background: none;
+}
+
 
 .content__container {
   width: 100%;
@@ -24,13 +32,14 @@ html {
     ion-title {
       font-weight: 900;
       text-align: center;
-      padding: 8px;
+      padding: 7px 80px;
+      background: linear-gradient(90deg, #fcfcfc 1%, #e6e6e6 50%, #fcfcfc 99%);
 
       // For mobile center the title based on full (device) width instead of element width,
       // menu and back button should not affect the position of the page title
       @include to-sm {
         position: absolute;
-        top: 15px;
+        top: 7px;
         right: 0;
         margin: auto;
         width: 100%;
@@ -42,11 +51,13 @@ html {
 /* --------------------------------------------- */
 
 /* +++ STANDING LIST +++ */
+.team__item { --min-height: 38px; }
 .team__container {
   display: flex;
   align-items: center;
   width: 100%;
   justify-content: space-between;
+  height: 35px;
 
   .team__logo {
     width: 15px;
@@ -96,8 +107,8 @@ html {
     flex-shrink: 0;
 
     .team__result {
-      width: 30px;
-      height: 30px;
+      width: 25px;
+      height: 25px;
       padding: 5px;
       border-radius: 25px;
       display: flex;
@@ -106,9 +117,9 @@ html {
       @include to-xs { font-size: 13px; }
     }
 
-    .won { background: #61ff67; }
+    .won { background: #96ff8f; }
     .draw { background: #d5d5d5; }
-    .lost { background: #ff6b70; }
+    .lost { background: #ffbeba; }
   }
 }
 

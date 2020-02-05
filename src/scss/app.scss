@@ -1,0 +1,141 @@
+@import "./mixins";
+
+html {
+  background-color: #fcfcfc;
+  font-family: Avenir, sans-serif !important;
+}
+
+/* +++ CONTENT +++ */
+.side__navigation {
+  //min-width: 230px !important;
+  @include from-md {
+    max-width: 12% !important;
+  }
+}
+
+.content__container {
+  width: 100%;
+  max-width: 1140px !important;
+  --ion-background-color: #fcfcfc;
+  border-right: none !important;
+
+  ion-toolbar {
+
+    ion-title {
+      font-weight: 900;
+      text-align: center;
+      padding: 8px;
+
+      // For mobile center the title based on full (device) width instead of element width,
+      // menu and back button should not affect the position of the page title
+      @include to-sm {
+        position: absolute;
+        top: 15px;
+        right: 0;
+        margin: auto;
+        width: 100%;
+      }
+    }
+  }
+}
+
+/* --------------------------------------------- */
+
+/* +++ STANDING LIST +++ */
+.team__container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+
+  .team__logo {
+    width: 15px;
+    margin-left: 5px;
+    margin-right: 10px;
+    @include from-sm {
+      margin-left: 10px;
+      margin-top: 12px;
+      margin-right: 10px;
+      margin-bottom: 12px;
+    }
+    flex-shrink: 0;
+
+    img {
+      display: flex;
+    }
+  }
+
+  .team__info {
+    display: flex;
+    align-items: center;
+
+    .team__position {
+      background-color: #fcfcfc;
+      @include to-xs { font-size: 13px; }
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-shrink: 0;
+      width: 24px;
+    }
+    .team__name {
+      align-self: center;
+      flex-shrink: 1;
+      @include to-xs { font-size: 14px; }
+    }
+  }
+
+  .team__stats {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+    @include from-sm { margin-right: 25px; }
+    width: 150px;
+    @include to-xs { width: 120px; }
+    justify-content: space-between;
+    flex-shrink: 0;
+
+    .team__result {
+      width: 30px;
+      height: 30px;
+      padding: 5px;
+      border-radius: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @include to-xs { font-size: 13px; }
+    }
+
+    .won { background: #61ff67; }
+    .draw { background: #d5d5d5; }
+    .lost { background: #ff6b70; }
+  }
+}
+
+.list_title {
+  padding-top: 20px;
+}
+
+/* --------------------------------------------- */
+
+/* +++ HOME +++ */
+.welcome-card img {
+  max-height: 35vh;
+  overflow: hidden;
+}
+
+ion-header ion-toolbar:first-child {
+  padding-top: var(--ion-safe-area-top,0);
+  display: flex;
+}
+
+ion-title {
+  //font-weight: 900;
+  width: fit-content;
+  padding: 0;
+  margin: auto;
+  //background-image: linear-gradient(-80deg,#3171e0 4%,#4c8dff 96%);
+  //background-repeat: no-repeat;
+  //background-position: 0 102%,0 0;
+  //background-size: 100% 15%;
+}

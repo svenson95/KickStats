@@ -1,6 +1,6 @@
 import Team from "./Team";
 
-export interface StandingRank {
+export interface TeamRanking {
     position: number;
     team: Team;
     playedGames: number;

@@ -15,12 +15,12 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {current_page, setPageTitle} from "./Content";
 import {pageTitles} from "../App";
-import {league_ids} from "./StandingList";
+import {league_ids} from "./RankingList";
 
 // interface MenuProps extends RouteComponentProps {
 //   appPages: AppPage[];
 // }
-export const leagueAPI = `http://api.football-data.org/v2/competitions/${Object.values(league_ids)[current_page]}/`;
+export const league_api = `http://api.football-data.org/v2/competitions/${Object.values(league_ids)[current_page]}/`;
 
 // const Menu: React.FunctionComponent<MenuProps> = ({ appPages }) => {
 class Menu extends React.Component<any, any> {
@@ -28,18 +28,18 @@ class Menu extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      standing: {}
+      ranking: {}
     };
   }
 
   componentDidMount(): void {
-    // standing = stand_positions;
-    // console.log(standing);
+    // ranking = rank_positions;
+    // console.log(ranking);
 
-    // if (standing.length === 0) {
-    //   initialFetchStanding(erediviseAPI).then(data => {
-    //     this.setState({ standing: data});
-    //     localStorage.setItem('standing', data);
+    // if (ranking.length === 0) {
+    //   initialFetchRanking(league_api).then(data => {
+    //     this.setState({ ranking: data});
+    //     localStorage.setItem('ranking', data);
     //   });
     // }
   }
@@ -64,7 +64,7 @@ class Menu extends React.Component<any, any> {
                     <IonMenuToggle key={index} autoHide={false}>
                       <IonItem routerLink={appPage.url} routerDirection="none" onClick={() => {
                         setPageTitle[index]();
-                        console.log(leagueAPI);
+                        console.log(league_api);
                       }}>
                         <IonIcon slot="start" icon={appPage.icon} />
                         <IonLabel>{appPage.title}</IonLabel>

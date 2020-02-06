@@ -13,7 +13,7 @@ import {Redirect, Route, RouteComponentProps, withRouter} from "react-router";
 
 import { createBrowserHistory } from "history";
 import Home from "../pages/Home";
-import List from "./StandingList";
+import List from "./RankingList";
 import {PageTitle} from "../declarations";
 
 export let current_page = 0;

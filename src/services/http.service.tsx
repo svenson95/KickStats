@@ -1,15 +1,16 @@
-import {StandingRank} from "../types/StandingRank";
+import {TeamRanking} from "../types/TeamRanking";
+import Ranking from "../types/Ranking";
 
-export let fetchedStanding: [];
-export let stand_positions: StandingRank[] = [];
+export let fetchedRanking: Ranking[];
+export let rank_positions: TeamRanking[] = [];
 
-export async function initialFetchStanding(url: string) {
+export async function initialFetchRanking(url: string) {
 
     async function tryFetch() {
         const res: Response = await fetch(url, {
             // method: 'GET',
-            mode: 'cors',
             // cache: 'no-cache',
+            mode: 'cors',
             credentials: 'same-origin',
             headers: {
                 'X-Auth-Token': '342413b707f445ebb2666b52c757dff1'
@@ -18,9 +19,9 @@ export async function initialFetchStanding(url: string) {
             // referrerPolicy: 'no-referrer',
         });
         const json = await res.json();
-        json.standings[0].table.forEach((position: StandingRank) => {
-            if (!stand_positions.includes(position)) {
-                stand_positions.push(position);
+        json.standings[0].table.forEach((position: TeamRanking) => {
+            if (!rank_positions.includes(position)) {
+                rank_positions.push(position);
             }
         });
         return json.standings[0].table;

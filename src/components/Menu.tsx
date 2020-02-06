@@ -15,7 +15,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {current_page, setPageTitle} from "./Content";
 import {pageTitles} from "../App";
-import {league_ids} from "./RankingList";
+import {changeLeagueID, league_ids} from "./RankingList";
 
 // interface MenuProps extends RouteComponentProps {
 //   appPages: AppPage[];
@@ -63,8 +63,8 @@ class Menu extends React.Component<any, any> {
                 return (
                     <IonMenuToggle key={index} autoHide={false}>
                       <IonItem routerLink={appPage.url} routerDirection="none" onClick={() => {
+                        changeLeagueID(index);
                         setPageTitle[index]();
-                        console.log(league_api);
                       }}>
                         <IonIcon slot="start" icon={appPage.icon} />
                         <IonLabel>{appPage.title}</IonLabel>

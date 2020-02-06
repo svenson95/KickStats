@@ -3,15 +3,39 @@
 $font-family-base: Avenir, Roboto, "Helvetica Neue", sans-serif !important;
 
 html {
-  background-color: #fcfcfc;
   --ion-font-family: Avenir, Roboto, "Helvetica Neue", sans-serif !important;
+  --ion-background-color: #383838;
 }
 
 /* +++ CONTENT +++ */
 .side__navigation {
-  //min-width: 230px !important;
+  --ion-background-color: #383838;
+  --color: white;
+  border-right: none !important;
+
   @include from-md {
     max-width: 12% !important;
+  }
+
+  ion-list-header,
+  ion-item,
+  ion-icon {
+    --color: white;
+    color: white; // ion-icon
+  }
+
+  ion-header {
+    margin-top: 15px;
+
+    ion-title {
+      background: white;
+      text-align: center;
+      width: 100%;
+
+      ion-button {
+        --box-shadow: none;
+      }
+    }
   }
 }
 
@@ -23,17 +47,20 @@ html {
 
 .content__container {
   width: 100%;
-  max-width: 1140px !important;
-  --ion-background-color: #fcfcfc;
-  border-right: none !important;
+  --ion-background-color: #383838;
+  max-width: 1200px !important;
+  //border-right: none !important;
 
   ion-toolbar {
 
     ion-title {
       font-weight: 900;
+      font-size: 25px;
       text-align: center;
-      padding: 7px 80px;
-      background: linear-gradient(90deg, #fcfcfc 1%, #e6e6e6 50%, #fcfcfc 99%);
+      padding: 7px;
+      width: 100%;
+      margin-top: 20px;
+      background: white;
 
       // For mobile center the title based on full (device) width instead of element width,
       // menu and back button should not affect the position of the page title
@@ -46,34 +73,131 @@ html {
       }
     }
   }
+
+  ion-content {
+    display: inline-flex;
+
+    .module__container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    ion-card {
+      --color: black;
+      margin: 25px 10px;
+      @include to-md { margin-top: 17px; }
+      padding: 25px 15px;
+      --ion-background-color: white !important;
+      --background: white !important;
+    }
+
+    .ranking__card {
+      height: fit-content;
+      width: 550px;
+      background-color: white;
+    }
+    .test__card {
+      height: fit-content;
+      width: 550px;
+      background-color: white;
+    }
+    .vertical__line {
+      z-index: 999;
+      height: 103%;
+      width: 1px;
+      position: absolute;
+      top: 2px;
+      background-color: black;
+      transform: translateY(-25px);
+    }
+    .line__1 { right: 133px; }
+    .line__2 { right: 93px; }
+    .line__3 { right: 53px; }
+  }
 }
 
 /* --------------------------------------------- */
 
 /* +++ RANKING LIST +++ */
-.team__item { --min-height: 38px; }
+.team__item {
+  --min-height: 28px;
+  --inner-border-width: 0 0 0 0;  // remove border for list items
+  --padding-start: 0;
+}
+.team__header {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+
+  .team__header__wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+    transform: translateX(-16px);
+    border-bottom: 1px solid black;
+    width: 150px;
+    @include to-xs { width: 100px; }
+    justify-content: space-between;
+    flex-shrink: 0;
+
+    .team__result__item {
+      width: 25px;
+      height: 25px;
+      padding: 5px;
+      margin-bottom: 5px;
+      margin-right: 5px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @include to-xs { font-size: 13px; }
+
+      background-repeat: no-repeat;
+      background-position: 0 90%,0 0;
+      background-size: 100% 9%;
+      font-weight: 900;
+      font-size: 10px;
+      //transform: skewY(-7deg)
+    }
+    .won {
+      background-image: linear-gradient(-80deg,#00b324 4%,#00b324 96%);
+      background-repeat: no-repeat;
+      background-position: 0 90%,0 0;
+      background-size: 100% 9%;
+    }
+    .draw {
+      background-image: linear-gradient(-80deg,#676665 4%,#676665 96%);
+      background-repeat: no-repeat;
+      background-position: 0 90%,0 0;
+      background-size: 100% 9%;
+    }
+    .lost {
+      background-image: linear-gradient(-80deg,#ff0514 4%,#ff0514 96%);
+      background-repeat: no-repeat;
+      background-position: 0 90%,0 0;
+      background-size: 100% 9%;
+    }
+  }
+}
+
+
 .team__container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  height: 35px;
 
-  .team__logo {
-    width: 15px;
-    margin-left: 5px;
-    margin-right: 10px;
-    @include from-sm {
-      margin-left: 10px;
-      margin-top: 12px;
-      margin-right: 10px;
-      margin-bottom: 12px;
-    }
-    flex-shrink: 0;
+  .team__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
 
-    img {
-      display: flex;
-    }
+  .team__wrapper:nth-child(0) {
+    background-color: white;
+    align-self: end;
   }
 
   .team__info {
@@ -81,7 +205,6 @@ html {
     align-items: center;
 
     .team__position {
-      background-color: #fcfcfc;
       @include to-xs { font-size: 13px; }
       display: flex;
       align-items: center;
@@ -89,6 +212,24 @@ html {
       flex-shrink: 0;
       width: 24px;
     }
+
+    .team__logo {
+      width: 15px;
+      margin-left: 5px;
+      margin-right: 10px;
+      @include from-sm {
+        margin-left: 10px;
+        margin-top: 4px;
+        margin-right: 10px;
+        margin-bottom: 4px;
+      }
+      flex-shrink: 0;
+
+      img {
+        display: flex;
+      }
+    }
+
     .team__name {
       align-self: center;
       flex-shrink: 1;
@@ -99,14 +240,13 @@ html {
   .team__stats {
     display: flex;
     align-items: center;
-    margin-left: 25px;
-    @include from-sm { margin-right: 25px; }
-    width: 150px;
-    @include to-xs { width: 120px; }
+    margin-right: 5px;
+    width: 145px;
+    @include to-xs { width: 100px; }
     justify-content: space-between;
     flex-shrink: 0;
 
-    .team__result {
+    .team__result__item {
       width: 25px;
       height: 25px;
       padding: 5px;
@@ -116,10 +256,6 @@ html {
       align-items: center;
       @include to-xs { font-size: 13px; }
     }
-
-    .won { background: #96ff8f; }
-    .draw { background: #d5d5d5; }
-    .lost { background: #ffbeba; }
   }
 }
 
@@ -138,6 +274,7 @@ html {
 ion-header ion-toolbar:first-child {
   padding-top: var(--ion-safe-area-top,0);
   display: flex;
+  margin-top: 10px;
 }
 
 ion-title {

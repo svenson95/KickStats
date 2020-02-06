@@ -13,11 +13,13 @@ import {Redirect, Route, RouteComponentProps, withRouter} from "react-router";
 
 import { createBrowserHistory } from "history";
 import Home from "../pages/Home";
-import List from "./RankingList";
+import RankingList from "./RankingList";
 import {PageTitle} from "../declarations";
 
 export let current_page = 0;
-export const setBundesligaTitle = () => { current_page = 0 };
+export const setBundesligaTitle = () => {
+    current_page = 0
+};
 export const setPremierLeagueTitle = () => { current_page = 1 };
 export const setPrimeraDivisionTitle = () => { current_page = 2 };
 export const setSeriaaTitle = () => { current_page = 3 };
@@ -72,13 +74,13 @@ class Content extends React.Component<ContentProps> {
                 <IonContent>
                     <IonRouterOutlet id="main">
                         <Route path="/home" component={Home} exact={true} />
-                        <Route path="/bundesliga" component={List} exact={true} />
-                        <Route path="/premierleague" component={List} exact={true} />
-                        <Route path="/primeradivision" component={List} exact={true} />
-                        <Route path="/seriea" component={List} exact={true} />
-                        <Route path="/ligue1" component={List} exact={true} />
-                        <Route path="/primeiraliga" component={List} exact={true} />
-                        <Route path="/eredivise" component={List} exact={true} />
+                        <Route path="/bundesliga" component={RankingList} exact={true} />
+                        <Route path="/premierleague" component={RankingList} exact={true} />
+                        <Route path="/primeradivision" component={RankingList} exact={true} />
+                        <Route path="/seriea" component={RankingList} exact={true} />
+                        <Route path="/ligue1" component={RankingList} exact={true} />
+                        <Route path="/primeiraliga" component={RankingList} exact={true} />
+                        <Route path="/eredivise" component={RankingList} exact={true} />
                         <Route path="/" render={() => <Redirect to="/home"/> } exact={true} />
                     </IonRouterOutlet>
                 </IonContent>

@@ -28,7 +28,7 @@ export let _table: TeamRanking[] = [];
 
 let data_set = [];
 
-const RankingList = () => {
+const Table = () => {
 
     // componentDidMount
     const mounted = useRef(false);
@@ -50,7 +50,7 @@ const RankingList = () => {
 
     }, );
 
-    const [ranking, updateRanking] = useState([]);
+    const [table, updateTable] = useState({});
     const [request, response] = useFetch(`https://api.football-data.org/v2/competitions/${league_id}/standings`,  {
         mode: 'cors',
         credentials: 'same-origin',
@@ -64,8 +64,8 @@ const RankingList = () => {
         if (response.ok) {
             _data = fetchedData;
             _table = fetchedData.standings[0].table;
+            updateTable(fetchedData.standings[0].table);
             console.log(_data);
-            updateRanking(fetchedData.standings[0].table);
             console.log('fetched');
         } else {
             console.log('+++ error +++\n')
@@ -76,26 +76,24 @@ const RankingList = () => {
         <IonPage>
             <IonContent>
                 <div className="module__container">
-
                     <IonCard className="ranking__card">
                         <IonProgressBar value={1} type={request.loading ? 'indeterminate' : 'determinate'}></IonProgressBar>
                         <div className="team__header">
                             <div className="team__header__stats">
-                                <div className="team__result__item played">PLAYED</div>
+                                <div className="team__result__item played">PLAY</div>
                                 <div className="team__result__item won">WIN</div>
-                                <div className="team__result__item draw">DRAW</div>
-                                <div className="team__result__item lost">LOSE</div>
+                                <div className="team__result__item draw">DRA</div>
+                                <div className="team__result__item lost">LOS</div>
                                 <div className="team__result__item">PTS</div>
                             </div>
                             <div className="team__header__info">
-                                {_data.competition?.name || ""} | {_data.competition?.area.name || ""}
+                                Table
                             </div>
                         </div>
-                        {ranking && <RankingItems ranking={ranking}/>}
+                        {table && <TableItems ranking={table}/>}
                     </IonCard>
                     <IonCard className="test__card">
                         <IonProgressBar value={1} type={request.loading ? 'indeterminate' : 'determinate'}></IonProgressBar>
-                        <p>Test</p>
                         <p>{request.error && `${request.error.message}`}</p>
                         <p>{request.loading && 'Loading...'}</p>
                     </IonCard>
@@ -105,7 +103,9 @@ const RankingList = () => {
     );
 };
 
-const RankingItems = ({ ...ranking }) => {
+const TableItems = ({ ...table }) => {
+
+    console.log(table);
 
     const items = _table.map((team: TeamRanking, index: number) => {
         return (
@@ -113,7 +113,7 @@ const RankingItems = ({ ...ranking }) => {
                 <div className="team__container">
                     <div className="team__info">
                         <div className="team__position">{team.position}.</div>
-                        <div className="team__logo"><img src={team.team.crestUrl} alt={team.team.name}/></div>
+                        <div className="team__logo"><img src={team.team.crestUrl} alt={""}/></div>
                         <div className="team__name">{team.team.name}</div>
                     </div>
                     <div className="team__stats">
@@ -135,4 +135,4 @@ const RankingItems = ({ ...ranking }) => {
         {items}</IonList>;
 };
 
-export default RankingList;
+export default Table;

@@ -22,10 +22,10 @@ import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
 /* Theme variables */
-import './theme/variables.css';
+import './scss/variables.css';
 import Content, {updateCurrentPage} from "./components/Content";
 import './scss/app.scss';
-import {league_ids} from "./components/RankingList";
+import {league_ids} from "./modules/Table";
 import {createBrowserHistory} from "history";
 
 export function setLeagueID() {

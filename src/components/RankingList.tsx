@@ -51,7 +51,7 @@ const RankingList = () => {
     }, );
 
     const [ranking, updateRanking] = useState([]);
-    const [request, response] = useFetch(`http://api.football-data.org/v2/competitions/${league_id}/standings`,  {
+    const [request, response] = useFetch(`https://api.football-data.org/v2/competitions/${league_id}/standings`,  {
         mode: 'cors',
         credentials: 'same-origin',
         headers: {

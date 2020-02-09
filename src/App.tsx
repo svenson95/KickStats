@@ -1,10 +1,9 @@
-import React from 'react';
-import {IonApp, IonSplitPane, IonTitle, IonToolbar, IonButton} from '@ionic/react';
+import React, {useEffect} from 'react';
+import {IonApp, IonSplitPane} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import {AppPage, PageTitle} from './declarations';
 
 import Menu from './components/Menu';
-import { home, list } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -24,10 +23,27 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import Content from "./components/Content";
+import Content, {updateCurrentPage} from "./components/Content";
 import './scss/app.scss';
+import {league_ids} from "./components/RankingList";
+import {createBrowserHistory} from "history";
 
-// export let matches: Match[] = [];
+export function setLeagueID() {
+  // Set 'current_page' initial value related to current page url
+  const history = createBrowserHistory();
+  const url_parameter = history.location.pathname.substr(1, history.location.pathname.length);
+  const titles = pageTitles;
+  titles.forEach(function(page, index) {
+    if (url_parameter === page.title.toLowerCase().trim()) {
+      updateCurrentPage[index]();
+      changeLeagueID(index);
+    } else if (url_parameter === "home" || "/" || "") {
+      const idx = titles.length - 1;
+      updateCurrentPage[idx]();
+      changeLeagueID(idx);
+    }
+  });
+}
 
 const bundesliga = 'Bundesliga';
 const premierleague = 'Premier League';
@@ -45,37 +61,30 @@ const appPages: AppPage[] = [
   {
     title: bundesliga,
     url: stringToUrl(`/${bundesliga}`),
-    icon: home
   },
   {
     title: premierleague,
     url: stringToUrl(`/${premierleague}`),
-    icon: list
   },
   {
     title: primeradivision,
     url: stringToUrl(`/${primeradivision}`),
-    icon: home
   },
   {
     title: seriea,
     url: stringToUrl(`/${seriea}`),
-    icon: list
   },
   {
     title: ligue1,
     url: stringToUrl(`/${ligue1}`),
-    icon: list
   },
   {
     title: primeiraliga,
     url: stringToUrl(`/${primeiraliga.toLowerCase()}`),
-    icon: home
   },
   {
     title: eredivise,
     url: stringToUrl(`/${eredivise.toLowerCase()}`),
-    icon: list
   },
 ];
 
@@ -106,20 +115,30 @@ export const pageTitles: PageTitle[] = [
   }
 ];
 
-class App extends React.Component<any, any> {
-
-  render() {
-    return (
-        <IonApp>
-          <IonReactRouter>
-            <IonSplitPane contentId="main">
-              <Menu appPages={appPages} />
-              <Content pageTitles={pageTitles} />
-            </IonSplitPane>
-          </IonReactRouter>
-        </IonApp>
-    )
-  }
+export let league_url: string;
+export let league_id: string;
+export function changeLeagueID(index: number) {
+  league_id = Object.values(league_ids)[index];
+  league_url = `http://api.football-data.org/v2/competitions/${league_id}/standings`;
 }
+
+const App = () => {
+
+  useEffect(() => {
+    console.log('app started');
+    setLeagueID();
+  });
+
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonSplitPane contentId="main">
+          <Menu appPages={appPages} />
+          <Content pageTitles={pageTitles} />
+        </IonSplitPane>
+      </IonReactRouter>
+    </IonApp>
+  )
+};
 
 export default App;

@@ -6,6 +6,12 @@
   }
 }
 
+@mixin to($width) {
+  @media screen and (max-width: $width) {
+    @content
+  }
+}
+
 @mixin to-tiny() {
   @media screen and (max-width: $breakpoint-tiny) {
     @content

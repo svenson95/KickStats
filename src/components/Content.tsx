@@ -11,15 +11,13 @@ import {
 import React from 'react';
 import {Redirect, Route, RouteComponentProps, withRouter} from "react-router";
 
-import { createBrowserHistory } from "history";
 import Home from "../pages/Home";
 import RankingList from "./RankingList";
 import {PageTitle} from "../declarations";
+import {setLeagueID} from "../App";
 
-export let current_page = 0;
-export const setBundesligaTitle = () => {
-    current_page = 0
-};
+export let current_page: number;
+export const setBundesligaTitle = () => { current_page = 0 };
 export const setPremierLeagueTitle = () => { current_page = 1 };
 export const setPrimeraDivisionTitle = () => { current_page = 2 };
 export const setSeriaaTitle = () => { current_page = 3 };
@@ -27,7 +25,7 @@ export const setLigue1Title = () => { current_page = 4 };
 export const setPrimeriaLigaTitle = () => { current_page = 5 };
 export const setErediviseTitle = () => { current_page = 6 };
 export const setHomeTitle = () => { current_page = 7 };
-export const setPageTitle = [
+export const updateCurrentPage = [
     setBundesligaTitle,
     setPremierLeagueTitle,
     setPrimeraDivisionTitle,
@@ -47,17 +45,7 @@ class Content extends React.Component<ContentProps> {
     constructor(props: any) {
         super(props);
 
-        // Prepare app for reload, 'current_page' initial value is zero & we set it related to current page url
-        const history = createBrowserHistory();
-        const pageLink = history.location.pathname.substr(1, history.location.pathname.length);
-        const titles = this.props.pageTitles;
-        titles.forEach(function(page, index) {
-            if (pageLink === page.title.toLowerCase()) {
-                current_page = index;
-            } else if (pageLink === "home") {
-                current_page = titles.length + 1;
-            }
-        });
+        setLeagueID();
     }
 
     render() {
@@ -68,7 +56,7 @@ class Content extends React.Component<ContentProps> {
                         <IonButtons slot="start">
                             <IonMenuButton />
                         </IonButtons>
-                        <IonTitle>{this.props.pageTitles[current_page].title}</IonTitle>
+                        {/*<IonTitle>{this.props.pageTitles[current_page].title}</IonTitle>*/}
                     </IonToolbar>
                 </IonHeader>
                 <IonContent>

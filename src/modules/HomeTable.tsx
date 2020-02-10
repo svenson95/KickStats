@@ -17,9 +17,8 @@ import {TeamRanking} from "../types/TeamRanking";
 import {setLeagueID} from "../App";
 import {withRouter} from "react-router";
 import {TableItems} from "../components/TableItems";
-import {HomeTable} from "./HomeTable";
 
-export const league_ids = {
+const league_ids = {
     "bundesliga": "2002",
     "premierleague": "2021",
     "primeradivision": "2014",
@@ -31,18 +30,14 @@ export const league_ids = {
     // "brazil": "2013"
 };
 
-export let league_name: string;
-export let league_country: string;
+let league_name: string;
+let league_country: string;
 let data_set = [];
 
-export let league_url: string;
-export let league_id: string;
-export function changeLeagueID(index: number) {
-    league_id = Object.values(league_ids)[index];
-    league_url = `http://api.football-data.org/v2/competitions/${league_id}/standings`;
-}
+let league_url: string;
+let league_id: string;
 
-const Table = () => {
+export const HomeTable = () => {
 
     // componentDidMount
     const mounted = useRef(false);
@@ -111,16 +106,15 @@ const Table = () => {
                                 <div className="team__result__item">PTS</div>
                             </div>
                             <div className="team__header__info">
-                                Table
+                                Table Test
                             </div>
                         </div>
                         {table && <TableItems table={table}/>}
                     </IonCard>
-                    <HomeTable />
                 </div>
             </IonContent>
         </IonPage>
     );
 };
 
-export default withRouter(Table);
+export default withRouter(HomeTable);

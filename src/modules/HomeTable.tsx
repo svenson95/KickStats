@@ -13,10 +13,8 @@ import {
 } from '@ionic/react';
 import React, {useEffect, useRef, useState} from 'react';
 import useFetch from "use-http/dist";
-import {TeamRanking} from "../types/TeamRanking";
-import {setLeagueID} from "../App";
 import {withRouter} from "react-router";
-import {TableItems} from "../components/TableItems";
+import {changeLeagueID} from "./Table";
 
 const league_ids = {
     "bundesliga": "2002",
@@ -52,7 +50,7 @@ export const HomeTable = () => {
                 console.log('async function done');
             })();
         } else {
-            setLeagueID();
+            changeLeagueID();
         }
 
         console.log('did mount');
@@ -96,7 +94,7 @@ export const HomeTable = () => {
             <IonContent>
                 <div className="module__container">
                     <IonCard className="ranking__card">
-                        <IonProgressBar value={1} type={request.loading ? 'indeterminate' : 'determinate'}/>
+                        {/*<IonProgressBar value={1} type={request.loading ? 'indeterminate' : 'determinate'}/>*/}
                         <div className="team__header">
                             <div className="team__header__stats">
                                 <div className="team__result__item played">PLAY</div>
@@ -109,7 +107,7 @@ export const HomeTable = () => {
                                 Table Test
                             </div>
                         </div>
-                        {table && <TableItems table={table}/>}
+                        {/*{table && <TableItems table={table}/>}*/}
                     </IonCard>
                 </div>
             </IonContent>

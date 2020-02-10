@@ -23,27 +23,8 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './scss/variables.css';
-import Content, {updateCurrentPage} from "./components/Content";
+import Content from "./components/Content";
 import './scss/app.scss';
-import {changeLeagueID} from "./modules/Table";
-import {createBrowserHistory} from "history";
-
-export function setLeagueID() {
-  // Set 'current_page' initial value related to current page url
-  const history = createBrowserHistory();
-  const url_parameter = history.location.pathname.substr(1, history.location.pathname.length);
-  const titles = pageTitles;
-  titles.forEach(function(page, index) {
-    if (url_parameter === page.title.toLowerCase().trim()) {
-      updateCurrentPage[index]();
-      changeLeagueID(index);
-    } else if (url_parameter === "home" || "/" || "") {
-      const idx = titles.length - 1;
-      updateCurrentPage[idx]();
-      changeLeagueID(idx);
-    }
-  });
-}
 
 const bundesliga = 'Bundesliga';
 const premierleague = 'Premier League';
@@ -119,7 +100,6 @@ const App = () => {
 
   useEffect(() => {
     console.log('app started');
-    setLeagueID();
   });
 
   return (

@@ -70,11 +70,12 @@ ion-toolbar {
 
     .competition__name {
       //font-size: 17px;
+      margin: 0 5px;
     }
     .competition__area {
       font-size: 13px;
       font-weight: 500;
-      margin-top: -5px;
+      margin: -5px 5px 0;
     }
 
     ion-title {
@@ -105,6 +106,11 @@ ion-toolbar {
 
   ion-content {
     display: inline-flex;
+
+    ion-header {
+      -webkit-margin-start: 10px;
+      margin-inline-start: 10px;
+    }
 
     .module__container {
       display: flex;

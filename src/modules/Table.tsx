@@ -1,7 +1,5 @@
 import {
     IonContent,
-    IonItem,
-    IonList,
     IonPage,
     IonCard,
     IonProgressBar,
@@ -13,10 +11,10 @@ import {
 } from '@ionic/react';
 import React, {useEffect, useRef, useState} from 'react';
 import useFetch from "use-http/dist";
-import {TeamRanking} from "../types/TeamRanking";
-import {setLeagueID} from "../App";
+import {pageTitles} from "../App";
 import {withRouter} from "react-router";
 import {TableItems} from "../components/TableItems";
+import {createBrowserHistory} from "history";
 import {HomeTable} from "./HomeTable";
 
 export const league_ids = {
@@ -35,10 +33,22 @@ export let league_name: string;
 export let league_country: string;
 let data_set = [];
 
-export let league_url: string;
-export let league_id: string;
-export function changeLeagueID(index: number) {
-    league_id = Object.values(league_ids)[index];
+export let league_url: string = "http://api.football-data.org/v2/competitions/2002/standings";
+export let league_id: string = "2002";
+export function changeLeagueID(ind?: number) {
+    // Set 'current_page' initial value related to current page url
+    const history = createBrowserHistory();
+    const url_parameter = history.location.pathname.substr(1, history.location.pathname.length);
+    pageTitles.forEach(function(page, index) {
+        if (url_parameter === page.title.toLowerCase().trim()) {
+            league_id = Object.values(league_ids)[index];
+        } else if (url_parameter === "home" || "/" || "") {
+            const idx = pageTitles.length - 1;
+            league_id = Object.values(league_ids)[idx];
+        }
+    });
+
+    if (ind) league_id = league_id = Object.values(league_ids)[ind];
     league_url = `http://api.football-data.org/v2/competitions/${league_id}/standings`;
 }
 
@@ -57,7 +67,7 @@ const Table = () => {
                 console.log('async function done');
             })();
         } else {
-            setLeagueID();
+            changeLeagueID();
         }
 
         console.log('did mount');
@@ -116,7 +126,7 @@ const Table = () => {
                         </div>
                         {table && <TableItems table={table}/>}
                     </IonCard>
-                    <HomeTable />
+                    {/*<HomeTable />*/}
                 </div>
             </IonContent>
         </IonPage>

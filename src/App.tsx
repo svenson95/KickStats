@@ -25,7 +25,7 @@ import '@ionic/react/css/display.css';
 import './scss/variables.css';
 import Content, {updateCurrentPage} from "./components/Content";
 import './scss/app.scss';
-import {league_ids} from "./modules/Table";
+import {changeLeagueID} from "./modules/Table";
 import {createBrowserHistory} from "history";
 
 export function setLeagueID() {
@@ -114,13 +114,6 @@ export const pageTitles: PageTitle[] = [
     title: "Home"
   }
 ];
-
-export let league_url: string;
-export let league_id: string;
-export function changeLeagueID(index: number) {
-  league_id = Object.values(league_ids)[index];
-  league_url = `http://api.football-data.org/v2/competitions/${league_id}/standings`;
-}
 
 const App = () => {
 

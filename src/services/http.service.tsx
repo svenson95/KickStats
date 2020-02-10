@@ -1,7 +1,5 @@
 import {TeamRanking} from "../types/TeamRanking";
-import {createBrowserHistory} from "history";
-import {pageTitles} from "../App";
-import {updateCurrentPage} from "../components/Content";
+
 
 export let rank_positions: TeamRanking[] = [];
 

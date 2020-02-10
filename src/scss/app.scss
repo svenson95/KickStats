@@ -22,8 +22,12 @@ html {
 
   ion-list-header,
   ion-item{
-    --background-hover: #2aa87e;
+    --background-hover: #00d341;
     @include from-sm { --color: white; }
+  }
+
+  ion-button {
+    --background-hover: #00ff46;
   }
 
   ion-header {

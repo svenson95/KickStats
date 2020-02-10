@@ -1,18 +1,13 @@
 import {
-    IonButtons,
     IonContent,
-    IonHeader,
-    IonMenuButton,
     IonPage,
     IonRouterOutlet,
-    IonTitle,
-    IonToolbar
 } from "@ionic/react";
 import React from 'react';
 import {Redirect, Route, RouteComponentProps, withRouter} from "react-router";
 
 import Home from "../pages/Home";
-import Table, {_data} from "../modules/Table";
+import Table from "../modules/Table";
 import {PageTitle} from "../declarations";
 
 export let current_page: number;
@@ -43,21 +38,6 @@ const Content: React.FC<ContentProps> = () => {
 
     return (
         <IonPage className="content__container" id="main">
-            <IonHeader>
-                <IonToolbar>
-                    <IonButtons slot="start">
-                        <IonMenuButton />
-                    </IonButtons>
-                    <IonTitle>
-                        <div className="competition__name">
-                            {_data.competition?.name || ""}
-                        </div>
-                        <div className="competition__area">
-                            {_data.competition?.area.name || ""}
-                        </div>
-                    </IonTitle>
-                </IonToolbar>
-            </IonHeader>
             <IonContent>
                 <IonRouterOutlet id="main">
                     <Route path="/home" component={Home} exact={true} />

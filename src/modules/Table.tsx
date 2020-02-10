@@ -3,13 +3,19 @@ import {
     IonItem,
     IonList,
     IonPage,
-    IonCard, IonProgressBar
+    IonCard,
+    IonProgressBar,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle,
+    IonHeader
 } from '@ionic/react';
 import React, {useEffect, useRef, useState} from 'react';
 import useFetch from "use-http/dist";
 import {TeamRanking} from "../types/TeamRanking";
-import {Data} from "../types/Data";
-import {league_id, setLeagueID} from "../App";
+import {setLeagueID} from "../App";
+import {withRouter} from "react-router";
 
 export const league_ids = {
     "bundesliga": "2002",
@@ -23,12 +29,18 @@ export const league_ids = {
     // "brazil": "2013"
 };
 
-export let _data: Data = {};
-export let _table: TeamRanking[] = [];
-
+export let league_name: string;
+export let league_country: string;
 let data_set = [];
 
-const Table = () => {
+export let league_url: string;
+export let league_id: string;
+export function changeLeagueID(index: number) {
+    league_id = Object.values(league_ids)[index];
+    league_url = `http://api.football-data.org/v2/competitions/${league_id}/standings`;
+}
+
+export const Table = () => {
 
     // componentDidMount
     const mounted = useRef(false);
@@ -50,7 +62,7 @@ const Table = () => {
 
     }, );
 
-    const [table, updateTable] = useState({});
+    const [table, updateTable] = useState();
     const [request, response] = useFetch(`https://api.football-data.org/v2/competitions/${league_id}/standings`,  {
         mode: 'cors',
         credentials: 'same-origin',
@@ -62,22 +74,32 @@ const Table = () => {
     async function fetchDataFromAPI() {
         const fetchedData = await request.get();
         if (response.ok) {
-            _data = fetchedData;
-            _table = fetchedData.standings[0].table;
+            league_name = fetchedData.competition.name;
+            league_country = fetchedData.competition.area.name;
             updateTable(fetchedData.standings[0].table);
-            console.log(_data);
             console.log('fetched');
         } else {
             console.log('+++ error +++\n')
         }
     }
 
-    return mounted && (
+    return (
         <IonPage>
+            <IonHeader>
+                <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonMenuButton />
+                    </IonButtons>
+                    <IonTitle>
+                        <div className="competition__name">{league_name || "League"}</div>
+                        <div className="competition__area">{league_country || "Country"}</div>
+                    </IonTitle>
+                </IonToolbar>
+            </IonHeader>
             <IonContent>
                 <div className="module__container">
                     <IonCard className="ranking__card">
-                        <IonProgressBar value={1} type={request.loading ? 'indeterminate' : 'determinate'}></IonProgressBar>
+                        <IonProgressBar value={1} type={request.loading ? 'indeterminate' : 'determinate'}/>
                         <div className="team__header">
                             <div className="team__header__stats">
                                 <div className="team__result__item played">PLAY</div>
@@ -90,10 +112,10 @@ const Table = () => {
                                 Table
                             </div>
                         </div>
-                        {table && <TableItems ranking={table}/>}
+                        {table && <TableItems table={table}/>}
                     </IonCard>
                     <IonCard className="test__card">
-                        <IonProgressBar value={1} type={request.loading ? 'indeterminate' : 'determinate'}></IonProgressBar>
+                        <IonProgressBar value={1} type={request.loading ? 'indeterminate' : 'determinate'}/>
                         <p>{request.error && `${request.error.message}`}</p>
                         <p>{request.loading && 'Loading...'}</p>
                     </IonCard>
@@ -103,11 +125,9 @@ const Table = () => {
     );
 };
 
-const TableItems = ({ ...table }) => {
+const TableItems = ({ ...props }) => {
 
-    console.log(table);
-
-    const items = _table.map((team: TeamRanking, index: number) => {
+    const items = props.table.map((team: TeamRanking, index: number) => {
         return (
             <IonItem key={index} className="team__item">
                 <div className="team__container">
@@ -126,6 +146,26 @@ const TableItems = ({ ...table }) => {
                 </div>
             </IonItem>
         );
+        // {props.table.map((table: any, index: any) => {
+        //     return (
+        //         <IonItem key={index} className="team__item">
+        //              <div className="team__container">
+        //                  <div className="team__info">
+        //                      <div className="team__position">{team.position}.</div>
+        //                      <div className="team__logo"><img src={team.team.crestUrl} alt={""}/></div>
+        //                      <div className="team__name">{team.team.name}</div>
+        //                  </div>
+        //                  <div className="team__stats">
+        //                      <div className="team__result__item">{team.playedGames}</div>
+        //                      <div className="team__result__item">{team.won}</div>
+        //                      <div className="team__result__item">{team.draw}</div>
+        //                      <div className="team__result__item">{team.lost}</div>
+        //                      <div className="team__result__item">{team.points}</div>
+        //                  </div>
+        //              </div>
+        //          </IonItem>
+        //     );
+        // })}
     });
     return <IonList>
         <div className="vertical__line line__1" />
@@ -135,4 +175,4 @@ const TableItems = ({ ...table }) => {
         {items}</IonList>;
 };
 
-export default Table;
+export default withRouter(Table);

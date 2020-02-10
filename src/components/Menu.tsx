@@ -12,23 +12,21 @@ import {
 } from '@ionic/react';
 import React from 'react';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
-import {updateCurrentPage} from "./Content";
-import {changeLeagueID, pageTitles} from "../App";
 import {AppPage} from "../declarations";
+import {changeLeagueID} from "../modules/Table";
 
 interface MenuProps extends RouteComponentProps {
   appPages: AppPage[];
 }
 
 const Menu: React.FunctionComponent<MenuProps> = ({ ...props }) => {
-// class Menu extends React.Component {
 
     return (
         <IonMenu className="side__navigation" contentId="main" type="overlay">
           <IonHeader>
             <IonToolbar>
               <IonTitle>
-                <IonButton routerLink='/home' routerDirection="none" onClick={updateCurrentPage[pageTitles.length - 1]}>
+                <IonButton routerLink='/home' routerDirection="none">
                   Kickticker
                 </IonButton>
               </IonTitle>
@@ -40,10 +38,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ ...props }) => {
               {props.appPages.map((appPage: any, index: any) => {
                 return (
                     <IonMenuToggle key={index} autoHide={false}>
-                      <IonItem routerLink={appPage.url} routerDirection="none" onClick={() => {
-                        changeLeagueID(index);
-                          updateCurrentPage[index]();
-                      }}>
+                      <IonItem routerLink={appPage.url} routerDirection="none" onClick={() => {changeLeagueID(index);}}>
                         <IonLabel>{appPage.title}</IonLabel>
                       </IonItem>
                     </IonMenuToggle>

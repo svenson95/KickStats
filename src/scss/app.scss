@@ -2,9 +2,10 @@
 
 $font-family-base: Avenir, Roboto, "Helvetica Neue", sans-serif !important;
 
-html {
+html,
+.content__container {
   --ion-font-family: Avenir, Roboto, "Helvetica Neue", sans-serif !important;
-  --ion-background-color: #777777;
+  --ion-background-color: #373737;
 }
 
 /* +++ CONTENT +++ */
@@ -62,7 +63,6 @@ ion-toolbar {
 
 .content__container {
   width: 100%;
-  --ion-background-color: #777777;
   max-width: 1200px !important;
   //border-right: none !important;
 
@@ -106,11 +106,6 @@ ion-toolbar {
 
   ion-content {
     display: inline-flex;
-
-    ion-header {
-      -webkit-margin-start: 10px;
-      margin-inline-start: 10px;
-    }
 
     .module__container {
       display: flex;

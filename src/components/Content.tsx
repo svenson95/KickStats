@@ -6,7 +6,7 @@ import {
 import React from 'react';
 import {Redirect, Route, RouteComponentProps, withRouter} from "react-router";
 
-import Home from "../pages/Home";
+import Start1 from "../pages/Start1";
 import Table from "../modules/Table";
 import {PageTitle} from "../declarations";
 
@@ -20,15 +20,15 @@ const Content: React.FC<ContentProps> = () => {
         <IonPage className="content__container" id="main">
             <IonContent>
                 <IonRouterOutlet id="main">
-                    <Route path="/home" component={Home} exact={true} />
-                    <Route path="/bundesliga" component={Table} exact={true} />
-                    <Route path="/premierleague" component={Table} exact={true} />
-                    <Route path="/primeradivision" component={Table} exact={true} />
-                    <Route path="/seriea" component={Table} exact={true} />
-                    <Route path="/ligue1" component={Table} exact={true} />
-                    <Route path="/primeiraliga" component={Table} exact={true} />
-                    <Route path="/eredivise" component={Table} exact={true} />
-                    <Route path="/" render={() => <Redirect to="/home"/> } exact={true} />
+                    <Route path={`${process.env.PUBLIC_URL}/home`} component={Start1} exact={true} />
+                    <Route path={`${process.env.PUBLIC_URL}/bundesliga`} component={Table} exact={true} />
+                    <Route path={`${process.env.PUBLIC_URL}/premierleague`} component={Table} exact={true} />
+                    <Route path={`${process.env.PUBLIC_URL}/primeradivision`} component={Table} exact={true} />
+                    <Route path={`${process.env.PUBLIC_URL}/seriea`} component={Table} exact={true} />
+                    <Route path={`${process.env.PUBLIC_URL}/ligue1`} component={Table} exact={true} />
+                    <Route path={`${process.env.PUBLIC_URL}/primeiraliga`} component={Table} exact={true} />
+                    <Route path={`${process.env.PUBLIC_URL}/eredivise`} component={Table} exact={true} />
+                    <Route path={`${process.env.PUBLIC_URL}/`} render={() => <Redirect to={`${process.env.PUBLIC_URL}/start`}/> } exact={true} />
                 </IonRouterOutlet>
             </IonContent>
         </IonPage>

@@ -10,14 +10,15 @@ import {
     IonToolbar
 } from '@ionic/react';
 import React, {useEffect, useRef, useState} from 'react';
-import useFetch from "use-http/dist";
 import {RouteComponentProps, withRouter} from "react-router";
 import {TableItems} from "../components/TableItems";
+import {createBrowserHistory} from "history";
+import {pageTitles} from "../App";
 
 export const league_ids = {
     "bundesliga": "2002",
     "premierleague": "2021",
-    "primeradivision": "2014",
+    "primeradivisión": "2014",
     "seriea": "2019",
     "ligue1": "2015",
     "primerialiga": "2017",
@@ -29,7 +30,6 @@ export const league_ids = {
 export let league_name: string;
 export let league_country: string;
 export let league_id: string;
-let fetchURL: string;
 
 // export const LOADING_CONTEXT_DATA = {
 //   leagueId: "",
@@ -46,41 +46,47 @@ const Table: React.FC<RouteComponentProps<{ name: string; }>> = ({ match }) => {
         if (mounted.current) return;
         mounted.current = true;
 
-        fetchURL = `https://api.football-data.org/v2/competitions/2002/standings`;
-        // fetchURL = `https://api.football-data.org/v2/competitions/${league_id}/standings`;
+        (async function() { await fetchDataFromAPI() })();
 
-        (async function() {
-            await fetchDataFromAPI();
-            console.log('async function done');
-        })();
-
-        console.log(match.params.name);
         console.log('did mount');
 
     }, );
 
     const [table, updateTable] = useState();
-    const [request, response] = useFetch("https://api.football-data.org/v2/competitions/2002/standings",  {
-        mode: 'cors',
-        credentials: 'same-origin',
-        headers: {
-            'X-Auth-Token': '342413b707f445ebb2666b52c757dff1'
-        },
-    });
+    // const [request, response] = useFetch(`https://api.football-data.org/v2/competitions/${league_id}/standings`,  {
+    //     mode: 'cors',
+    //     credentials: 'same-origin',
+    //     headers: {
+    //         'X-Auth-Token': '342413b707f445ebb2666b52c757dff1'
+    //     },
+    // });
 
     async function fetchDataFromAPI() {
-        const fetchedData = await request.get();
+
+        const history = createBrowserHistory();
+        const url_parameter = history.location.pathname.substr(1, history.location.pathname.length);
+
+        league_id = Object.values(league_ids)[pageTitles.findIndex(el => el.title === url_parameter)];
+
+        const response = await fetch(`https://api.football-data.org/v2/competitions/${league_id}/standings`,  {
+            mode: 'cors',
+            credentials: 'same-origin',
+            headers: {
+                'X-Auth-Token': '342413b707f445ebb2666b52c757dff1'
+            },
+        });
+        const fetchedData = await response.json();
 
         if (response.ok) {
             league_name = fetchedData.competition.name;
             league_country = fetchedData.competition.area.name;
-            league_id = fetchedData.competition.id;
             updateTable(fetchedData.standings[0].table);
             console.log(fetchedData.standings[0].table);
-            console.log('fetched');
         } else {
-            console.log('+++ error +++\n')
+            console.log('+++ error +++\n');
+            console.log(response.status)
         }
+
     }
 
     return (
@@ -100,7 +106,7 @@ const Table: React.FC<RouteComponentProps<{ name: string; }>> = ({ match }) => {
                 <IonContent>
                     <div className="module__container">
                         {table && <IonCard className="ranking__card">
-                            <IonProgressBar value={1} type={request.loading ? 'indeterminate' : 'determinate'}/>
+                            <IonProgressBar value={1} type={false ? 'indeterminate' : 'determinate'}/>
                             <div className="team__header">
                                 <div className="team__header__stats">
                                     <div className="team__result__item played">PLAY</div>

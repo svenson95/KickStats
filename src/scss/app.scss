@@ -137,7 +137,7 @@ ion-toolbar {
 
     .ranking__card {
       height: fit-content;
-      width: 480px;
+      width: 500px;
       background-color: white;
       @include to-xs { * { font-size: 13px; } }
     }
@@ -186,6 +186,7 @@ ion-toolbar {
     align-items: center;
     padding: 10px 20px;
     font-weight: 700;
+    font-size: 20px;
   }
 
   .team__header__stats {

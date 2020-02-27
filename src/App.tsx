@@ -61,35 +61,35 @@ const appPages: AppPage[] = [
   },
   {
     title: primeiraliga,
-    url: stringToUrl(`/${primeiraliga.toLowerCase()}`),
+    url: stringToUrl(`/${primeiraliga}`),
   },
   {
     title: eredivise,
-    url: stringToUrl(`/${eredivise.toLowerCase()}`),
+    url: stringToUrl(`/${eredivise}`),
   },
 ];
 
 export const pageTitles: PageTitle[] = [
   {
-    title: bundesliga
+    title: stringToUrl(bundesliga)
   },
   {
-    title: premierleague
+    title: stringToUrl(premierleague)
   },
   {
-    title: primeradivision
+    title: stringToUrl(primeradivision)
   },
   {
-    title: seriea
+    title: stringToUrl(seriea)
   },
   {
-    title: ligue1
+    title: stringToUrl(ligue1)
   },
   {
-    title: primeiraliga
+    title: stringToUrl(primeiraliga)
   },
   {
-    title: eredivise
+    title: stringToUrl(eredivise)
   },
   {
     title: "Home"

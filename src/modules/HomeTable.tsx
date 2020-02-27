@@ -14,13 +14,13 @@ import {
 import React, {useEffect, useRef, useState} from 'react';
 import useFetch from "use-http/dist";
 import {withRouter} from "react-router";
-import {changeLeagueID} from "./Table";
+// import {changeLeagueID} from "./Table";
 
 const league_ids = {
     "bundesliga": "2002",
     "premierleague": "2021",
     "primeradivision": "2014",
-    "seriaa": "2019",
+    "seriea": "2019",
     "ligue1": "2015",
     "primerialiga": "2017",
     "eredivise": "2003",
@@ -44,18 +44,14 @@ export const HomeTable = () => {
         if (mounted.current) return;
         mounted.current = true;
 
-        if (data_set.length <= 0) {
-            (async function() {
-                await fetchDataFromAPI();
-                console.log('async function done');
-            })();
-        } else {
-            changeLeagueID();
-        }
+        (async function() {
+            await fetchDataFromAPI();
+            console.log('async function done');
+        })();
 
         console.log('did mount');
 
-    }, );
+    });
 
     const [table, updateTable] = useState();
     const [request, response] = useFetch(`https://api.football-data.org/v2/competitions/${league_id}/standings`,  {

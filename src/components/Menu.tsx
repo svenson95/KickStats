@@ -13,7 +13,6 @@ import {
 import React from 'react';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {AppPage} from "../declarations";
-import {changeLeagueID} from "../modules/Table";
 
 interface MenuProps extends RouteComponentProps {
   appPages: AppPage[];
@@ -38,7 +37,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ ...props }) => {
               {props.appPages.map((appPage: any, index: any) => {
                 return (
                     <IonMenuToggle key={index} autoHide={false}>
-                      <IonItem routerLink={appPage.url} routerDirection="none" onClick={() => {changeLeagueID(index);}}>
+                      <IonItem routerLink={appPage.url} routerDirection="none">
                         <IonLabel>{appPage.title}</IonLabel>
                       </IonItem>
                     </IonMenuToggle>

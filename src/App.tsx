@@ -29,7 +29,7 @@ import './scss/app.scss';
 const bundesliga = 'Bundesliga';
 const premierleague = 'Premier League';
 const primeradivision = 'Primera División';
-const seriea = 'Seria A';
+const seriea = 'Serie A';
 const ligue1 = 'Ligue 1';
 const primeiraliga = 'Primeira Liga';
 const eredivise = 'Eredivise';

@@ -91,40 +91,39 @@ const Table: React.FC<RouteComponentProps<{ name: string; }>> = ({ match }) => {
 
     return (
         // <LoadingContext.Provider value={LOADING_CONTEXT_DATA}>
-            <IonPage>
-                <IonHeader>
-                    <IonToolbar>
-                        <IonButtons slot="start">
-                            <IonMenuButton />
-                        </IonButtons>
-                        <IonTitle>
-                            <div className="competition__name">{league_name || "League"}</div>
-                            <div className="competition__area">{league_country || "Country"}</div>
-                        </IonTitle>
-                    </IonToolbar>
-                </IonHeader>
-                <IonContent>
-                    <div className="module__container">
-                        {table && <IonCard className="ranking__card">
-                            <IonProgressBar value={1} type={false ? 'indeterminate' : 'determinate'}/>
-                            <div className="team__header">
-                                <div className="team__header__stats">
-                                    <div className="team__result__item played">PLAY</div>
-                                    <div className="team__result__item won">WIN</div>
-                                    <div className="team__result__item draw">DRA</div>
-                                    <div className="team__result__item lost">LOS</div>
-                                    <div className="team__result__item">PTS</div>
-                                </div>
-                                <div className="team__header__info">
-                                    Table
-                                </div>
+        <IonPage>
+            <IonHeader>
+                <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonMenuButton />
+                    </IonButtons>
+                    <IonTitle>
+                        <div className="competition__name">{league_name || "League"}</div>
+                        <div className="competition__area">{league_country || "Country"}</div>
+                    </IonTitle>
+                </IonToolbar>
+            </IonHeader>
+            <IonContent>
+                <div className="module__container">
+                    {table && <IonCard className="ranking__card">
+                        <IonProgressBar value={1} type={false ? 'indeterminate' : 'determinate'}/>
+                        <div className="team__header">
+                            <div className="team__header__stats">
+                                <div className="team__result__item played">PLAY</div>
+                                <div className="team__result__item won">WIN</div>
+                                <div className="team__result__item draw">DRA</div>
+                                <div className="team__result__item lost">LOS</div>
+                                <div className="team__result__item">PTS</div>
                             </div>
-                            <TableItems table={table}/>
-                        </IonCard>}
-                        {/*<HomeTable />*/}
-                    </div>
-                </IonContent>
-            </IonPage>
+                            <div className="team__header__info">
+                                Table
+                            </div>
+                        </div>
+                        <TableItems table={table}/>
+                    </IonCard>}
+                </div>
+            </IonContent>
+        </IonPage>
         // </LoadingContext.Provider>
     );
 };

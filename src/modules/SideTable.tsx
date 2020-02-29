@@ -1,5 +1,7 @@
 import {
-    IonCard, IonItem, IonList,
+    IonCard,
+    IonItem,
+    IonList,
     IonProgressBar,
 } from '@ionic/react';
 import React, {useContext} from 'react';
@@ -8,7 +10,13 @@ import {TeamRanking} from "../types/TeamRanking";
 
 function SideTable(props: any) {
     const loadContext = useContext(LoadingContext);
-    console.log(loadContext.state);
+
+    // const mounted = useRef(false);
+    // useEffect(() => {
+    //    if (mounted.current) return;
+    //    mounted.current = true;
+    //
+    // });
 
     return (
         <div className="side__table__container">
@@ -26,7 +34,7 @@ function SideTable(props: any) {
                         <div className="team__result__item">PTS</div>
                     </div>
                 </div>
-                {props.table && <TableItems table={props.table.standings[0].table}/>}
+                {props.data && <TableItems table={props.data.standings[(props.name === "Home" ? 1 : 2)].table}/>}
             </IonCard>
         </div>
     );

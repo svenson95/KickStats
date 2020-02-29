@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {IonApp, IonSplitPane} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import {AppPage, PageTitle} from './declarations';
@@ -25,7 +25,7 @@ import '@ionic/react/css/display.css';
 import './scss/variables.css';
 import Content from "./components/Content";
 import './scss/app.scss';
-import LoadingContext from './modules/Loading.context';
+import Context from './modules/Loading.context';
 
 const bundesliga = 'Bundesliga';
 const premierleague = 'Premier League';
@@ -106,7 +106,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <LoadingContext.Provider value={this.state}>
+      <Context.Provider value={this.state}>
         <IonApp>
           <IonReactRouter>
             <IonSplitPane contentId="main">
@@ -115,7 +115,7 @@ class App extends React.Component {
             </IonSplitPane>
           </IonReactRouter>
         </IonApp>
-      </LoadingContext.Provider>
+      </Context.Provider>
     )
   }
 }

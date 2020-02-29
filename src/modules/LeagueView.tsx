@@ -40,25 +40,21 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
         if (mounted.current) return;
         mounted.current = true;
 
-        (async function() { await fetchDataFromAPI() })();
+        (async function() {
+            loadContext.setLoading?.(true);
+            await fetchCompetition();
+            await fetchMatches();
+            loadContext.setLoading?.(false);
+        })();
 
         console.log('did mount');
 
     }, );
 
-    const [table, updateTable] = useState();
+    const [data, setData] = useState();
     const loadContext = useContext(LoadingContext);
-    // const [request, response] = useFetch(`https://api.football-data.org/v2/competitions/${league_id}/standings`,  {
-    //     mode: 'cors',
-    //     credentials: 'same-origin',
-    //     headers: {
-    //         'X-Auth-Token': '342413b707f445ebb2666b52c757dff1'
-    //     },
-    // });
 
-    async function fetchDataFromAPI() {
-
-        loadContext.setLoading?.(true);
+    async function fetchCompetition() {
 
         const history = createBrowserHistory();
         const url_parameter = history.location.pathname.substr(1, history.location.pathname.length);
@@ -75,16 +71,46 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
         const fetchedData = await response.json();
 
         if (response.ok) {
-            loadContext.setLoading?.(false);
             league_name = fetchedData.competition.name;
             league_country = fetchedData.competition.area.name;
-            updateTable(fetchedData);
-            console.log(fetchedData.standings[0].table);
+            setData(fetchedData);
+            console.log(fetchedData);
         } else {
-            loadContext.setLoading?.(false);
             console.log('+++ error +++\n');
             console.log(response.status)
         }
+
+    }
+
+    async function fetchMatches() {
+
+        const history = createBrowserHistory();
+        const url_parameter = history.location.pathname.substr(1, history.location.pathname.length);
+
+        league_id = Object.values(league_ids)[pageTitles.findIndex(el => el.title === url_parameter)];
+
+        const response = await fetch(`https://api.football-data.org/v2/competitions/${league_id}/matches`,  {
+            mode: 'cors',
+            credentials: 'same-origin',
+            headers: {
+                'X-Auth-Token': '342413b707f445ebb2666b52c757dff1'
+            },
+        });
+        const fetchedData = await response.json();
+        console.log(fetchedData);
+
+        // if (response.ok) {
+        //     loadContext.setLoading?.(false);
+        //     league_name = fetchedData.competition.name;
+        //     league_country = fetchedData.competition.area.name;
+        //     setData(fetchedData);
+        //     // dataContext.setData?.(fetchedData);
+        //     console.log(fetchedData);
+        // } else {
+        //     loadContext.setLoading?.(false);
+        //     console.log('+++ error +++\n');
+        //     console.log(response.status)
+        // }
 
     }
 
@@ -96,15 +122,16 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
                         <IonMenuButton />
                     </IonButtons>
                     <IonTitle>
-                        <div className="table__name">Kickticker</div>
+                        <div className="table__name">
+                            {league_name || "League"} | <span>{league_country || "Country"}</span>
+                        </div>
                     </IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <MainTable table={table} />
-                <SideTable table={table} name={"Form"}/>
-                <SideTable table={table} name={"Home"}/>
-                <SideTable table={table} name={"Away"}/>
+                <MainTable data={data} />
+                <SideTable data={data} name={"Home"}/>
+                <SideTable data={data} name={"Away"}/>
             </IonContent>
         </IonPage>
     );

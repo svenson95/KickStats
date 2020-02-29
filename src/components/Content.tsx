@@ -3,20 +3,19 @@ import {
     IonPage,
     IonRouterOutlet,
 } from "@ionic/react";
-import React, {useContext} from 'react';
+import React from 'react';
 import {Redirect, Route, RouteComponentProps, withRouter} from "react-router";
 
 import Start1 from "../pages/Start";
-import Table from "../modules/Table";
+import Table from "../modules/LeagueView";
 import {PageTitle} from "../declarations";
+import LoadingContext from "../modules/Loading.context";
 
 interface ContentProps extends RouteComponentProps {
     pageTitles: PageTitle[]
 }
 
 const Content: React.FC<ContentProps> = () => {
-
-    // let leagueContext = useContext(LoadingContext);
 
     return (
         <IonPage className="content__container" id="main">

@@ -25,6 +25,7 @@ import '@ionic/react/css/display.css';
 import './scss/variables.css';
 import Content from "./components/Content";
 import './scss/app.scss';
+import LoadingContext from './modules/Loading.context';
 
 const bundesliga = 'Bundesliga';
 const premierleague = 'Premier League';
@@ -96,22 +97,27 @@ export const pageTitles: PageTitle[] = [
   }
 ];
 
-const App = () => {
+class App extends React.Component {
 
-  useEffect(() => {
-    console.log('app started');
-  });
+  state = {
+    state: false,
+    setLoading: (value: boolean) => { this.setState({ state: value })}
+  };
 
-  return (
-    <IonApp>
-      <IonReactRouter>
-        <IonSplitPane contentId="main">
-          <Menu appPages={appPages} />
-          <Content pageTitles={pageTitles} />
-        </IonSplitPane>
-      </IonReactRouter>
-    </IonApp>
-  )
-};
+  render() {
+    return (
+      <LoadingContext.Provider value={this.state}>
+        <IonApp>
+          <IonReactRouter>
+            <IonSplitPane contentId="main">
+              <Menu appPages={appPages} />
+              <Content pageTitles={pageTitles} />
+            </IonSplitPane>
+          </IonReactRouter>
+        </IonApp>
+      </LoadingContext.Provider>
+    )
+  }
+}
 
 export default App;

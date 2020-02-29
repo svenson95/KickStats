@@ -1,19 +1,23 @@
 import {
     IonButtons,
-    IonCard,
     IonContent,
     IonHeader,
     IonMenuButton,
     IonPage,
-    IonProgressBar,
     IonTitle,
     IonToolbar
 } from '@ionic/react';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {RouteComponentProps, withRouter} from "react-router";
-import {TableItems} from "../components/TableItems";
 import {createBrowserHistory} from "history";
 import {pageTitles} from "../App";
+import MainTable from "./MainTable";
+import SideTable from "./SideTable";
+import LoadingContext from "./Loading.context";
+
+export let league_name: string;
+export let league_country: string;
+export let league_id: string;
 
 export const league_ids = {
     "bundesliga": "2002",
@@ -27,17 +31,7 @@ export const league_ids = {
     // "brazil": "2013"
 };
 
-export let league_name: string;
-export let league_country: string;
-export let league_id: string;
-
-// export const LOADING_CONTEXT_DATA = {
-//   leagueId: "",
-//   setLeagueId(value: string) { this.leagueId = value }
-// };
-// export const LoadingContext = React.createContext(LOADING_CONTEXT_DATA);
-
-const Table: React.FC<RouteComponentProps<{ name: string; }>> = ({ match }) => {
+const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match }) => {
 
     // componentDidMount
     const mounted = useRef(false);
@@ -53,6 +47,7 @@ const Table: React.FC<RouteComponentProps<{ name: string; }>> = ({ match }) => {
     }, );
 
     const [table, updateTable] = useState();
+    const loadContext = useContext(LoadingContext);
     // const [request, response] = useFetch(`https://api.football-data.org/v2/competitions/${league_id}/standings`,  {
     //     mode: 'cors',
     //     credentials: 'same-origin',
@@ -62,6 +57,8 @@ const Table: React.FC<RouteComponentProps<{ name: string; }>> = ({ match }) => {
     // });
 
     async function fetchDataFromAPI() {
+
+        loadContext.setLoading?.(true);
 
         const history = createBrowserHistory();
         const url_parameter = history.location.pathname.substr(1, history.location.pathname.length);
@@ -78,11 +75,13 @@ const Table: React.FC<RouteComponentProps<{ name: string; }>> = ({ match }) => {
         const fetchedData = await response.json();
 
         if (response.ok) {
+            loadContext.setLoading?.(false);
             league_name = fetchedData.competition.name;
             league_country = fetchedData.competition.area.name;
-            updateTable(fetchedData.standings[0].table);
+            updateTable(fetchedData);
             console.log(fetchedData.standings[0].table);
         } else {
+            loadContext.setLoading?.(false);
             console.log('+++ error +++\n');
             console.log(response.status)
         }
@@ -90,7 +89,6 @@ const Table: React.FC<RouteComponentProps<{ name: string; }>> = ({ match }) => {
     }
 
     return (
-        // <LoadingContext.Provider value={LOADING_CONTEXT_DATA}>
         <IonPage>
             <IonHeader>
                 <IonToolbar>
@@ -98,34 +96,18 @@ const Table: React.FC<RouteComponentProps<{ name: string; }>> = ({ match }) => {
                         <IonMenuButton />
                     </IonButtons>
                     <IonTitle>
-                        <div className="competition__name">{league_name || "League"}</div>
-                        <div className="competition__area">{league_country || "Country"}</div>
+                        <div className="table__name">Kickticker</div>
                     </IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <div className="module__container">
-                    {table && <IonCard className="ranking__card">
-                        <IonProgressBar value={1} type={false ? 'indeterminate' : 'determinate'}/>
-                        <div className="team__header">
-                            <div className="team__header__stats">
-                                <div className="team__result__item played">PLAY</div>
-                                <div className="team__result__item won">WIN</div>
-                                <div className="team__result__item draw">DRA</div>
-                                <div className="team__result__item lost">LOS</div>
-                                <div className="team__result__item">PTS</div>
-                            </div>
-                            <div className="team__header__info">
-                                Table
-                            </div>
-                        </div>
-                        <TableItems table={table}/>
-                    </IonCard>}
-                </div>
+                <MainTable table={table} />
+                <SideTable table={table} name={"Form"}/>
+                <SideTable table={table} name={"Home"}/>
+                <SideTable table={table} name={"Away"}/>
             </IonContent>
         </IonPage>
-        // </LoadingContext.Provider>
     );
 };
 
-export default withRouter(Table);
+export default withRouter(LeagueView);

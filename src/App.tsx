@@ -105,6 +105,9 @@ class App extends React.Component {
   };
 
   render() {
+
+    console.log("App rendered");
+
     return (
       <Context.Provider value={this.state}>
         <IonApp>

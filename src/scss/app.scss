@@ -110,9 +110,28 @@ ion-toolbar {
 
     .table__card {
       height: fit-content;
-      @include from-xs { min-width: 500px; }
+      @include from-xs { min-width: 450px; }
       background-color: white;
       @include to-xs { * { font-size: 13px; } }
+    }
+    .matchday__results__card {
+      height: fit-content;
+      background-color: white;
+      @include to-xs { * { font-size: 13px; } }
+
+      .home__team {
+        width: 170px;
+        text-align: right;
+        font-size: 12px;
+        margin-right: 10px;
+        align-self: center;
+      }
+      .away__team {
+        width: 170px;
+        font-size: 12px;
+        margin-left: 10px;
+        align-self: center;
+      }
     }
     .league__view__card,
     .side__table__container {
@@ -122,6 +141,7 @@ ion-toolbar {
       vertical-align: top;
       @include to-sm { justify-content: center; }
     }
+    .league__view__card:last-child { margin-bottom: 10px; }
     .side__table__card {
       .team__stats,
       .team__header {
@@ -142,19 +162,18 @@ ion-toolbar {
       --ion-background-color: white !important;
       --background: white !important;
 
-      -webkit-margin-start: 5px;
-      margin-inline-start: 5px;
-      -webkit-margin-end: 5px;
-      margin-inline-end: 5px;
+      -webkit-margin-end: 0;
+      margin-inline-end: 0;
+      margin-bottom: 0;
 
-      @include to-xs { margin-top: 0; margin-bottom: 0; }
-
-      @include to-xs {
-        -webkit-margin-start: 0;
-        margin-inline-start: 0;
-        -webkit-margin-end: 0;
-        margin-inline-end: 0;
-      }
+      //@include to-xs { margin-top: 0; margin-bottom: 0; }
+      //
+      //@include to-xs {
+      //  -webkit-margin-start: 0;
+      //  margin-inline-start: 0;
+      //  -webkit-margin-end: 0;
+      //  margin-inline-end: 0;
+      //}
 
       ion-list {
         padding: 0 5px 5px;
@@ -192,7 +211,7 @@ ion-toolbar {
   --inner-padding-end: 0;
 }
 .card__title {
-  padding: 10px 12px;
+  padding: 6px 12px;
   font-weight: 700;
   font-size: 16px;
   &:not(.no-absolute-position) { position: absolute; }
@@ -221,7 +240,7 @@ ion-toolbar {
       justify-content: center;
       align-items: flex-end;
 
-      font-weight: 600;
+      font-weight: 500;
       font-size: 9px;
       @include to-xs { font-size: 8px; }
       //background-repeat: no-repeat;
@@ -261,7 +280,7 @@ ion-toolbar {
 .team__container {
   width: 100%;
   display: flex;
-  font-size: 14px;
+  font-size: 12px;
   justify-content: space-between;
 }
 

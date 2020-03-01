@@ -14,7 +14,7 @@ import {pageTitles} from "../App";
 import MainTable from "../modules/MainTable";
 import SideTable from "../modules/SideTable";
 import LoadingContext from "../modules/Loading.context";
-import LastGames from "../modules/LastGames";
+import MatchdayResults from "../modules/MatchdayResults";
 
 export const league_ids = {
     "bundesliga": "2002",
@@ -71,7 +71,6 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
             },
         });
         const fetchedData = await response.json();
-        console.log(fetchedData);
 
         if (url.includes("/standings") && response.ok) {
             setCompetitionData(fetchedData);
@@ -103,9 +102,10 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
             </IonHeader>
             <IonContent>
                 <MainTable data={competitionData} />
-                <SideTable data={competitionData} name={"Home"}/>
-                <SideTable data={competitionData} name={"Away"}/>
-                <LastGames data={competitionMatches} competitionData={competitionData} />
+                <SideTable data={competitionData} name={"Home"} />
+                <SideTable data={competitionData} name={"Away"} />
+                <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"lastMatchday"}/>
+                <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"currentMatchday"}/>
             </IonContent>
         </IonPage>
     );

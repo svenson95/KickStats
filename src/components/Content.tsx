@@ -7,7 +7,7 @@ import React from 'react';
 import {Redirect, Route, RouteComponentProps, withRouter} from "react-router";
 
 import Start1 from "../pages/Start";
-import LeagueView from "../modules/LeagueView";
+import LeagueView from "./LeagueView";
 import {PageTitle} from "../declarations";
 
 interface ContentProps extends RouteComponentProps {

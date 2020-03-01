@@ -9,13 +9,14 @@ import LoadingContext from "./Loading.context";
 import {TeamRanking} from "../types/TeamRanking";
 
 function MainTable(props: any) {
+
     const loadContext = useContext(LoadingContext);
 
     return (
-        <div className="main__table__container">
+        <div className="league__view__card">
             <IonCard className="table__card">
                 <IonProgressBar value={1} type={loadContext.state ? 'indeterminate' : 'determinate'}/>
-                    <div className="team__header__info">
+                    <div className="card__title">
                         <div className="table__name">
                             Table
                         </div>
@@ -32,14 +33,13 @@ function MainTable(props: any) {
                             <div className="team__result__item goals--difference">=</div>
                         </div>
                     </div>
-                    {props.data && <TableItems table={props.data.standings[0].table} loading={loadContext.state}/>}
+                    {props.data && <TableItems table={props.data.standings[0].table} context={loadContext} />}
             </IonCard>
         </div>
     );
 }
 
 const TableItems = ({ ...props }) => {
-    const context = useContext(LoadingContext);
 
     return (<>
         <IonList>
@@ -50,32 +50,34 @@ const TableItems = ({ ...props }) => {
             <div className="vertical__line line__5" key="line_5" />
             <div className="vertical__line line__6" key="line_6" />
             <div className="vertical__line line__7" key="line_7" />
-            {context.state ? (
-                <>{[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18].map((index) => {
-                    return (
-                        <IonItem key={index} className="team__item">
-                            <div className="team__container">
-                                <div className="team__info">
-                                    <div className="team__position">{index}.</div>
-                                    <div className="team__logo"><IonSkeletonText animated style={{ width: '95%' }} /></div>
-                                    <div className="team__name">
-                                        <IonSkeletonText animated style={{ width: '95%' }} />
+            {!props.table || props.context.state ? (
+                <>
+                    {[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18].map((index) => {
+                        return (
+                            <IonItem key={index} className="team__item">
+                                <div className="team__container">
+                                    <div className="team__info">
+                                        <div className="team__position">{index}.</div>
+                                        <div className="team__logo"><IonSkeletonText animated style={{ width: '95%' }} /></div>
+                                        <div className="team__name">
+                                            <IonSkeletonText animated style={{ width: '95%' }} />
+                                        </div>
+                                    </div>
+                                    <div className="team__stats">
+                                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
                                     </div>
                                 </div>
-                                <div className="team__stats">
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                </div>
-                            </div>
-                        </IonItem>
-                    )
-                })}</>
+                            </IonItem>
+                        )
+                    })}
+                </>
             ) : (
                 <>
                     {props.table.map((team: TeamRanking, index: number) => {

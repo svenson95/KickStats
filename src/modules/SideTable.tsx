@@ -22,7 +22,7 @@ function SideTable(props: any) {
         <div className="side__table__container">
             <IonCard className="side__table__card">
                 <IonProgressBar value={1} type={loadContext.state ? 'indeterminate' : 'determinate'}/>
-                <div className="team__header__info">
+                <div className="card__title">
                     <div className="table__name">{props.name}</div>
                 </div>
                 <div className="team__header__stats">

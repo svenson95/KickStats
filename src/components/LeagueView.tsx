@@ -14,6 +14,7 @@ import {pageTitles} from "../App";
 import MainTable from "../modules/MainTable";
 import SideTable from "../modules/SideTable";
 import LoadingContext from "../modules/Loading.context";
+import LastGames from "../modules/LastGames";
 
 export const league_ids = {
     "bundesliga": "2002",
@@ -49,13 +50,15 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
             loadContext.setLoading?.(true);
 
             await fetchData(competition_data);
-            // await fetchData(competition_matches);
+            await fetchData(competition_matches);
+
             loadContext.setLoading?.(false);
         })();
 
     }, );
 
-    const [data, setData] = useState();
+    const [competitionData, setCompetitionData] = useState();
+    const [competitionMatches, setCompetitionMatches] = useState();
     const loadContext = useContext(LoadingContext);
 
     async function fetchData(url: string) {
@@ -71,11 +74,11 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
         console.log(fetchedData);
 
         if (url.includes("/standings") && response.ok) {
-            setData(fetchedData);
+            setCompetitionData(fetchedData);
 
-        // TODO: need regexp -> 'competitions/regexp/matches'
+        // TODO: regexp -> 'competitions/regexp/matches'
         } else if (url.includes("/matches") && response.ok) {
-            // setSeasonMatches(fetchedData)
+            setCompetitionMatches(fetchedData)
 
         } else {
             console.log('+++ error +++\n');
@@ -92,16 +95,17 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
                         <IonMenuButton />
                     </IonButtons>
                     <IonTitle>
-                        {data && <div className="table__name">
-                            {data.competition.name || "League"} | <span>{data.competition.area.name || "Country"}</span>
+                        {competitionData && <div className="table__name">
+                            {competitionData.competition.name || "League"} | <span>{competitionData.competition.area.name || "Country"}</span>
                         </div>}
                     </IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <MainTable data={data} />
-                <SideTable data={data} name={"Home"}/>
-                <SideTable data={data} name={"Away"}/>
+                <MainTable data={competitionData} />
+                <SideTable data={competitionData} name={"Home"}/>
+                <SideTable data={competitionData} name={"Away"}/>
+                <LastGames data={competitionMatches} competitionData={competitionData} />
             </IonContent>
         </IonPage>
     );

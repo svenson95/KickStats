@@ -30,7 +30,7 @@ const Start: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <IonCard className="welcome-card">
+                <IonCard className="welcome-card" style={{margin: "10px"}}>
                     <img src="/assets/shapes.svg" alt=""/>
                     <IonCardHeader>
                         <IonCardSubtitle>Get Started</IonCardSubtitle>
@@ -44,7 +44,7 @@ const Start: React.FC = () => {
                     </IonCardContent>
                 </IonCard>
 
-                <IonCard className="resources-card">
+                <IonCard className="resources-card" style={{margin: "10px"}}>
                     <IonList lines="none">
                         <IonListHeader>
                             <IonLabel>Resources</IonLabel>

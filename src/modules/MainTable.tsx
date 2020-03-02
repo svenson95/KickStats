@@ -13,8 +13,8 @@ function MainTable(props: any) {
     const loadContext = useContext(LoadingContext);
 
     return (
-        <div className="league__view__card">
-            <IonCard className="table__card">
+        <div className="main__table__container">
+            <IonCard className="table__card" style={{margin: "10px"}}>
                 <IonProgressBar value={1} type={loadContext.state ? 'indeterminate' : 'determinate'}/>
                     <div className="card__title">
                         <div className="table__name">
@@ -28,9 +28,9 @@ function MainTable(props: any) {
                             <div className="team__result__item draw">DRA</div>
                             <div className="team__result__item lost">LOS</div>
                             <div className="team__result__item">PTS</div>
-                            <div className="team__result__item goals--plus">+</div>
-                            <div className="team__result__item goals--minus">-</div>
-                            <div className="team__result__item goals--difference">=</div>
+                            <div className="team__result__item goals--plus"><div className="ball">+</div></div>
+                            <div className="team__result__item goals--minus"><div className="ball">-</div></div>
+                            <div className="team__result__item goals--difference"><div className="ball">=</div></div>
                         </div>
                     </div>
                     {props.data && <TableItems table={props.data.standings[0].table} context={loadContext} />}

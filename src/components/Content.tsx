@@ -6,7 +6,7 @@ import {
 import React from 'react';
 import {Redirect, Route, RouteComponentProps, withRouter} from "react-router";
 
-import Start1 from "../pages/Start";
+import Start from "../pages/Start";
 import LeagueView from "./LeagueView";
 import {PageTitle} from "../declarations";
 
@@ -20,7 +20,7 @@ const Content: React.FC<ContentProps> = () => {
         <IonPage className="content__container" id="main">
             <IonContent>
                 <IonRouterOutlet id="main">
-                    <Route path="/home" component={Start1} exact={true} />
+                    <Route path="/home" component={Start} exact={true} />
                     <Route path="/bundesliga" component={LeagueView} exact={true} />
                     <Route path="/premierleague" component={LeagueView} exact={true} />
                     <Route path="/primeradivisión" component={LeagueView} exact={true} />

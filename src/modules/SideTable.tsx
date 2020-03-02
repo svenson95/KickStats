@@ -19,8 +19,8 @@ function SideTable(props: any) {
     // });
 
     return (
-        <div className="side__table__container">
-            <IonCard className="side__table__card">
+        <IonCard className="side__table__container" style={{margin: "10px"}}>
+            <div className="side__table__card">
                 <IonProgressBar value={1} type={loadContext.state ? 'indeterminate' : 'determinate'}/>
                 <div className="card__title">
                     <div className="table__name">{props.name}</div>
@@ -35,8 +35,8 @@ function SideTable(props: any) {
                     </div>
                 </div>
                 {props.data && <TableItems table={props.data.standings[(props.name === "Home" ? 1 : 2)].table}/>}
-            </IonCard>
-        </div>
+            </div>
+        </IonCard>
     );
 }
 

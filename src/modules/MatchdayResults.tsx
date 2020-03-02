@@ -14,8 +14,8 @@ function MatchdayResults(props: any) {
     }
 
     return (
-        <div className="league__view__card">
-            <IonCard className="matchday__results__card">
+        <IonCard className="matchday__results__card" style={{margin: "10px"}}>
+            <div className="league__view__card">
                 <IonProgressBar value={1} type={loadContext.state ? 'indeterminate' : 'determinate'}/>
                 <div className="card__title no-absolute-position">
                     <div className="table__name">
@@ -23,8 +23,8 @@ function MatchdayResults(props: any) {
                     </div>
                 </div>
                 {props.data && <LastGamesItems data={props.data} context={loadContext} competitionData={props.competitionData} name={props.name}/>}
-            </IonCard>
-        </div>
+            </div>
+        </IonCard>
     );
 }
 

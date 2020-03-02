@@ -16,9 +16,9 @@
     "static/js/6.afcf9058.chunk.js.map": "/Kickticker/static/js/6.afcf9058.chunk.js.map",
     "static/js/7.76403045.chunk.js": "/Kickticker/static/js/7.76403045.chunk.js",
     "static/js/7.76403045.chunk.js.map": "/Kickticker/static/js/7.76403045.chunk.js.map",
-    "main.css": "/Kickticker/static/css/main.c2939a47.chunk.css",
-    "main.js": "/Kickticker/static/js/main.8294f3c6.chunk.js",
-    "main.js.map": "/Kickticker/static/js/main.8294f3c6.chunk.js.map",
+    "main.css": "/Kickticker/static/css/main.bf4b7da7.chunk.css",
+    "main.js": "/Kickticker/static/js/main.eae4bb37.chunk.js",
+    "main.js.map": "/Kickticker/static/js/main.eae4bb37.chunk.js.map",
     "runtime-main.js": "/Kickticker/static/js/runtime-main.a07448dc.js",
     "runtime-main.js.map": "/Kickticker/static/js/runtime-main.a07448dc.js.map",
     "static/css/10.51bd2302.chunk.css": "/Kickticker/static/css/10.51bd2302.chunk.css",
@@ -203,10 +203,10 @@
     "static/js/99.b6986b9e.chunk.js": "/Kickticker/static/js/99.b6986b9e.chunk.js",
     "static/js/99.b6986b9e.chunk.js.map": "/Kickticker/static/js/99.b6986b9e.chunk.js.map",
     "index.html": "/Kickticker/index.html",
-    "precache-manifest.5302f65c15a75d5b4157e4101520a7b1.js": "/Kickticker/precache-manifest.5302f65c15a75d5b4157e4101520a7b1.js",
+    "precache-manifest.9e1cb30bf8782266f2125e43105d9090.js": "/Kickticker/precache-manifest.9e1cb30bf8782266f2125e43105d9090.js",
     "service-worker.js": "/Kickticker/service-worker.js",
     "static/css/10.51bd2302.chunk.css.map": "/Kickticker/static/css/10.51bd2302.chunk.css.map",
-    "static/css/main.c2939a47.chunk.css.map": "/Kickticker/static/css/main.c2939a47.chunk.css.map",
+    "static/css/main.bf4b7da7.chunk.css.map": "/Kickticker/static/css/main.bf4b7da7.chunk.css.map",
     "static/js/10.21737a44.chunk.js.LICENSE": "/Kickticker/static/js/10.21737a44.chunk.js.LICENSE",
     "static/js/80.e3af5dfb.chunk.js.LICENSE": "/Kickticker/static/js/80.e3af5dfb.chunk.js.LICENSE",
     "static/js/93.1ccebc69.chunk.js.LICENSE": "/Kickticker/static/js/93.1ccebc69.chunk.js.LICENSE",
@@ -914,7 +914,7 @@
     "static/js/runtime-main.a07448dc.js",
     "static/css/10.51bd2302.chunk.css",
     "static/js/10.21737a44.chunk.js",
-    "static/css/main.c2939a47.chunk.css",
-    "static/js/main.8294f3c6.chunk.js"
+    "static/css/main.bf4b7da7.chunk.css",
+    "static/js/main.eae4bb37.chunk.js"
   ]
 }

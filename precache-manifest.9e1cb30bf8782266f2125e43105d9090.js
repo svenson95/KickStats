@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9aad1045b9548649da4cbc3070401d95",
+    "revision": "f4633901fca9295ffb166b111e8e1ff5",
     "url": "/Kickticker/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Kickticker/static/css/10.51bd2302.chunk.css"
   },
   {
-    "revision": "d8619232908881482cd3",
-    "url": "/Kickticker/static/css/main.c2939a47.chunk.css"
+    "revision": "622d623c8a4ced3ac291",
+    "url": "/Kickticker/static/css/main.bf4b7da7.chunk.css"
   },
   {
     "revision": "29e2659f252bc683f5a2",
@@ -428,8 +428,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Kickticker/static/js/99.b6986b9e.chunk.js.LICENSE"
   },
   {
-    "revision": "d8619232908881482cd3",
-    "url": "/Kickticker/static/js/main.8294f3c6.chunk.js"
+    "revision": "622d623c8a4ced3ac291",
+    "url": "/Kickticker/static/js/main.eae4bb37.chunk.js"
   },
   {
     "revision": "20715e1374531b1ae2fa",

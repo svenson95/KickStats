@@ -122,6 +122,10 @@ ion-toolbar {
     flex-wrap: wrap;
   }
 
+  .home__and__away__container {
+    display: flex;
+  }
+
   ion-content {
 
     .ion-page {
@@ -144,18 +148,16 @@ ion-toolbar {
       } }
 
       .home__team {
-        width: 170px;
+        width: 180px;
         @include to-xs { width: 140px }
         text-align: right;
         font-size: 12px;
-        margin-right: 10px;
         align-self: center;
       }
       .away__team {
-        width: 170px;
+        width: 180px;
         @include to-xs { width: 140px }
         font-size: 12px;
-        margin-left: 10px;
         align-self: center;
       }
     }
@@ -316,6 +318,11 @@ ion-toolbar {
   display: flex;
   font-size: 12px;
   justify-content: space-between;
+
+  .matchday__position {
+    font-size: 10px;
+    color: #2d2d2d
+  }
 }
 
 .team__container:nth-child(0) {
@@ -391,6 +398,7 @@ ion-toolbar {
 }
 .matchday__results__card {
   height: fit-content;
+  width: 450px;
   @include to-xs { margin: 10px auto !important; }
 }
 

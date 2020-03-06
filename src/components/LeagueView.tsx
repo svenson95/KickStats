@@ -96,8 +96,10 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
                 <IonContent>
                     <div className="content__div">
                         <MainTable data={competitionData} />
-                        <SideTable data={competitionData} name={"Home"} />
-                        <SideTable data={competitionData} name={"Away"} />
+                        <div className="home__and__away__container">
+                            <SideTable data={competitionData} name={"Home"} />
+                            <SideTable data={competitionData} name={"Away"} />
+                        </div>
                         <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"lastMatchday"}/>
                         <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"currentMatchday"}/>
                     </div>

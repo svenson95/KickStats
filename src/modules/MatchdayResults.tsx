@@ -31,6 +31,11 @@ function MatchdayResults(props: any) {
 const LastGamesItems = ({ ...props }) => {
 
     const currentMatchDay = props.competitionData.season.currentMatchday;
+    const table = props.competitionData.standings[0].table;
+    function getTeamPosition(teamName: string) {
+        const position = table.find((el: any) => el.team.name === teamName);
+        return position.position;
+    }
     const matches: [] = props.data.matches.filter((match: any) => match.matchday === currentMatchDay - (props.name === "lastMatchday" ? 1 : 0));
 
     return (<>
@@ -62,11 +67,11 @@ const LastGamesItems = ({ ...props }) => {
                             <IonItem key={index} className="team__item">
                                 <div className="team__container">
                                     <span className="home__team team__name">
-                                        {match.homeTeam.name}
+                                        <span className="matchday__position">{getTeamPosition(match.homeTeam.name)}.</span> {match.homeTeam.name}
                                     </span>
                                     <span>{homeScore !== null ? homeScore : "-"} : {awayScore !== null ? awayScore : "-"}</span>
                                     <span className="away__team">
-                                        {match.awayTeam.name}
+                                        {match.awayTeam.name} <span className="matchday__position">{getTeamPosition(match.awayTeam.name)}.</span>
                                     </span>
                                 </div>
                             </IonItem>

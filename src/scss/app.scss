@@ -124,6 +124,10 @@ ion-toolbar {
 
   .home__and__away__container {
     display: flex;
+    @include to-md {
+      width: 100%;
+      justify-content: center;
+    }
   }
 
   ion-content {
@@ -231,7 +235,7 @@ ion-toolbar {
 
 /* +++ TABLE +++ */
 .team__item {
-  --min-height: 28px;
+  --min-height: 35px;
   --inner-border-width: 0 0 0 0;  // remove border for list items
   --padding-start: 0;
   --inner-padding-end: 0;
@@ -315,6 +319,7 @@ ion-toolbar {
 
 .team__container {
   width: 100%;
+  min-height: 30px;
   display: flex;
   font-size: 12px;
   justify-content: space-between;
@@ -348,9 +353,6 @@ ion-toolbar {
   .team__logo {
     width: 20px;
     margin: 3px 10px;
-    @include from-sm {
-      margin-left: 10px;
-    }
     flex-shrink: 0;
 
     img {
@@ -382,8 +384,10 @@ ion-toolbar {
 }
 
 .main__table__container {
+  @include to-md { width: 100%; }
+  display: flex;
+
   @include to-xs { margin: 10px auto !important; }
-  width: 500px;
 }
 .side__table__container {
   @include to-xs { margin: 10px auto !important; }
@@ -427,4 +431,9 @@ ion-title {
   //background-repeat: no-repeat;
   //background-position: 0 102%,0 0;
   //background-size: 100% 15%;
+}
+
+.test {
+  background: #00f547;
+  border-radius: 4px;
 }

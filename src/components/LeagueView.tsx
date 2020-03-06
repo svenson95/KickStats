@@ -100,6 +100,7 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
                             <SideTable data={competitionData} name={"Home"} />
                             <SideTable data={competitionData} name={"Away"} />
                         </div>
+                        <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"nextToLastMatchday"}/>
                         <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"lastMatchday"}/>
                         <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"currentMatchday"}/>
                     </div>

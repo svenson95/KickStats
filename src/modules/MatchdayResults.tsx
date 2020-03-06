@@ -3,14 +3,20 @@ import LoadingContext from "./Loading.context";
 import {IonCard, IonItem, IonList, IonProgressBar, IonSkeletonText} from "@ionic/react";
 
 let cardTitle = "";
+let matchdayIndex = 0;
 
 function MatchdayResults(props: any) {
 
     const loadContext = useContext(LoadingContext);
-    if (props.name === "lastMatchday") {
-        cardTitle = "Last Matchday"
-    } else if (props.name === "currentMatchday") {
-        cardTitle = "Current Matchday"
+    if (props.name === "currentMatchday") {
+        cardTitle = "Current Matchday";
+        matchdayIndex = 0;
+    } else if (props.name === "lastMatchday") {
+        cardTitle = "Last Matchday";
+        matchdayIndex = 1;
+    } else if (props.name === "nextToLastMatchday") {
+        cardTitle = "Next-To-Last Matchday";
+        matchdayIndex = 2;
     }
 
     return (
@@ -36,7 +42,7 @@ const LastGamesItems = ({ ...props }) => {
         const position = table.find((el: any) => el.team.name === teamName);
         return position.position;
     }
-    const matches: [] = props.data.matches.filter((match: any) => match.matchday === currentMatchDay - (props.name === "lastMatchday" ? 1 : 0));
+    const matches: [] = props.data.matches.filter((match: any) => match.matchday === currentMatchDay - matchdayIndex);
 
     return (<>
         <IonList>

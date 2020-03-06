@@ -101,11 +101,13 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <MainTable data={competitionData} />
-                <SideTable data={competitionData} name={"Home"} />
-                <SideTable data={competitionData} name={"Away"} />
-                <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"lastMatchday"}/>
-                <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"currentMatchday"}/>
+                <div className="content__div">
+                    <MainTable data={competitionData} />
+                    <SideTable data={competitionData} name={"Home"} />
+                    <SideTable data={competitionData} name={"Away"} />
+                    <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"lastMatchday"}/>
+                    <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"currentMatchday"}/>
+                </div>
             </IonContent>
         </IonPage>
     );

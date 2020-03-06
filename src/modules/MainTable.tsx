@@ -14,7 +14,7 @@ function MainTable(props: any) {
 
     return (
         <div className="main__table__container">
-            <IonCard className="table__card" style={{margin: "10px"}}>
+            <IonCard className="table__card" style={{ margin: "10px" }}>
                 <IonProgressBar value={1} type={loadContext.state ? 'indeterminate' : 'determinate'}/>
                     <div className="card__title">
                         <div className="table__name">
@@ -33,7 +33,7 @@ function MainTable(props: any) {
                             <div className="team__result__item goals--difference"><div className="ball">=</div></div>
                         </div>
                     </div>
-                    {props.data && <TableItems table={props.data.standings[0].table} context={loadContext} />}
+                    <TableItems data={props.data} />
             </IonCard>
         </div>
     );
@@ -50,7 +50,7 @@ const TableItems = ({ ...props }) => {
             <div className="vertical__line line__5" key="line_5" />
             <div className="vertical__line line__6" key="line_6" />
             <div className="vertical__line line__7" key="line_7" />
-            {!props.table || props.context.state ? (
+            {!props.data ? (
                 <>
                     {[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18].map((index) => {
                         return (
@@ -80,7 +80,7 @@ const TableItems = ({ ...props }) => {
                 </>
             ) : (
                 <>
-                    {props.table.map((team: TeamRanking, index: number) => {
+                    {props.data.standings[0].table.map((team: TeamRanking, index: number) => {
                         return (
                             <IonItem key={index} className="team__item">
                                 <div className="team__container">

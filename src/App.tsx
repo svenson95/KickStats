@@ -99,26 +99,16 @@ export const pageTitles: PageTitle[] = [
 
 class App extends React.Component {
 
-  state = {
-    state: false,
-    setLoading: (value: boolean) => { this.setState({ state: value })}
-  };
-
   render() {
-
-    console.log("App rendered");
-
     return (
-      <Context.Provider value={this.state}>
-        <IonApp>
-          <IonReactRouter>
-            <IonSplitPane contentId="main">
-              <Menu appPages={appPages} />
-              <Content pageTitles={pageTitles} />
-            </IonSplitPane>
-          </IonReactRouter>
-        </IonApp>
-      </Context.Provider>
+      <IonApp>
+        <IonReactRouter>
+          <IonSplitPane contentId="main">
+            <Menu appPages={appPages} />
+            <Content pageTitles={pageTitles} />
+          </IonSplitPane>
+        </IonReactRouter>
+      </IonApp>
     )
   }
 }

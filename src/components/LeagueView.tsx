@@ -1,20 +1,13 @@
-import {
-    IonButtons,
-    IonContent,
-    IonHeader,
-    IonMenuButton,
-    IonPage,
-    IonTitle,
-    IonToolbar
-} from '@ionic/react';
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import {IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from '@ionic/react';
+import React, {useEffect, useRef, useState} from 'react';
 import {RouteComponentProps, withRouter} from "react-router";
 import {createBrowserHistory} from "history";
 import {pageTitles} from "../App";
+import {LoadingContextData} from "../modules/Loading.context";
 import MainTable from "../modules/MainTable";
 import SideTable from "../modules/SideTable";
-import LoadingContext from "../modules/Loading.context";
 import MatchdayResults from "../modules/MatchdayResults";
+import Context from '../modules/Loading.context';
 
 export const league_ids = {
     "bundesliga": "2002",
@@ -47,19 +40,18 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
         const competition_matches = `https://api.football-data.org/v2/competitions/${league_id}/matches`;
 
         (async function() {
-            loadContext.setLoading?.(true);
 
+            setLoading({ state: true });
             await fetchData(competition_data);
             await fetchData(competition_matches);
-
-            loadContext.setLoading?.(false);
+            setLoading({ state: false });
         })();
 
     }, );
 
     const [competitionData, setCompetitionData] = useState();
     const [competitionMatches, setCompetitionMatches] = useState();
-    const loadContext = useContext(LoadingContext);
+    const [state, setLoading] = useState({state: false, setLoading: (value: boolean) => { setLoading({state: value}) }} as LoadingContextData);
 
     async function fetchData(url: string) {
 
@@ -87,29 +79,31 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
     }
 
     return (
-        <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonButtons slot="start">
-                        <IonMenuButton />
-                    </IonButtons>
-                    <IonTitle>
-                        {competitionData && <div className="table__name">
-                            {competitionData.competition.name || "League"} | <span>{competitionData.competition.area.name || "Country"}</span>
-                        </div>}
-                    </IonTitle>
-                </IonToolbar>
-            </IonHeader>
-            <IonContent>
-                <div className="content__div">
-                    <MainTable data={competitionData} />
-                    <SideTable data={competitionData} name={"Home"} />
-                    <SideTable data={competitionData} name={"Away"} />
-                    <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"lastMatchday"}/>
-                    <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"currentMatchday"}/>
-                </div>
-            </IonContent>
-        </IonPage>
+        <Context.Provider value={state}>
+            <IonPage>
+                <IonHeader>
+                    <IonToolbar>
+                        <IonButtons slot="start">
+                            <IonMenuButton />
+                        </IonButtons>
+                        <IonTitle>
+                            {competitionData && <div className="table__name">
+                                {competitionData.competition.name || "League"} | <span>{competitionData.competition.area.name || "Country"}</span>
+                            </div>}
+                        </IonTitle>
+                    </IonToolbar>
+                </IonHeader>
+                <IonContent>
+                    <div className="content__div">
+                        <MainTable data={competitionData} />
+                        <SideTable data={competitionData} name={"Home"} />
+                        <SideTable data={competitionData} name={"Away"} />
+                        <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"lastMatchday"}/>
+                        <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"currentMatchday"}/>
+                    </div>
+                </IonContent>
+            </IonPage>
+        </Context.Provider>
     );
 };
 

@@ -20,6 +20,7 @@ export const league_ids = {
     // "england_championship": "2015",
     // "brazil": "2013"
 };
+export let currentMatchday: number;
 
 const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match }) => {
 
@@ -66,10 +67,11 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
 
         if (url.includes("/standings") && response.ok) {
             setCompetitionData(fetchedData);
+            currentMatchday = fetchedData.season.currentMatchday;
 
         // TODO: regexp -> 'competitions/regexp/matches'
         } else if (url.includes("/matches") && response.ok) {
-            setCompetitionMatches(fetchedData)
+            setCompetitionMatches(fetchedData);
 
         } else {
             console.log('+++ error +++\n');
@@ -100,9 +102,9 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
                             <SideTable data={competitionData} name={"Home"} />
                             <SideTable data={competitionData} name={"Away"} />
                         </div>
-                        <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"nextToLastMatchday"}/>
-                        <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"lastMatchday"}/>
                         <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"currentMatchday"}/>
+                        <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"lastMatchday"}/>
+                        <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"nextToLastMatchday"}/>
                     </div>
                 </IonContent>
             </IonPage>

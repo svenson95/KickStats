@@ -1,22 +1,24 @@
 import React, {useContext} from 'react';
 import LoadingContext from "./Loading.context";
 import {IonCard, IonItem, IonList, IonProgressBar, IonSkeletonText} from "@ionic/react";
+import {currentMatchday} from "../components/LeagueView";
 
-let cardTitle = "";
-let matchdayIndex = 0;
+let cardTitle: string;
+let cardIndex: number;
 
 function MatchdayResults(props: any) {
 
     const loadContext = useContext(LoadingContext);
+
     if (props.name === "currentMatchday") {
-        cardTitle = "Current Matchday";
-        matchdayIndex = 0;
+        cardTitle = `${currentMatchday}. Matchday`;
+        cardIndex = 0;
     } else if (props.name === "lastMatchday") {
-        cardTitle = "Last Matchday";
-        matchdayIndex = 1;
+        cardTitle = `${currentMatchday - 1}. Matchday`;
+        cardIndex = 1;
     } else if (props.name === "nextToLastMatchday") {
-        cardTitle = "Next-To-Last Matchday";
-        matchdayIndex = 2;
+        cardTitle = `${currentMatchday - 2}. Matchday`;
+        cardIndex = 2;
     }
 
     return (
@@ -36,13 +38,13 @@ function MatchdayResults(props: any) {
 
 const LastGamesItems = ({ ...props }) => {
 
-    const currentMatchDay = props.competitionData.season.currentMatchday;
     const table = props.competitionData.standings[0].table;
     function getTeamPosition(teamName: string) {
         const position = table.find((el: any) => el.team.name === teamName);
         return position.position;
     }
-    const matches: [] = props.data.matches.filter((match: any) => match.matchday === currentMatchDay - matchdayIndex);
+
+    const matches: [] = props.data.matches.filter((match: any) => match.matchday === currentMatchday - cardIndex);
 
     return (<>
         <IonList>

@@ -1,2 +1,0 @@
-(this.webpackJsonpkickticker=this.webpackJsonpkickticker||[]).push([[5],{204:function(n,t,e){"use strict";e.r(t),e.d(t,"startStatusTap",(function(){return c}));var i=e(26),c=(e(7),function(){var n=window;n.addEventListener("statusTap",(function(){Object(i.g)((function(){var t=n.innerWidth,e=n.innerHeight,c=document.elementFromPoint(t/2,e/2);if(c){var o=c.closest("ion-content");o&&o.componentOnReady().then((function(){Object(i.m)((function(){return o.scrollToTop(300)}))}))}}))}))})}}]);
-//# sourceMappingURL=5.76e1de57.chunk.js.map

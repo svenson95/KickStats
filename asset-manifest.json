@@ -17,8 +17,8 @@
     "static/js/7.f2799a35.chunk.js": "/KickStats/static/js/7.f2799a35.chunk.js",
     "static/js/7.f2799a35.chunk.js.map": "/KickStats/static/js/7.f2799a35.chunk.js.map",
     "main.css": "/KickStats/static/css/main.b82fa7dd.chunk.css",
-    "main.js": "/KickStats/static/js/main.091b7060.chunk.js",
-    "main.js.map": "/KickStats/static/js/main.091b7060.chunk.js.map",
+    "main.js": "/KickStats/static/js/main.96fb0700.chunk.js",
+    "main.js.map": "/KickStats/static/js/main.96fb0700.chunk.js.map",
     "runtime-main.js": "/KickStats/static/js/runtime-main.230579c6.js",
     "runtime-main.js.map": "/KickStats/static/js/runtime-main.230579c6.js.map",
     "static/css/10.51bd2302.chunk.css": "/KickStats/static/css/10.51bd2302.chunk.css",
@@ -203,7 +203,7 @@
     "static/js/99.848ddc72.chunk.js": "/KickStats/static/js/99.848ddc72.chunk.js",
     "static/js/99.848ddc72.chunk.js.map": "/KickStats/static/js/99.848ddc72.chunk.js.map",
     "index.html": "/KickStats/index.html",
-    "precache-manifest.aba2a898e00eb40aba23a5835ec58a71.js": "/KickStats/precache-manifest.aba2a898e00eb40aba23a5835ec58a71.js",
+    "precache-manifest.21795a58d69e1702786692b276d5452a.js": "/KickStats/precache-manifest.21795a58d69e1702786692b276d5452a.js",
     "service-worker.js": "/KickStats/service-worker.js",
     "static/css/10.51bd2302.chunk.css.map": "/KickStats/static/css/10.51bd2302.chunk.css.map",
     "static/css/main.b82fa7dd.chunk.css.map": "/KickStats/static/css/main.b82fa7dd.chunk.css.map",
@@ -915,6 +915,6 @@
     "static/css/10.51bd2302.chunk.css",
     "static/js/10.c297e955.chunk.js",
     "static/css/main.b82fa7dd.chunk.css",
-    "static/js/main.091b7060.chunk.js"
+    "static/js/main.96fb0700.chunk.js"
   ]
 }

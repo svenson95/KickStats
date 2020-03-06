@@ -43,30 +43,6 @@ const Start: React.FC = () => {
                         </p>
                     </IonCardContent>
                 </IonCard>
-
-                <IonCard className="resources-card" style={{margin: "10px"}}>
-                    <IonList lines="none">
-                        <IonListHeader>
-                            <IonLabel>Resources</IonLabel>
-                        </IonListHeader>
-                        <IonItem href="https://ionicframework.com/docs/" target="_blank">
-                            <IonIcon slot="start" color="medium" icon={book} />
-                            <IonLabel>Ionic Documentation</IonLabel>
-                        </IonItem>
-                        <IonItem href="https://ionicframework.com/docs/building/scaffolding" target="_blank">
-                            <IonIcon slot="start" color="medium" icon={build} />
-                            <IonLabel>Scaffold Out Your App</IonLabel>
-                        </IonItem>
-                        <IonItem href="https://ionicframework.com/docs/layout/structure" target="_blank">
-                            <IonIcon slot="start" color="medium" icon={grid} />
-                            <IonLabel>Change Your App Layout</IonLabel>
-                        </IonItem>
-                        <IonItem href="https://ionicframework.com/docs/theming/basics" target="_blank">
-                            <IonIcon slot="start" color="medium" icon={colorFill} />
-                            <IonLabel>Theme Your App</IonLabel>
-                        </IonItem>
-                    </IonList>
-                </IonCard>
             </IonContent>
         </IonPage>
     );

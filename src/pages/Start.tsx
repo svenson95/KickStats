@@ -31,7 +31,7 @@ const Start: React.FC = () => {
             </IonHeader>
             <IonContent>
                 <IonCard className="welcome-card" style={{margin: "10px"}}>
-                    <img src="/assets/shapes.svg" alt=""/>
+                    <img src="./assets/shapes.svg" alt=""/>
                     <IonCardHeader>
                         <IonCardSubtitle>Get Started</IonCardSubtitle>
                         <IonCardTitle>Welcome to Ionic</IonCardTitle>

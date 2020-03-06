@@ -26,7 +26,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ ...props }) => {
             <IonToolbar>
               <IonTitle>
                 <IonButton routerLink='/home' routerDirection="none">
-                  Kickticker
+                  KICK STATS
                 </IonButton>
               </IonTitle>
             </IonToolbar>
@@ -47,6 +47,6 @@ const Menu: React.FunctionComponent<MenuProps> = ({ ...props }) => {
           </IonContent>
         </IonMenu>
     );
-}
+};
 
 export default withRouter(Menu);

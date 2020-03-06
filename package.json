@@ -1,6 +1,6 @@
 {
-  "homepage": "https://svenson95.github.io/Kickticker/",
-  "name": "kickticker",
+  "homepage": "https://svenson95.github.io/KickStats",
+  "name": "kickstats",
   "version": "0.0.1",
   "private": true,
   "dependencies": {

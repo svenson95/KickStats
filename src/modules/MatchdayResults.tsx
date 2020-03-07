@@ -35,9 +35,8 @@ function MatchdayResults(props: any) {
 
 const MatchdayMatches = ({ ...props }) => {
 
-    const table = props.data.standings[0].table;
     function getTeamPosition(teamName: string) {
-        const position = table.find((el: any) => el.team.name === teamName);
+        const position = props.data.standings[0].table.find((el: any) => el.team.name === teamName);
         return position.position;
     }
 

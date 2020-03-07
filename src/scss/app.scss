@@ -264,7 +264,7 @@ ion-toolbar {
 
 /* +++ TABLE +++ */
 .team__item {
-  --min-height: 35px;
+  --min-height: 25px;
   --inner-border-width: 0 0 0 0;  // remove border for list items
   --padding-start: 0;
   --inner-padding-end: 0;
@@ -367,7 +367,7 @@ ion-toolbar {
 
 .team__info {
   width: 100%;
-  min-height: 30px;
+  min-height: 25px;
   display: flex;
   align-items: center;
   flex-shrink: 1;
@@ -456,6 +456,7 @@ ion-toolbar {
   width: fit-content;
 
   img {
+    width: 100%;
     max-height: 35vh;
     overflow: hidden;
   }

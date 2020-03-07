@@ -28,6 +28,8 @@ export function markItems(teamName: string) {
         counter -= 1;
     } else if (counter >= 2) {
         document.querySelectorAll(`.team__info`)?.forEach(el => el.classList.remove('marked'));
+        document.querySelectorAll(".home__team")?.forEach(el => el.classList.remove('marked'));
+        document.querySelectorAll(".away__team")?.forEach(el => el.classList.remove('marked'));
         counter = 0;
     } else {
         document.querySelectorAll(`.team__info__${teamName}`)?.forEach(el => el.classList.add('marked'));

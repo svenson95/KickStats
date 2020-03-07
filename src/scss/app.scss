@@ -119,11 +119,18 @@ ion-toolbar {
 
   .home__and__away__container {
     display: flex;
-    width: 470px;
-    justify-content: space-between;
 
     @include to-md {
       width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+  .matches__container {
+    @include to-md {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
       justify-content: center;
     }
   }
@@ -172,6 +179,9 @@ ion-toolbar {
       vertical-align: top;
       @include to-sm { justify-content: center; }
     }
+    .side__table__container {
+      height: fit-content;
+    }
 
     .matchday__results__card:last-child { margin-bottom: 10px; }
 
@@ -179,12 +189,14 @@ ion-toolbar {
       width: 100%;
       .team__stats,
       .team__header {
-        width: 117px;
+        width: 175px;
       }
-      .line__1 { right: 27px; @include to-xs { right: 28px; } }
-      .line__2 { right: 51px; @include to-xs { right: 52px; } }
-      .line__3 { right: 74px; @include to-xs { right: 76px; } }
-      .line__4 { right: 97px; @include to-xs { right: 100px; } }
+      .line__1 { right: 29px; @include to-xs { right: 29px; } }
+      .line__2 { right: 54px; @include to-xs { right: 54px; } }
+      .line__3 { right: 79px; @include to-xs { right: 79px; } }
+      .line__4 { right: 104px; @include to-xs { right: 104px; } }
+      .line__5 { right: 129px; @include to-xs { right: 129px; } }
+      .line__6 { right: 154px; @include to-xs { right: 154px; } }
     }
     ion-card {
       border-radius: 0;

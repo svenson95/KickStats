@@ -23,6 +23,8 @@ function SideTable(props: any) {
                         <div className="team__result__item draw">DRA</div>
                         <div className="team__result__item lost">LOS</div>
                         <div className="team__result__item">PTS</div>
+                        <div className="team__result__item goals--plus"><div className="ball">+</div></div>
+                        <div className="team__result__item goals--minus"><div className="ball">-</div></div>
                     </div>
                 </div>
                 {props.data && <TableItems table={props.data.standings[(props.name === "Home" ? 1 : 2)].table}/>}
@@ -47,6 +49,8 @@ const TableItems = ({ ...props }) => {
                         <div className="team__result__item">{team.draw}</div>
                         <div className="team__result__item">{team.lost}</div>
                         <div className="team__result__item">{team.points}</div>
+                        <div className="team__result__item">{team.goalsFor}</div>
+                        <div className="team__result__item">{team.goalsAgainst}</div>
                     </div>
                 </div>
             </IonItem>
@@ -58,6 +62,8 @@ const TableItems = ({ ...props }) => {
             <div className="vertical__line line__2" />
             <div className="vertical__line line__3" />
             <div className="vertical__line line__4" />
+            <div className="vertical__line line__5" />
+            <div className="vertical__line line__6" />
             {items}
         </IonList>
     </>;

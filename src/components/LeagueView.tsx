@@ -102,9 +102,9 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
                         <IonMenuButton />
                     </IonButtons>
                     <IonTitle>
-                        <div className="table__name">
-                            {competitionData && competitionData.competition.name} | <span>{competitionData && competitionData.competition.area.name}</span>
-                        </div>
+                        {competitionData && <div className="table__name">
+                            <>{competitionData.competition.name} | <span>{competitionData.competition.area.name}</span></>
+                        </div>}
                     </IonTitle>
                 </IonToolbar>
             </IonHeader>
@@ -115,9 +115,11 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
                         <SideTable data={competitionData} name={"Home"} />
                         <SideTable data={competitionData} name={"Away"} />
                     </div>
-                    <MatchdayResults competitionMatches={competitionMatches} data={competitionData} name={"currentMatchday"}/>
-                    <MatchdayResults competitionMatches={competitionMatches} data={competitionData} name={"lastMatchday"}/>
-                    <MatchdayResults competitionMatches={competitionMatches} data={competitionData} name={"nextToLastMatchday"}/>
+                    <div className="matches__container">
+                        <MatchdayResults competitionMatches={competitionMatches} data={competitionData} name={"currentMatchday"} />
+                        <MatchdayResults competitionMatches={competitionMatches} data={competitionData} name={"lastMatchday"} />
+                        <MatchdayResults competitionMatches={competitionMatches} data={competitionData} name={"nextToLastMatchday"} />
+                    </div>
                 </div>
             </IonContent>
         </IonPage>

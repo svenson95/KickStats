@@ -25,7 +25,6 @@ import '@ionic/react/css/display.css';
 import './scss/variables.css';
 import Content from "./components/Content";
 import './scss/app.scss';
-import Context from './modules/Loading.context';
 
 const bundesliga = 'Bundesliga';
 const premierleague = 'Premier League';

@@ -4,18 +4,14 @@ import {
     IonList,
     IonProgressBar, IonSkeletonText,
 } from '@ionic/react';
-import React, {useContext} from 'react';
-import LoadingContext from "./Loading.context";
+import React from 'react';
 import {TeamRanking} from "../types/TeamRanking";
 
 function MainTable(props: any) {
-
-    const loadContext = useContext(LoadingContext);
-
     return (
         <div className="main__table__container">
             <IonCard className="table__card" style={{ margin: "10px" }}>
-                <IonProgressBar value={1} type={loadContext.state ? 'indeterminate' : 'determinate'}/>
+                <IonProgressBar value={1} type={!props.data ? 'indeterminate' : 'determinate'}/>
                     <div className="card__title">
                         <div className="table__name">
                             Table

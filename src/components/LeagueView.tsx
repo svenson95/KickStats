@@ -3,11 +3,9 @@ import React, {useEffect, useRef, useState} from 'react';
 import {RouteComponentProps, withRouter} from "react-router";
 import {createBrowserHistory} from "history";
 import {pageTitles} from "../App";
-import {LoadingContextData} from "../modules/Loading.context";
 import MainTable from "../modules/MainTable";
 import SideTable from "../modules/SideTable";
 import MatchdayResults from "../modules/MatchdayResults";
-import Context from '../modules/Loading.context';
 
 export const league_ids = {
     "bundesliga": "2002",
@@ -42,17 +40,14 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
 
         (async function() {
 
-            setLoading({ state: true });
             await fetchData(competition_data);
             await fetchData(competition_matches);
-            setLoading({ state: false });
         })();
 
     }, );
 
     const [competitionData, setCompetitionData] = useState();
     const [competitionMatches, setCompetitionMatches] = useState();
-    const [state, setLoading] = useState({state: false, setLoading: (value: boolean) => { setLoading({state: value}) }} as LoadingContextData);
 
     async function fetchData(url: string) {
 
@@ -81,34 +76,32 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
     }
 
     return (
-        <Context.Provider value={state}>
-            <IonPage>
-                <IonHeader>
-                    <IonToolbar>
-                        <IonButtons slot="start">
-                            <IonMenuButton />
-                        </IonButtons>
-                        <IonTitle>
-                            {competitionData && <div className="table__name">
-                                {competitionData.competition.name || "League"} | <span>{competitionData.competition.area.name || "Country"}</span>
-                            </div>}
-                        </IonTitle>
-                    </IonToolbar>
-                </IonHeader>
-                <IonContent>
-                    <div className="content__div">
-                        <MainTable data={competitionData} />
-                        <div className="home__and__away__container">
-                            <SideTable data={competitionData} name={"Home"} />
-                            <SideTable data={competitionData} name={"Away"} />
-                        </div>
-                        <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"currentMatchday"}/>
-                        <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"lastMatchday"}/>
-                        <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"nextToLastMatchday"}/>
+        <IonPage>
+            <IonHeader>
+                <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonMenuButton />
+                    </IonButtons>
+                    <IonTitle>
+                        {competitionData && <div className="table__name">
+                            {competitionData.competition.name || "League"} | <span>{competitionData.competition.area.name || "Country"}</span>
+                        </div>}
+                    </IonTitle>
+                </IonToolbar>
+            </IonHeader>
+            <IonContent>
+                <div className="content__div">
+                    <MainTable data={competitionData} />
+                    <div className="home__and__away__container">
+                        <SideTable data={competitionData} name={"Home"} />
+                        <SideTable data={competitionData} name={"Away"} />
                     </div>
-                </IonContent>
-            </IonPage>
-        </Context.Provider>
+                    <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"currentMatchday"}/>
+                    <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"lastMatchday"}/>
+                    <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"nextToLastMatchday"}/>
+                </div>
+            </IonContent>
+        </IonPage>
     );
 };
 

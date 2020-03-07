@@ -4,24 +4,14 @@ import {
     IonList,
     IonProgressBar,
 } from '@ionic/react';
-import React, {useContext} from 'react';
-import LoadingContext from "./Loading.context";
+import React from 'react';
 import {TeamRanking} from "../types/TeamRanking";
 
 function SideTable(props: any) {
-    const loadContext = useContext(LoadingContext);
-
-    // const mounted = useRef(false);
-    // useEffect(() => {
-    //    if (mounted.current) return;
-    //    mounted.current = true;
-    //
-    // });
-
     return (
         <IonCard className="side__table__container" style={{margin: "10px"}}>
             <div className="side__table__card">
-                <IonProgressBar value={1} type={loadContext.state ? 'indeterminate' : 'determinate'}/>
+                <IonProgressBar value={1} type={!props.data ? 'indeterminate' : 'determinate'}/>
                 <div className="card__title">
                     <div className="table__name">{props.name}</div>
                 </div>
@@ -41,7 +31,6 @@ function SideTable(props: any) {
 }
 
 const TableItems = ({ ...props }) => {
-
     const items = props.table.map((team: TeamRanking, index: number) => {
         return (
             <IonItem key={index} className="team__item">
@@ -61,12 +50,15 @@ const TableItems = ({ ...props }) => {
             </IonItem>
         );
     });
-    return <IonList>
-        <div className="vertical__line line__1" />
-        <div className="vertical__line line__2" />
-        <div className="vertical__line line__3" />
-        <div className="vertical__line line__4" />
-        {items}</IonList>;
+    return <>
+        <IonList>
+            <div className="vertical__line line__1" />
+            <div className="vertical__line line__2" />
+            <div className="vertical__line line__3" />
+            <div className="vertical__line line__4" />
+            {items}
+        </IonList>
+    </>;
 };
 
 export default SideTable;

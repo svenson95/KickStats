@@ -47,16 +47,22 @@ ion-header ion-toolbar:first-child {
     ion-title {
       text-align: left;
       width: 100%;
-      height: 60px;
 
       ion-button {
         color: #009b18;
+        font-size: 22px;
+        font-weight: 900;
         --background: clear;
-        --background-hover: rgba(0, 105, 22, 0.30);
-        --border-radius: 0 4px 4px 0;
+        --background-hover: clear;
+        --border-radius: 0 30px 30px 0;
         --box-shadow: none;
-        margin-left: -10px;
-        padding-left: 10px;
+        margin-left: -8px;
+        padding-left: 0px;
+
+        &:hover {
+          text-shadow: 0 0 15px #009b18;
+          transition: 200ms;
+        }
       }
     }
   }
@@ -145,7 +151,17 @@ ion-toolbar {
       height: fit-content;
       @include from-xs { min-width: 450px; }
       background-color: white;
-      @include to-xs { * { font-size: 12px; } }
+      @include to-xs {
+        .team__position,
+        .team__stats {
+          font-size: 11px;
+        };
+
+        .team__name {
+          font-size: 12px;
+          @include to-xs { font-size: 11px }
+        }
+      }
     }
     .league__view__card {
       height: fit-content;
@@ -187,6 +203,7 @@ ion-toolbar {
 
     .side__table__card {
       width: 100%;
+
       .team__stats,
       .team__header {
         width: 175px;
@@ -364,12 +381,18 @@ ion-toolbar {
     justify-content: flex-end;
     flex-shrink: 0;
     width: 24px;
+    @include to-xs { width: 18px }
   }
 
   .team__logo {
     width: 20px;
     margin: 3px 10px;
     flex-shrink: 0;
+
+    @include to-xs {
+      margin: 3px 2px;
+      width: 15px;
+    }
 
     img {
       display: flex;
@@ -379,6 +402,8 @@ ion-toolbar {
   .team__name {
     align-self: center;
     width: 100%;
+    margin-right: 20px;
+    @include to-xs { margin-right: 5px }
   }
 }
 
@@ -407,13 +432,13 @@ ion-toolbar {
 }
 .side__table__container {
   @include to-xs { margin: 10px auto !important; }
-  width: 200px;
+  width: 250px;
 
   .team__stats .team__result__item {
-    width: 20%;
+    width: 14.285%;
   }
   .team__header__stats .team__header .team__result__item {
-    width: 20%;
+    width: 14.285%;
   }
 }
 .matchday__results__card {

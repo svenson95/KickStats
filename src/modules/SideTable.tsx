@@ -8,30 +8,27 @@ import React from 'react';
 import {TeamRanking} from "../types/TeamRanking";
 import {markItems} from "../components/LeagueView";
 
-function SideTable(props: any) {
-    return (
-        <IonCard className="side__table__container">
-            <div className="side__table__card">
-                <IonProgressBar value={1} type={!props.data ? 'indeterminate' : 'determinate'}/>
-                <div className="card__title">
-                    <div className="table__name">{props.name}</div>
-                </div>
-                <div className="team__header__stats">
-                    <div className="team__header">
-                        <div className="team__result__item played">PLAY</div>
-                        <div className="team__result__item won">WIN</div>
-                        <div className="team__result__item draw">DRA</div>
-                        <div className="team__result__item lost">LOS</div>
-                        <div className="team__result__item">PTS</div>
-                        <div className="team__result__item goals--plus"><div className="ball">+</div></div>
-                        <div className="team__result__item goals--minus"><div className="ball">-</div></div>
-                    </div>
-                </div>
-                {props.data && <TableItems table={props.data.standings[(props.name === "Home" ? 1 : 2)].table}/>}
+const SideTable = ({ ...props }) =>
+    <IonCard className="side__table__container">
+        <div className="side__table__card">
+            <IonProgressBar value={1} type={!props.data ? 'indeterminate' : 'determinate'}/>
+            <div className="card__title">
+                <div className="table__name">{props.name}</div>
             </div>
-        </IonCard>
-    );
-}
+            <div className="team__header__stats">
+                <div className="team__header">
+                    <div className="team__result__item played">PLAY</div>
+                    <div className="team__result__item won">WIN</div>
+                    <div className="team__result__item draw">DRA</div>
+                    <div className="team__result__item lost">LOS</div>
+                    <div className="team__result__item">PTS</div>
+                    <div className="team__result__item goals--plus"><div className="ball">+</div></div>
+                    <div className="team__result__item goals--minus"><div className="ball">-</div></div>
+                </div>
+            </div>
+            {props.data && <TableItems table={props.data.standings[(props.name === "Home" ? 1 : 2)].table}/>}
+        </div>
+    </IonCard>;
 
 const TableItems = ({ ...props }) => {
     const items = props.table.map((team: TeamRanking, index: number) => {

@@ -18,35 +18,31 @@ interface MenuProps extends RouteComponentProps {
   appPages: AppPage[];
 }
 
-const Menu: React.FunctionComponent<MenuProps> = ({ ...props }) => {
-
-    return (
-        <IonMenu className="side__navigation" contentId="main" type="overlay">
-          <IonHeader>
-            <IonToolbar>
-              <IonTitle>
-                <IonButton routerLink='/home' routerDirection="none">
-                  KICK STATS
-                </IonButton>
-              </IonTitle>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent>
-            <IonListHeader>Competitions</IonListHeader>
-            <IonList>
-              {props.appPages.map((appPage: any, index: any) => {
-                return (
-                    <IonMenuToggle key={index} autoHide={false}>
-                      <IonItem routerLink={appPage.url} routerDirection="none">
-                        <IonLabel>{appPage.title}</IonLabel>
-                      </IonItem>
-                    </IonMenuToggle>
-                );
-              })}
-            </IonList>
-          </IonContent>
-        </IonMenu>
-    );
-};
+const Menu: React.FunctionComponent<MenuProps> = ({ ...props }) =>
+    <IonMenu className="side__navigation" contentId="main" type="overlay">
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>
+            <IonButton routerLink='/home' routerDirection="none">
+              KICK STATS
+            </IonButton>
+          </IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <IonListHeader>Competitions</IonListHeader>
+        <IonList>
+          {props.appPages.map((appPage: any, index: any) => {
+            return (
+                <IonMenuToggle key={index} autoHide={false}>
+                  <IonItem routerLink={appPage.url} routerDirection="none">
+                    <IonLabel>{appPage.title}</IonLabel>
+                  </IonItem>
+                </IonMenuToggle>
+            );
+          })}
+        </IonList>
+      </IonContent>
+    </IonMenu>;
 
 export default withRouter(Menu);

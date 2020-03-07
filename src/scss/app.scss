@@ -1,10 +1,10 @@
 @import "./mixins";
 
-$font-family-base: Avenir, Roboto, "Helvetica Neue", sans-serif !important;
+$font-family-base: "Helvetica Neue", Arial, Roboto, sans-serif !important;
 
 html,
 .content__container {
-  --ion-font-family: Avenir, Roboto, "Helvetica Neue", sans-serif !important;
+  --ion-font-family: "Helvetica Neue", Arial, Roboto, sans-serif !important;
   --ion-background-color: #373737;
 }
 
@@ -36,12 +36,8 @@ ion-header ion-toolbar:first-child {
 
   ion-list-header,
   ion-item{
-    --background-hover: #00d341;
+    --background-hover: rgba(0, 105, 22, 0.30);
     @include from-sm { --color: white; }
-  }
-
-  ion-button {
-    --background-hover: #00ff46;
   }
 
   ion-header {
@@ -49,21 +45,20 @@ ion-header ion-toolbar:first-child {
     ion-toolbar { @include to-md { box-shadow: none; } }
 
     ion-title {
-      text-align: center;
+      text-align: left;
       width: 100%;
-      height: 48px;
+      height: 60px;
 
       ion-button {
-        //--box-shadow: none;
-        color: #575757;
-        font-family: "Days One" !important;
+        color: #009b18;
+        --background: clear;
+        --background-hover: rgba(0, 105, 22, 0.30);
+        --border-radius: 0 4px 4px 0;
+        --box-shadow: none;
+        margin-left: -10px;
+        padding-left: 10px;
       }
     }
-  }
-
-  ion-content {
-    font-family: "Days One" !important;
-    ion-label { font-family: "Days One" !important; }
   }
 }
 
@@ -124,6 +119,9 @@ ion-toolbar {
 
   .home__and__away__container {
     display: flex;
+    width: 470px;
+    justify-content: space-between;
+
     @include to-md {
       width: 100%;
       justify-content: center;
@@ -210,7 +208,9 @@ ion-toolbar {
         @include to-xs { padding: 0 5px 15px; }
       }
 
-      ion-progress-bar { --buffer-background: #0079e6; }
+      ion-progress-bar {
+        --buffer-background: #ffffff;
+      }
     }
     .vertical__line {
       z-index: 999;
@@ -323,6 +323,7 @@ ion-toolbar {
   display: flex;
   font-size: 12px;
   justify-content: space-between;
+  align-items: center;
 
   .matchday__position {
     font-size: 10px;
@@ -434,6 +435,7 @@ ion-title {
 }
 
 .test {
-  background: #00f547;
+  background: #007d18;
+  color: white;
   border-radius: 4px;
 }

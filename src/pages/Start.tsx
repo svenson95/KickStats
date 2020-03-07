@@ -5,15 +5,13 @@ import {
     IonCardHeader,
     IonCardSubtitle,
     IonCardTitle,
-    IonContent, IonHeader,
-    IonIcon,
-    IonItem,
-    IonLabel,
-    IonList,
-    IonListHeader, IonMenuButton,
-    IonPage, IonTitle, IonToolbar,
+    IonContent,
+    IonHeader,
+    IonMenuButton,
+    IonPage,
+    IonTitle,
+    IonToolbar,
 } from '@ionic/react';
-import { book, build, colorFill, grid } from 'ionicons/icons';
 import React from 'react';
 
 const Start: React.FC = () => {

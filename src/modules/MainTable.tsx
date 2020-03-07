@@ -40,13 +40,13 @@ const TableItems = ({ ...props }) => {
 
     return (<>
         <IonList>
-            <div className="vertical__line line__1" key="line_1" />
-            <div className="vertical__line line__2" key="line_2" />
-            <div className="vertical__line line__3" key="line_3" />
-            <div className="vertical__line line__4" key="line_4" />
-            <div className="vertical__line line__5" key="line_5" />
-            <div className="vertical__line line__6" key="line_6" />
-            <div className="vertical__line line__7" key="line_7" />
+            <div className="vertical__line line__1" />
+            <div className="vertical__line line__2" />
+            <div className="vertical__line line__3" />
+            <div className="vertical__line line__4" />
+            <div className="vertical__line line__5" />
+            <div className="vertical__line line__6" />
+            <div className="vertical__line line__7" />
             {!props.data ? (
                 <>
                     {[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18].map((index) => {

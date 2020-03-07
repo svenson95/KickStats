@@ -1,6 +1,6 @@
 import {IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from '@ionic/react';
 import React, {useEffect, useRef, useState} from 'react';
-import {RouteComponentProps, withRouter} from "react-router";
+import {RouteComponentProps} from "react-router";
 import {createBrowserHistory} from "history";
 import {pageTitles} from "../App";
 import MainTable from "../modules/MainTable";
@@ -126,4 +126,4 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
     );
 };
 
-export default withRouter(LeagueView);
+export default LeagueView;

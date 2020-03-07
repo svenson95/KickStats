@@ -68,14 +68,16 @@ const MatchdayMatches = ({ ...props }) => {
                     {matches.map((match: any, index: number) => {
                         const homeScore = match.score.fullTime.homeTeam;
                         const awayScore = match.score.fullTime.awayTeam;
+                        const trimmedHomeTeam = match.homeTeam.name.toLowerCase().split(' ').join('').split('.').join('');
+                        const trimmedAwayTeam = match.awayTeam.name.toLowerCase().split(' ').join('').split('.').join('');
                         return (
                             <IonItem key={index} className="team__item">
                                 <div className="team__container">
-                                    <span className="home__team team__name">
+                                    <span className={`home__team team__info__${trimmedHomeTeam}`}>
                                         <span className="matchday__position">{getTeamPosition(match.homeTeam.name)}.</span> {match.homeTeam.name}
                                     </span>
                                     <span>{homeScore !== null ? homeScore : "-"} : {awayScore !== null ? awayScore : "-"}</span>
-                                    <span className="away__team">
+                                    <span className={`away__team team__info__${trimmedAwayTeam}`}>
                                         {match.awayTeam.name} <span className="matchday__position">{getTeamPosition(match.awayTeam.name)}.</span>
                                     </span>
                                 </div>

@@ -155,12 +155,14 @@ ion-toolbar {
         text-align: right;
         font-size: 12px;
         align-self: center;
+        padding: 5px;
       }
       .away__team {
         width: 180px;
         @include to-xs { width: 140px }
         font-size: 12px;
         align-self: center;
+        padding: 5px;
       }
     }
     .matchday__results__card,
@@ -338,6 +340,7 @@ ion-toolbar {
 
 .team__info {
   width: 100%;
+  min-height: 30px;
   display: flex;
   align-items: center;
   flex-shrink: 1;
@@ -434,8 +437,9 @@ ion-title {
   //background-size: 100% 15%;
 }
 
-.test {
+.marked {
   background: #007d18;
   color: white;
   border-radius: 4px;
+  .matchday__position { color: white }
 }

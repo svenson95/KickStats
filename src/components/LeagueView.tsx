@@ -20,6 +20,21 @@ export const league_ids = {
 };
 export let currentMatchday: number;
 
+let counter = 0;
+export function markItems(teamName: string) {
+    console.log(teamName);
+    if (document.querySelector(`.team__info__${teamName}`)?.classList.contains('marked')) {
+        document.querySelectorAll(`.team__info__${teamName}`)?.forEach(el => el.classList.remove('marked'));
+        counter -= 1;
+    } else if (counter >= 2) {
+        document.querySelectorAll(`.team__info`)?.forEach(el => el.classList.remove('marked'));
+        counter = 0;
+    } else {
+        document.querySelectorAll(`.team__info__${teamName}`)?.forEach(el => el.classList.add('marked'));
+        counter += 1;
+    }
+}
+
 const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match }) => {
 
     // componentDidMount
@@ -63,10 +78,12 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
         if (url.includes("/standings") && response.ok) {
             setCompetitionData(fetchedData);
             currentMatchday = fetchedData.season.currentMatchday;
+            console.log(fetchedData);
 
         // TODO: regexp -> 'competitions/regexp/matches'
         } else if (url.includes("/matches") && response.ok) {
             setCompetitionMatches(fetchedData);
+            console.log(fetchedData);
 
         } else {
             console.log('+++ error +++\n');
@@ -83,9 +100,9 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
                         <IonMenuButton />
                     </IonButtons>
                     <IonTitle>
-                        {competitionData && <div className="table__name">
-                            {competitionData.competition.name || "League"} | <span>{competitionData.competition.area.name || "Country"}</span>
-                        </div>}
+                        <div className="table__name">
+                            {competitionData && competitionData.competition.name} | <span>{competitionData && competitionData.competition.area.name}</span>
+                        </div>
                     </IonTitle>
                 </IonToolbar>
             </IonHeader>
@@ -96,9 +113,9 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
                         <SideTable data={competitionData} name={"Home"} />
                         <SideTable data={competitionData} name={"Away"} />
                     </div>
-                    <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"currentMatchday"}/>
-                    <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"lastMatchday"}/>
-                    <MatchdayResults data={competitionMatches} competitionData={competitionData} name={"nextToLastMatchday"}/>
+                    <MatchdayResults competitionMatches={competitionMatches} data={competitionData} name={"currentMatchday"}/>
+                    <MatchdayResults competitionMatches={competitionMatches} data={competitionData} name={"lastMatchday"}/>
+                    <MatchdayResults competitionMatches={competitionMatches} data={competitionData} name={"nextToLastMatchday"}/>
                 </div>
             </IonContent>
         </IonPage>

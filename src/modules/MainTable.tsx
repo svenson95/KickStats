@@ -6,6 +6,7 @@ import {
 } from '@ionic/react';
 import React from 'react';
 import {TeamRanking} from "../types/TeamRanking";
+import {markItems} from "../components/LeagueView";
 
 function MainTable(props: any) {
     return (
@@ -77,10 +78,11 @@ const TableItems = ({ ...props }) => {
             ) : (
                 <>
                     {props.data.standings[0].table.map((team: TeamRanking, index: number) => {
+                        const trimmedTeamName = team.team.name.toLowerCase().split(' ').join('').split('.').join('');
                         return (
                             <IonItem key={index} className="team__item">
                                 <div className="team__container">
-                                    <div className="team__info">
+                                    <div className={`team__info team__info__${trimmedTeamName}`} onClick={() => markItems(trimmedTeamName)}>
                                         <div className="team__position">{team.position}.</div>
                                         <div className="team__logo"><img src={team.team.crestUrl} alt={""}/></div>
                                         <div className="team__name">

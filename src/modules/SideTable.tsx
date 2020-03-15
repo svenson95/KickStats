@@ -3,10 +3,13 @@ import {
     IonItem,
     IonList,
     IonProgressBar,
+    IonSkeletonText,
 } from '@ionic/react';
 import React from 'react';
 import {TeamRanking} from "../types/TeamRanking";
 import {markItems} from "../components/LeagueView";
+
+
 
 const SideTable = ({ ...props }) =>
     <IonCard className="side__table__container">
@@ -17,53 +20,68 @@ const SideTable = ({ ...props }) =>
             </div>
             <div className="team__header__stats">
                 <div className="team__header">
-                    <div className="team__result__item played">PLAY</div>
+                    <div className="team__result__item played">PYD</div>
                     <div className="team__result__item won">WIN</div>
                     <div className="team__result__item draw">DRA</div>
                     <div className="team__result__item lost">LOS</div>
-                    <div className="team__result__item">PTS</div>
                     <div className="team__result__item goals--plus"><div className="ball">+</div></div>
                     <div className="team__result__item goals--minus"><div className="ball">-</div></div>
                 </div>
             </div>
-            {props.data && <TableItems table={props.data.standings[(props.name === "Home" ? 1 : 2)].table}/>}
+            <SideTableItems data={props.data} name={props.name} />
         </div>
     </IonCard>;
 
-const TableItems = ({ ...props }) => {
-    const items = props.table.map((team: TeamRanking, index: number) => {
-        const trimmedTeamName = team.team.name.toLowerCase().split(' ').join('').split('.').join('');
-        return (
-            <IonItem key={index} className="team__item">
-                <div className="team__container">
-                    <div className={`team__info team__info__${trimmedTeamName}`} onClick={() => markItems(trimmedTeamName)} >
-                        <div className="team__position">{team.position}.</div>
-                        <div className="team__logo"><img src={team.team.crestUrl} alt={""}/></div>
-                    </div>
-                    <div className="team__stats">
-                        <div className="team__result__item">{team.playedGames}</div>
-                        <div className="team__result__item">{team.won}</div>
-                        <div className="team__result__item">{team.draw}</div>
-                        <div className="team__result__item">{team.lost}</div>
-                        <div className="team__result__item">{team.points}</div>
-                        <div className="team__result__item">{team.goalsFor}</div>
-                        <div className="team__result__item">{team.goalsAgainst}</div>
-                    </div>
-                </div>
-            </IonItem>
-        );
-    });
-    return <>
-        <IonList>
-            <div className="vertical__line line__1" />
-            <div className="vertical__line line__2" />
-            <div className="vertical__line line__3" />
-            <div className="vertical__line line__4" />
-            <div className="vertical__line line__5" />
-            <div className="vertical__line line__6" />
-            {items}
-        </IonList>
-    </>;
-};
+const trimmedName = (string: string) =>
+    string.toLowerCase().split(' ').join('').split('.').join('').split('&').join('and');
+
+const SideTableItems = ({ ...props }) =>
+    <IonList>
+        <div className="vertical__line line__1" />
+        <div className="vertical__line line__2" />
+        <div className="vertical__line line__3" />
+        <div className="vertical__line line__4" />
+        <div className="vertical__line line__5" />
+        {props.data ? (
+            <>
+                {props.data.standings[(props.name === "Home" ? 1 : 2)].table.map((team: TeamRanking, index: number) =>
+                    <IonItem key={index} className="team__item">
+                        <div className="team__container">
+                            <div className={`team__info team__info__${trimmedName(team.team.name)}`} onClick={() => markItems(trimmedName(team.team.name))} >
+                                <div className="team__position">{team.position}.</div>
+                                <div className="team__logo"><img src={team.team.crestUrl} alt={""}/></div>
+                            </div>
+                            <div className="team__stats">
+                                <div className="team__result__item">{team.playedGames}</div>
+                                <div className="team__result__item">{team.won}</div>
+                                <div className="team__result__item">{team.draw}</div>
+                                <div className="team__result__item">{team.lost}</div>
+                                <div className="team__result__item">{team.goalsFor}</div>
+                                <div className="team__result__item">{team.goalsAgainst}</div>
+                            </div>
+                        </div>
+                    </IonItem>
+                )}
+            </>
+        ) : (<SideTableSkeleton />)}
+    </IonList>;
+
+const SideTableSkeleton = ({ ...props }) =>
+    <IonItem className="team__item">
+        <div className="team__container">
+            <div className={`team__info`}>
+                <div className="team__position">.</div>
+                <div className="team__logo"><IonSkeletonText animated style={{ width: '95%' }} /></div>
+            </div>
+            <div className="team__stats">
+                <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+            </div>
+        </div>
+    </IonItem>;
 
 export default SideTable;

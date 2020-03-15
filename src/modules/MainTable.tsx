@@ -10,7 +10,7 @@ import {markItems} from "../components/LeagueView";
 
 const MainTable = ({ ...props }) =>
     <div className="main__table__container">
-        <IonCard className="table__card" style={{ margin: "10px" }}>
+        <IonCard className="table__card">
             <IonProgressBar value={1} type={!props.data ? 'indeterminate' : 'determinate'}/>
                 <div className="card__title">
                     <div className="table__name">
@@ -19,7 +19,7 @@ const MainTable = ({ ...props }) =>
                 </div>
                 <div className="team__header__stats">
                     <div className="team__header">
-                        <div className="team__result__item played">PLAY</div>
+                        <div className="team__result__item played">PYD</div>
                         <div className="team__result__item won">WIN</div>
                         <div className="team__result__item draw">DRA</div>
                         <div className="team__result__item lost">LOS</div>
@@ -42,35 +42,7 @@ const TableItems = ({ ...props }) =>
         <div className="vertical__line line__5" />
         <div className="vertical__line line__6" />
         <div className="vertical__line line__7" />
-        {!props.data ? (
-            <>
-                {[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18].map((index) => {
-                    return (
-                        <IonItem key={index} className="team__item">
-                            <div className="team__container">
-                                <div className="team__info">
-                                    <div className="team__position">{index}.</div>
-                                    <div className="team__logo"><IonSkeletonText animated style={{ width: '95%' }} /></div>
-                                    <div className="team__name">
-                                        <IonSkeletonText animated style={{ width: '95%' }} />
-                                    </div>
-                                </div>
-                                <div className="team__stats">
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                                </div>
-                            </div>
-                        </IonItem>
-                    )
-                })}
-            </>
-        ) : (
+        {props.data ? (
             <>
                 {props.data.standings[0].table.map((team: TeamRanking, index: number) => {
                     const trimmedTeamName = team.team.name.toLowerCase().split(' ').join('').split('.').join('');
@@ -99,7 +71,30 @@ const TableItems = ({ ...props }) =>
                     )
                 })}
             </>
-        )}
+        ) : (<MainTableSkeleton/>)}
     </IonList>;
+
+const MainTableSkeleton = ({ ...props }) =>
+    <IonItem className="team__item">
+        <div className="team__container">
+            <div className="team__info">
+                <div className="team__position">{props.index}.</div>
+                <div className="team__logo"><IonSkeletonText animated style={{ width: '95%' }} /></div>
+                <div className="team__name">
+                    <IonSkeletonText animated style={{ width: '95%' }} />
+                </div>
+            </div>
+            <div className="team__stats">
+                <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+            </div>
+        </div>
+    </IonItem>;
 
 export default MainTable;

@@ -26,7 +26,10 @@ ion-header ion-toolbar:first-child {
   span { font-size: 16px; font-weight: 400 }
 }
 .side__navigation {
-  @include to-sm { --ion-background-color: white; }
+  @include to-sm {
+    --ion-background-color: white;
+    --width: 200px;
+  }
   //@include to-sm { --color: white; }
   border-right: none !important;
 
@@ -168,13 +171,14 @@ ion-toolbar {
       height: fit-content;
       background-color: white;
       width: 100%;
-      @include to-xs { * {
-        font-size: 13px;
-      } }
 
+      .match__result {
+        min-width: 30px;
+        text-align: center;
+      }
       .home__team {
         width: 200px;
-        @include to-xs { width: 140px }
+        @include to-xs { width: 100% }
         text-align: right;
         font-size: 12px;
         align-self: center;
@@ -182,7 +186,7 @@ ion-toolbar {
       }
       .away__team {
         width: 200px;
-        @include to-xs { width: 140px }
+        @include to-xs { width: 100% }
         font-size: 12px;
         align-self: center;
         padding: 5px;
@@ -324,7 +328,7 @@ ion-toolbar {
       .ball {
         width: 12px;
         height: 12px;
-        background: limegreen;
+        background: #007d18;
         border-radius: 15px;
         text-align: center;
       }

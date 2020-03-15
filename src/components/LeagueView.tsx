@@ -1,7 +1,6 @@
 import {IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from '@ionic/react';
 import React, {useEffect, useRef, useState} from 'react';
 import {RouteComponentProps} from "react-router";
-import {createBrowserHistory} from "history";
 import {pageTitles} from "../App";
 import MainTable from "../modules/MainTable";
 import SideTable from "../modules/SideTable";
@@ -77,12 +76,6 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
                 'X-Auth-Token': '342413b707f445ebb2666b52c757dff1'
             },
         });
-
-        if (!response.ok) {
-            console.log('+++ error +++\n');
-            console.log(response.status)
-        }
-
         return response.json();
 
     }

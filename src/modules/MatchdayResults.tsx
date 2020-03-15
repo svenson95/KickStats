@@ -8,13 +8,13 @@ let cardIndex: number;
 function MatchdayResults(props: any) {
 
     if (props.name === "currentMatchday") {
-        cardTitle = `${currentMatchday}. Matchday`;
+        cardTitle = `Next | ${currentMatchday}. Matchday`;
         cardIndex = 0;
     } else if (props.name === "lastMatchday") {
-        cardTitle = `${currentMatchday - 1}. Matchday`;
+        cardTitle = `Current | ${currentMatchday - 1}. Matchday`;
         cardIndex = 1;
     } else if (props.name === "nextToLastMatchday") {
-        cardTitle = `${currentMatchday - 2}. Matchday`;
+        cardTitle = `Last | ${currentMatchday - 2}. Matchday`;
         cardIndex = 2;
     }
 
@@ -36,8 +36,8 @@ function MatchdayResults(props: any) {
 const MatchdayMatches = ({ ...props }) => {
 
     function getTeamPosition(teamName: string) {
-        const position = props.data.standings[0].table.find((el: any) => el.team.name === teamName);
-        return position.position;
+        const ranking = props.data.standings[0].table.find((el: any) => el.team.name === teamName);
+        return ranking.position;
     }
 
     const matches: [] = props.competitionMatches.matches.filter((match: any) => match.matchday === currentMatchday - cardIndex);
@@ -75,7 +75,7 @@ const MatchdayMatches = ({ ...props }) => {
                                     <span className={`home__team team__info__${trimmedHomeTeam}`}>
                                         <span className="matchday__position">{getTeamPosition(match.homeTeam.name)}.</span> {match.homeTeam.name}
                                     </span>
-                                    <span>{homeScore !== null ? homeScore : "-"} : {awayScore !== null ? awayScore : "-"}</span>
+                                    <span className="match__result">{homeScore !== null ? homeScore : "-"} : {awayScore !== null ? awayScore : "-"}</span>
                                     <span className={`away__team team__info__${trimmedAwayTeam}`}>
                                         {match.awayTeam.name} <span className="matchday__position">{getTeamPosition(match.awayTeam.name)}.</span>
                                     </span>

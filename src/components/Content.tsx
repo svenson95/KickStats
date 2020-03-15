@@ -26,7 +26,7 @@ const Content: React.FC<ContentProps> = () =>
                 <Route path="/ligue1" component={LeagueView} />
                 <Route path="/primeiraliga" component={LeagueView} />
                 <Route path="/eredivise" component={LeagueView} />
-                <Redirect exact from="/" to="/home" />
+                <Redirect to="/home" exact={true} />
             </IonRouterOutlet>
         </IonContent>
     </IonPage>;

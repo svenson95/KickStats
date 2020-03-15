@@ -46,20 +46,22 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
         if (mounted.current) return;
         mounted.current = true;
 
-        let league_id: string;
-        const history = createBrowserHistory();
-        const url_parameter = history.location.pathname.substr(1, history.location.pathname.length);
-        league_id = Object.values(league_ids)[pageTitles.findIndex(el => el.title === url_parameter)];
+        const url_parameter = match.path.substr(1, match.path.length);
+        const league_id = Object.values(league_ids)[pageTitles.findIndex(el => el.title === url_parameter)];
 
         // const team_matches = `https://api.football-data.org/v2/teams/524/matches`;
         const competition_data = `https://api.football-data.org/v2/competitions/${league_id}/standings`;
         const competition_matches = `https://api.football-data.org/v2/competitions/${league_id}/matches`;
 
-        (async function() {
-
-            await fetchData(competition_data);
-            await fetchData(competition_matches);
-        })();
+        fetchData(competition_data).then(data => {
+            setCompetitionData(data);
+            console.log(data);
+            currentMatchday = data.season.currentMatchday;
+        });
+        fetchData(competition_matches).then(data => {
+            setCompetitionMatches(data);
+            console.log(data);
+        });
 
     }, );
 
@@ -75,22 +77,13 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
                 'X-Auth-Token': '342413b707f445ebb2666b52c757dff1'
             },
         });
-        const fetchedData = await response.json();
 
-        if (url.includes("/standings") && response.ok) {
-            setCompetitionData(fetchedData);
-            currentMatchday = fetchedData.season.currentMatchday;
-            console.log(fetchedData);
-
-        // TODO: regexp -> 'competitions/regexp/matches'
-        } else if (url.includes("/matches") && response.ok) {
-            setCompetitionMatches(fetchedData);
-            console.log(fetchedData);
-
-        } else {
+        if (!response.ok) {
             console.log('+++ error +++\n');
             console.log(response.status)
         }
+
+        return response.json();
 
     }
 

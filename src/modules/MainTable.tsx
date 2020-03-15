@@ -45,7 +45,7 @@ const TableItems = ({ ...props }) =>
         {props.data ? (
             <>
                 {props.data.standings[0].table.map((team: TeamRanking, index: number) => {
-                    const trimmedTeamName = team.team.name.toLowerCase().split(' ').join('').split('.').join('');
+                    const trimmedTeamName = team.team.name.toLowerCase().split(' ').join('').split('.').join('').split('&').join('and');
                     return (
                         <IonItem key={index} className="team__item">
                             <div className="team__container">

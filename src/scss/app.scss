@@ -135,7 +135,7 @@ ion-toolbar {
     }
 
     @include to-xs {
-      justify-content: space-between;
+      justify-content: space-evenly;
     }
   }
   .matches__container {
@@ -245,6 +245,7 @@ ion-toolbar {
       }
 
       ion-list {
+        overflow: hidden;
         padding: 0 5px 5px;
         @include to-xs { padding: 0 5px 5px; }
       }

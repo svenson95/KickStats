@@ -12,9 +12,9 @@
     "static/js/4.4649edbb.chunk.js.map": "/KickStats/static/js/4.4649edbb.chunk.js.map",
     "static/js/5.618e3d11.chunk.js": "/KickStats/static/js/5.618e3d11.chunk.js",
     "static/js/5.618e3d11.chunk.js.map": "/KickStats/static/js/5.618e3d11.chunk.js.map",
-    "main.css": "/KickStats/static/css/main.92c1d681.chunk.css",
-    "main.js": "/KickStats/static/js/main.ec585508.chunk.js",
-    "main.js.map": "/KickStats/static/js/main.ec585508.chunk.js.map",
+    "main.css": "/KickStats/static/css/main.a464556d.chunk.css",
+    "main.js": "/KickStats/static/js/main.7ab3fe83.chunk.js",
+    "main.js.map": "/KickStats/static/js/main.7ab3fe83.chunk.js.map",
     "runtime-main.js": "/KickStats/static/js/runtime-main.f1ebcbff.js",
     "runtime-main.js.map": "/KickStats/static/js/runtime-main.f1ebcbff.js.map",
     "static/css/8.4c499b71.chunk.css": "/KickStats/static/css/8.4c499b71.chunk.css",
@@ -193,10 +193,10 @@
     "static/js/94.05b9f1ab.chunk.js": "/KickStats/static/js/94.05b9f1ab.chunk.js",
     "static/js/94.05b9f1ab.chunk.js.map": "/KickStats/static/js/94.05b9f1ab.chunk.js.map",
     "index.html": "/KickStats/index.html",
-    "precache-manifest.add742f740319e07b81491f62fe06a36.js": "/KickStats/precache-manifest.add742f740319e07b81491f62fe06a36.js",
+    "precache-manifest.496fc7449ce3f4b081315ed6defd2e8a.js": "/KickStats/precache-manifest.496fc7449ce3f4b081315ed6defd2e8a.js",
     "service-worker.js": "/KickStats/service-worker.js",
     "static/css/8.4c499b71.chunk.css.map": "/KickStats/static/css/8.4c499b71.chunk.css.map",
-    "static/css/main.92c1d681.chunk.css.map": "/KickStats/static/css/main.92c1d681.chunk.css.map",
+    "static/css/main.a464556d.chunk.css.map": "/KickStats/static/css/main.a464556d.chunk.css.map",
     "static/js/30.f8f113bc.chunk.js.LICENSE": "/KickStats/static/js/30.f8f113bc.chunk.js.LICENSE",
     "static/js/8.cd62b19d.chunk.js.LICENSE": "/KickStats/static/js/8.cd62b19d.chunk.js.LICENSE",
     "static/js/90.fd6832cf.chunk.js.LICENSE": "/KickStats/static/js/90.fd6832cf.chunk.js.LICENSE",
@@ -207,7 +207,7 @@
     "static/js/runtime-main.f1ebcbff.js",
     "static/css/8.4c499b71.chunk.css",
     "static/js/8.cd62b19d.chunk.js",
-    "static/css/main.92c1d681.chunk.css",
-    "static/js/main.ec585508.chunk.js"
+    "static/css/main.a464556d.chunk.css",
+    "static/js/main.7ab3fe83.chunk.js"
   ]
 }

@@ -3,7 +3,8 @@ import {IonApp, IonSplitPane} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import {AppPage, PageTitle} from './declarations';
 
-import Menu from './components/Menu';
+import Menu from './components/split-pane/Menu';
+import Content from "./components/split-pane/Content";
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -23,7 +24,6 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './scss/variables.css';
-import Content from "./components/Content";
 import './scss/app.scss';
 
 const bundesliga = 'Bundesliga';

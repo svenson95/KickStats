@@ -18,14 +18,14 @@ const Content: React.FC<ContentProps> = () =>
     <IonPage className="content__container" id="main">
         <IonContent>
             <IonRouterOutlet id="main">
-                <Route path="/home" component={Start} />
-                <Route path="/bundesliga" component={LeagueView} />
-                <Route path="/premierleague" component={LeagueView} />
-                <Route path="/primeradivisión" component={LeagueView}  />
-                <Route path="/seriea" component={LeagueView} />
-                <Route path="/ligue1" component={LeagueView} />
-                <Route path="/primeiraliga" component={LeagueView} />
-                <Route path="/eredivise" component={LeagueView} />
+                <Route path="/home" render={() => <Start />} />
+                <Route path="/bundesliga" render={() => <LeagueView/>} />
+                <Route path="/premierleague" render={() => <LeagueView/>} />
+                <Route path="/primeradivision" render={() => <LeagueView/>} />
+                <Route path="/seriea" render={() => <LeagueView/>} />
+                <Route path="/ligue1" render={() => <LeagueView/>} />
+                <Route path="/primeiraliga" render={() => <LeagueView/>} />
+                <Route path="/eredivise" render={() => <LeagueView/>} />
                 <Redirect to="/home" exact={true} />
             </IonRouterOutlet>
         </IonContent>

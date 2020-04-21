@@ -6,7 +6,6 @@ import {
     IonSkeletonText,
 } from '@ionic/react';
 import React from 'react';
-import {TeamRanking} from "../types/TeamRanking";
 import {markItems} from "../components/LeagueView";
 
 
@@ -14,7 +13,7 @@ import {markItems} from "../components/LeagueView";
 const SideTable = ({ ...props }) =>
     <IonCard className="side__table__container">
         <div className="side__table__card">
-            <IonProgressBar value={1} type={!props.data ? 'indeterminate' : 'determinate'}/>
+            <IonProgressBar value={1} type={props.isLoading ? 'indeterminate' : 'determinate'}/>
             <div className="card__title">
                 <div className="table__name">{props.name}</div>
             </div>
@@ -42,9 +41,9 @@ const SideTableItems = ({ ...props }) =>
         <div className="vertical__line line__3" />
         <div className="vertical__line line__4" />
         <div className="vertical__line line__5" />
-        {props.data ? (
+        {props.data.standings ? (
             <>
-                {props.data.standings[(props.name === "Home" ? 1 : 2)].table.map((team: TeamRanking, index: number) =>
+                {props.data.standings[(props.name === "Home" ? 1 : 2)].table.map((team: any, index: number) =>
                     <IonItem key={index} className="team__item">
                         <div className="team__container">
                             <div className={`team__info team__info__${trimmedName(team.team.name)}`} onClick={() => markItems(trimmedName(team.team.name))} >

@@ -1,90 +1,96 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {IonCard, IonItem, IonList, IonProgressBar, IonSkeletonText} from "@ionic/react";
-import {currentMatchday} from "../components/LeagueView";
 
-let cardTitle: string;
-let cardIndex: number;
+let MatchdayResults = ({ ...props }) => {
 
-function MatchdayResults(props: any) {
+    let [title, setTitle] = useState();
+    let [index, setIndex] = useState();
 
-    if (props.name === "currentMatchday") {
-        cardTitle = `Next | ${currentMatchday}. Matchday`;
-        cardIndex = 0;
-    } else if (props.name === "lastMatchday") {
-        cardTitle = `Current | ${currentMatchday - 1}. Matchday`;
-        cardIndex = 1;
-    } else if (props.name === "nextToLastMatchday") {
-        cardTitle = `Last | ${currentMatchday - 2}. Matchday`;
-        cardIndex = 2;
-    }
+    useEffect(() => {
+        if (props.name === "currentMatchday") {
+            setTitle(`Next | ${props.matchDay}. Matchday`);
+            setIndex(0);
+        } else if (props.name === "lastMatchday") {
+            setTitle(`Current | ${props.matchDay - 1}. Matchday`);
+            setIndex(1);
+        } else if (props.name === "nextToLastMatchday") {
+            setTitle(`Last | ${props.matchDay - 2}. Matchday`);
+            setIndex(2);
+        }
+    });
 
     return (
         <IonCard className="matchday__results__card">
             <div className="league__view__card">
-                <IonProgressBar value={1} type={!props.competitionMatches ? 'indeterminate' : 'determinate'}/>
-                <div className="card__title no-absolute-position">
+                <IonProgressBar value={1} type={props.isLoading ? 'indeterminate' : 'determinate'}/>
+                <div className="card__title absolute-position">
                     <div className="table__name">
-                        {cardTitle && cardTitle}
+                        {title && title}
                     </div>
                 </div>
-                {props.competitionMatches && <MatchdayMatches competitionMatches={props.competitionMatches} data={props.data} name={props.name}/>}
+                {props.matchesData &&
+                    <MatchDayCard
+                        matchDay={props.matchDay}
+                        index={index}
+                        matchesData={props.matchesData}
+                        data={props.data}
+                        name={props.name}
+                    />
+                }
+                {props.isLoading &&
+                    <IonList>
+                        <IonItem className="team__item">
+                            <div className="team__container">
+                            <span className={`home__team`}>
+                                <span className="matchday__position"><IonSkeletonText animated style={{ width: '80%' }} />.</span> <IonSkeletonText animated style={{ width: '80%' }} />
+                            </span>
+                                <span className="match__result"><IonSkeletonText animated style={{ width: '80%' }} /> : <IonSkeletonText animated style={{ width: '80%' }} /></span>
+                                <span className={`away__team`}>
+                                <IonSkeletonText animated style={{ width: '80%' }} /> <span className="matchday__position"><IonSkeletonText animated style={{ width: '80%' }} />.</span>
+                            </span>
+                            </div>
+                        </IonItem>
+                    </IonList>
+                }
             </div>
         </IonCard>
     );
-}
+};
 
-const MatchdayMatches = ({ ...props }) => {
+const MatchDayCard = ({ ...props }) => {
 
     function getTeamPosition(teamName: string) {
         const ranking = props.data.standings[0].table.find((el: any) => el.team.name === teamName);
         return ranking.position;
     }
 
-    const matches: [] = props.competitionMatches.matches.filter((match: any) => match.matchday === currentMatchday - cardIndex);
+    const matches: [] = props.matchesData.matches.filter((allMatches: any) => allMatches.matchday === props.matchDay - props.index);
 
     return (<>
         <IonList>
-            {!props.competitionMatches ? (
-                <>
-                    {[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18].map((index) => {
-                        return (
-                            <IonItem key={index} className="team__item">
-                                <div className="match__container">
-                                <span className="home__team team__name">
-                                    <IonSkeletonText animated style={{ width: '95%' }} />
+            {props.matchesData && matches.map((match: any, index: number) => {
+                const homeScore = match.score.fullTime.homeTeam;
+                const awayScore = match.score.fullTime.awayTeam;
+                const trimmedHomeTeam = match.homeTeam.name.toLowerCase().split(' ').join('').split('.').join('').split('&').join('and');
+                const trimmedAwayTeam = match.awayTeam.name.toLowerCase().split(' ').join('').split('.').join('').split('&').join('and');
+
+                return (
+                    <IonItem key={index} className="team__item">
+                        <div className="team__container">
+                                <span className={`home__team team__info__${trimmedHomeTeam}`}>
+                                    <span
+                                        className="matchday__position">{getTeamPosition(match.homeTeam.name)}.</span> {match.homeTeam.name}
                                 </span>
-                                    <span><IonSkeletonText animated style={{ width: '80%' }} /> : <IonSkeletonText animated style={{ width: '80%' }} /></span>
-                                    <span className="away__team">
-                                    <IonSkeletonText animated style={{ width: '95%' }} />
+                            <span
+                                className="match__result">{homeScore !== null ? homeScore : "-"} : {awayScore !== null ? awayScore : "-"}</span>
+                            <span className={`away__team team__info__${trimmedAwayTeam}`}>
+                                    {match.awayTeam.name} <span
+                                className="matchday__position">{getTeamPosition(match.awayTeam.name)}.</span>
                                 </span>
-                                </div>
-                            </IonItem>
-                        )
-                    })}
-                </>
-            ) : (
-                <>
-                    {matches.map((match: any, index: number) => {
-                        const homeScore = match.score.fullTime.homeTeam;
-                        const awayScore = match.score.fullTime.awayTeam;
-                        const trimmedHomeTeam = match.homeTeam.name.toLowerCase().split(' ').join('').split('.').join('').split('&').join('and');
-                        const trimmedAwayTeam = match.awayTeam.name.toLowerCase().split(' ').join('').split('.').join('').split('&').join('and');
-                        return (
-                            <IonItem key={index} className="team__item">
-                                <div className="team__container">
-                                    <span className={`home__team team__info__${trimmedHomeTeam}`}>
-                                        <span className="matchday__position">{getTeamPosition(match.homeTeam.name)}.</span> {match.homeTeam.name}
-                                    </span>
-                                    <span className="match__result">{homeScore !== null ? homeScore : "-"} : {awayScore !== null ? awayScore : "-"}</span>
-                                    <span className={`away__team team__info__${trimmedAwayTeam}`}>
-                                        {match.awayTeam.name} <span className="matchday__position">{getTeamPosition(match.awayTeam.name)}.</span>
-                                    </span>
-                                </div>
-                            </IonItem>
-                        )
-                    })}
-                </>
-            )}
+                        </div>
+                    </IonItem>
+                )
+            })}
         </IonList>
     </>);
 };

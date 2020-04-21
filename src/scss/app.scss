@@ -26,12 +26,12 @@ ion-header ion-toolbar:first-child {
   span { font-size: 16px; font-weight: 400 }
 }
 .side__navigation {
+  border-right: none !important;
+
   @include to-sm {
     --ion-background-color: white;
     --width: 200px;
   }
-  //@include to-sm { --color: white; }
-  border-right: none !important;
 
   @include from-md {
     max-width: 12% !important;
@@ -39,7 +39,6 @@ ion-header ion-toolbar:first-child {
 
   ion-list-header,
   ion-item{
-    --background-hover: rgba(0, 105, 22, 0.30);
     @include from-sm { --color: white; }
   }
 
@@ -52,19 +51,13 @@ ion-header ion-toolbar:first-child {
       width: 100%;
 
       ion-button {
-        color: #009b18;
         font-size: 22px;
         font-weight: 900;
         --border-radius: 0 30px 30px 0;
         --box-shadow: none;
         margin-left: -8px;
-        padding-left: 0px;
+        padding-left: 0;
         height: 36px;
-
-        &:hover {
-          text-shadow: 0 0 15px #009b18;
-          transition: 200ms;
-        }
       }
     }
   }
@@ -256,10 +249,10 @@ ion-toolbar {
     }
     .vertical__line {
       z-index: 2;
-      height: 98%;
+      height: 91%;
       width: 1px;
       position: absolute;
-      top: 25px;
+      top: 69px;
       background-color: #d1d1d1;
       transform: translateY(-25px);
     }
@@ -286,7 +279,7 @@ ion-toolbar {
   padding: 6px 12px;
   font-weight: 700;
   font-size: 16px;
-  &:not(.no-absolute-position) {
+  &:not(.absolute-position) {
     position: absolute;
   }
 }

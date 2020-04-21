@@ -22,16 +22,33 @@ export const league_ids = {
 let counter = 0;
 export function markItems(teamName: string) {
     console.log(teamName);
-    if (document.querySelector(`.team__info__${teamName}`)?.classList.contains('marked')) {
-        document.querySelectorAll(`.team__info__${teamName}`)?.forEach(el => el.classList.remove('marked'));
+    let marked1 = document.querySelector(`.team__info__${teamName}`)?.classList.contains('marked1');
+    if (marked1) {
+        document.querySelectorAll(`.team__info__${teamName}`)?.forEach(el => el.classList.remove('marked1'));
+        counter -= 1;
+    } else if (document.querySelector(`.team__info__${teamName}`)?.classList.contains('marked2')) {
+        document.querySelectorAll(`.team__info__${teamName}`)?.forEach(el => el.classList.remove('marked2'));
         counter -= 1;
     } else if (counter >= 2) {
-        document.querySelectorAll(`.team__info`)?.forEach(el => el.classList.remove('marked'));
-        document.querySelectorAll(".home__team")?.forEach(el => el.classList.remove('marked'));
-        document.querySelectorAll(".away__team")?.forEach(el => el.classList.remove('marked'));
+        document.querySelectorAll(`.team__info`)?.forEach(el => {
+            el.classList.remove('marked1');
+            el.classList.remove('marked2');
+        });
+        document.querySelectorAll(".home__team")?.forEach(el => {
+            el.classList.remove('marked1');
+            el.classList.remove('marked2');
+        });
+        document.querySelectorAll(".away__team")?.forEach(el => {
+            el.classList.remove('marked1');
+            el.classList.remove('marked2');
+        });
         counter = 0;
     } else {
-        document.querySelectorAll(`.team__info__${teamName}`)?.forEach(el => el.classList.add('marked'));
+        if (counter === 0) {
+            document.querySelectorAll(`.team__info__${teamName}`)?.forEach(el => el.classList.add('marked1'));
+        } else {
+            document.querySelectorAll(`.team__info__${teamName}`)?.forEach(el => el.classList.add('marked2'));
+        }
         counter += 1;
     }
 }
@@ -148,6 +165,6 @@ let MatchDays = ({ ...props }) => {
             />
         </div>
     )
-}
+};
 
 export default withRouter(LeagueView);

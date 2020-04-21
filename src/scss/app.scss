@@ -149,9 +149,9 @@ ion-toolbar {
     .table__card {
       height: fit-content;
       @include from-xs { min-width: 450px; }
+      @include to-xs { min-width: 432px; }
       background-color: white;
       @include to-xs {
-        width: 100%;
 
         .team__name,
         .team__position,
@@ -302,7 +302,7 @@ ion-toolbar {
     flex-shrink: 0;
 
     .team__result__item {
-      width: 12.5%;
+      width: calc(100% / 8);
       display: flex;
       justify-content: center;
       align-items: flex-end;
@@ -322,7 +322,7 @@ ion-toolbar {
       .ball {
         width: 12px;
         height: 12px;
-        background: #007d18;
+        background: var(--ion-color-primary);
         border-radius: 15px;
         text-align: center;
       }
@@ -347,10 +347,6 @@ ion-toolbar {
         text-align: center;
       }
     }
-
-    //.won { background-image: linear-gradient(-80deg,#00b324 4%,#00b324 96%); }
-    //.draw { background-image: linear-gradient(-80deg,#676665 4%,#676665 96%); }
-    //.lost { background-image: linear-gradient(-80deg,#ff0514 4%,#ff0514 96%); }
   }
 }
 
@@ -402,6 +398,8 @@ ion-toolbar {
 
     img {
       display: flex;
+      max-height: 20px;
+      margin: auto;
     }
   }
 
@@ -422,7 +420,7 @@ ion-toolbar {
   flex-shrink: 0;
 
   .team__result__item {
-    width: 12.5%;
+    width: calc(100% / 8);
     border-radius: 25px;
     display: flex;
     justify-content: center;
@@ -431,8 +429,8 @@ ion-toolbar {
 }
 
 .main__table__container {
-  @include to-md { width: 100%; }
   display: flex;
+  width: 100%;
 
   @include to-xs { margin: 10px auto !important; }
 }
@@ -470,18 +468,20 @@ ion-toolbar {
 }
 
 ion-title {
-  //font-weight: 900;
   width: fit-content;
   padding: 0;
   margin: auto;
-  //background-image: linear-gradient(-80deg,#3171e0 4%,#4c8dff 96%);
-  //background-repeat: no-repeat;
-  //background-position: 0 102%,0 0;
-  //background-size: 100% 15%;
 }
 
-.marked {
-  background: #007d18;
+.marked1 {
+  background: var(--ion-color-primary);
+  color: white;
+  border-radius: 4px;
+  .matchday__position { color: white }
+}
+
+.marked2 {
+  background: var(--ion-color-primary-contrast);
   color: white;
   border-radius: 4px;
   .matchday__position { color: white }

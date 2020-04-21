@@ -38,7 +38,7 @@ function stringToUrl(string: string) {
   return string.replace(' ', '').toLowerCase()
 }
 
-const appPages: AppPage[] = [
+export const appPages: AppPage[] = [
   {
     title: bundesliga,
     url: stringToUrl(`/${bundesliga}`),
@@ -49,7 +49,7 @@ const appPages: AppPage[] = [
   },
   {
     title: primeradivision,
-    url: stringToUrl(`/${primeradivision}`),
+    url: stringToUrl(`/${primeradivision.replace('ó', 'o')}`),
   },
   {
     title: seriea,
@@ -77,7 +77,7 @@ export const pageTitles: PageTitle[] = [
     title: stringToUrl(premierleague)
   },
   {
-    title: stringToUrl(primeradivision)
+    title: stringToUrl(primeradivision.replace('ó', 'o'))
   },
   {
     title: stringToUrl(seriea)

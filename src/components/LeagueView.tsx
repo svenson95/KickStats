@@ -9,7 +9,7 @@ import MatchdayResults from "../modules/MatchdayResults";
 export const league_ids = {
     "bundesliga": "2002",
     "premierleague": "2021",
-    "primeradivisión": "2014",
+    "primeradivision": "2014",
     "seriea": "2019",
     "ligue1": "2015",
     "primerialiga": "2017",

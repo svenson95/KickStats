@@ -121,12 +121,12 @@ let MatchDays = ({ ...props }) => {
         if (mounted.current) return;
         mounted.current = true;
 
-        fetchMatch();
+        fetchMatches();
 
         return () => setMatchesData([]);
     }, [setLoading]);
 
-    let fetchMatch = () => {
+    let fetchMatches = () => {
         setLoading(true);
         const url_parameter = props.route.path.substr(1, props.route.path.length);
         const league_id = Object.values(league_ids)[pageTitles.findIndex(el => el.title === url_parameter)];
@@ -142,7 +142,7 @@ let MatchDays = ({ ...props }) => {
             <MatchdayResults
                 matchesData={matchesData}
                 route={props.route}
-                matchDay={30}
+                matchDay={25}
                 data={props.data}
                 name="currentMatchday"
                 isLoading={isLoading}
@@ -150,7 +150,7 @@ let MatchDays = ({ ...props }) => {
             <MatchdayResults
                 matchesData={matchesData}
                 route={props.route}
-                matchDay={30}
+                matchDay={26}
                 data={props.data}
                 name="lastMatchday"
                 isLoading={isLoading}
@@ -158,7 +158,7 @@ let MatchDays = ({ ...props }) => {
             <MatchdayResults
                 matchesData={matchesData}
                 route={props.route}
-                matchDay={30}
+                matchDay={27}
                 data={props.data}
                 name="nextToLastMatchday"
                 isLoading={isLoading}

@@ -7,10 +7,12 @@ import {
 import React from 'react';
 import {markItems} from "../components/LeagueView";
 
-const MainTable = ({ ...props }) =>
-    <div className="main__table__container">
-        <IonCard className="table__card">
-            <IonProgressBar value={1} type={props.isLoading ? 'indeterminate' : 'determinate'}/>
+const MainTable = ({ ...props }) => {
+
+    return (
+        <div className="main__table__container">
+            <IonCard className="table__card">
+                <IonProgressBar value={1} type={props.isLoading ? 'indeterminate' : 'determinate'}/>
                 <div className="card__title">
                     <div className="table__name">
                         Table
@@ -23,24 +25,36 @@ const MainTable = ({ ...props }) =>
                         <div className="team__result__item draw">DRA</div>
                         <div className="team__result__item lost">LOS</div>
                         <div className="team__result__item">PTS</div>
-                        <div className="team__result__item goals--plus"><div className="ball">+</div></div>
-                        <div className="team__result__item goals--minus"><div className="ball">-</div></div>
-                        <div className="team__result__item goals--difference"><div className="ball">=</div></div>
+                        <div className="team__result__item goals--plus">
+                            <div className="ball">+</div>
+                        </div>
+                        <div className="team__result__item goals--minus">
+                            <div className="ball">-</div>
+                        </div>
+                        <div className="team__result__item goals--difference">
+                            <div className="ball">=</div>
+                        </div>
                     </div>
                 </div>
-            {props.data.standings ? <TableItems data={props.data} /> : <MainTableSkeleton/>}
-        </IonCard>
-    </div>;
+                {props.data.standings ? <TableItems data={props.data}/> : <MainTableSkeleton/>}
+            </IonCard>
+        </div>
+    )
+};
 
 const TableItems = ({ ...props }) =>
     <IonList>
-        <div className="vertical__line line__1" />
-        <div className="vertical__line line__2" />
-        <div className="vertical__line line__3" />
-        <div className="vertical__line line__4" />
-        <div className="vertical__line line__5" />
-        <div className="vertical__line line__6" />
-        <div className="vertical__line line__7" />
+        <div className="vertical__line__container--relative-parent">
+            <div className="vertical__line__container--hiding-parent">
+                <div className="vertical__line line__1" />
+                <div className="vertical__line line__2" />
+                <div className="vertical__line line__3" />
+                <div className="vertical__line line__4" />
+                <div className="vertical__line line__5" />
+                <div className="vertical__line line__6" />
+                <div className="vertical__line line__7" />
+            </div>
+        </div>
         {props.data.standings[0].table.map((team: any, index: number) => {
             const trimmedTeamName = team.team.name.toLowerCase().split(' ').join('').split('.').join('').split('&').join('and');
             return (

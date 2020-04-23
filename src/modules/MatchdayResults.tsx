@@ -20,7 +20,7 @@ let MatchdayResults = ({ ...props }) => {
     });
 
     return (
-        <IonCard className="matchday__results__card">
+        <IonCard className="matchday__card">
             <div className="league__view__card">
                 <IonProgressBar value={1} type={props.isLoading ? 'indeterminate' : 'determinate'}/>
                 <div className="card__title absolute-position">
@@ -37,86 +37,7 @@ let MatchdayResults = ({ ...props }) => {
                         name={props.name}
                     />
                 }
-                {props.isLoading &&
-                    <IonList>
-                        <IonItem key={index} className="team__item">
-                            <div className="team__container">
-                                <span className="home__team">
-                                    <span className="matchday__position">
-                                        <IonSkeletonText animated style={{ width: '100%' }} />
-                                    </span>
-                                    <IonSkeletonText animated style={{ width: '100%' }} />
-                                </span>
-                                <span className="match__result">
-                                    <IonSkeletonText animated style={{ width: '100%' }} /><span>:</span><IonSkeletonText animated style={{ width: '100%' }} />
-                                </span>
-                                <span className="away__team">
-                                    <span className="matchday__position">
-                                        <IonSkeletonText animated style={{ width: '100%' }} />
-                                    </span>
-                                    <IonSkeletonText animated style={{ width: '100%' }} />
-                                </span>
-                            </div>
-                        </IonItem>
-                        <IonItem key={index} className="team__item">
-                            <div className="team__container">
-                                <span className="home__team">
-                                    <span className="matchday__position">
-                                        <IonSkeletonText animated style={{ width: '100%' }} />
-                                    </span>
-                                    <IonSkeletonText animated style={{ width: '100%' }} />
-                                </span>
-                                <span className="match__result">
-                                    <IonSkeletonText animated style={{ width: '100%' }} /><span>:</span><IonSkeletonText animated style={{ width: '100%' }} />
-                                </span>
-                                <span className="away__team">
-                                    <span className="matchday__position">
-                                        <IonSkeletonText animated style={{ width: '100%' }} />
-                                    </span>
-                                    <IonSkeletonText animated style={{ width: '100%' }} />
-                                </span>
-                            </div>
-                        </IonItem>
-                        <IonItem key={index} className="team__item">
-                            <div className="team__container">
-                                <span className="home__team">
-                                    <span className="matchday__position">
-                                        <IonSkeletonText animated style={{ width: '100%' }} />
-                                    </span>
-                                    <IonSkeletonText animated style={{ width: '100%' }} />
-                                </span>
-                                <span className="match__result">
-                                    <IonSkeletonText animated style={{ width: '100%' }} /><span>:</span><IonSkeletonText animated style={{ width: '100%' }} />
-                                </span>
-                                <span className="away__team">
-                                    <span className="matchday__position">
-                                        <IonSkeletonText animated style={{ width: '100%' }} />
-                                    </span>
-                                    <IonSkeletonText animated style={{ width: '100%' }} />
-                                </span>
-                            </div>
-                        </IonItem>
-                        <IonItem key={index} className="team__item">
-                            <div className="team__container">
-                                <span className="home__team">
-                                    <span className="matchday__position">
-                                        <IonSkeletonText animated style={{ width: '100%' }} />
-                                    </span>
-                                    <IonSkeletonText animated style={{ width: '100%' }} />
-                                </span>
-                                <span className="match__result">
-                                    <IonSkeletonText animated style={{ width: '100%' }} /><span>:</span><IonSkeletonText animated style={{ width: '100%' }} />
-                                </span>
-                                <span className="away__team">
-                                    <span className="matchday__position">
-                                        <IonSkeletonText animated style={{ width: '100%' }} />
-                                    </span>
-                                    <IonSkeletonText animated style={{ width: '100%' }} />
-                                </span>
-                            </div>
-                        </IonItem>
-                    </IonList>
-                }
+                {props.isLoading && <MatchDayCardSkeleton/>}
             </div>
         </IonCard>
     );
@@ -163,6 +84,37 @@ const MatchDayCard = ({ ...props }) => {
             })}
         </IonList>
     </>);
+};
+
+const MatchDayCardSkeleton = () => {
+    const skeletonItems = Array(9).fill(null);
+    const items = skeletonItems.map((_, index) =>
+        <IonItem key={index} className="team__item">
+            <div className="team__container">
+                <span className="home__team">
+                    <span className="matchday__position">
+                        <IonSkeletonText animated style={{ width: '100%' }} />
+                        <span id="position__dot">.</span>
+                    </span>
+                    <IonSkeletonText animated style={{ width: '100%' }} />
+                </span>
+                <span className="match__result">
+                    <IonSkeletonText animated style={{ width: '100%' }} />
+                    <span>:</span>
+                    <IonSkeletonText animated style={{ width: '100%' }} />
+                </span>
+                <span className="away__team">
+                    <IonSkeletonText animated style={{ width: '100%' }} />
+                    <span className="matchday__position">
+                        <IonSkeletonText animated style={{ width: '100%' }} />
+                        <span id="position__dot">.</span>
+                    </span>
+                </span>
+            </div>
+        </IonItem>
+    );
+
+    return <IonList className="matchday__card__skeleton">{items}</IonList>;
 };
 
 export default MatchdayResults;

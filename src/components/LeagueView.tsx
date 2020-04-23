@@ -67,7 +67,6 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
 
         fetchTables();
 
-        return () => setCompetitionData([])
     }, [setLoading]);
 
     let fetchTables = () => {

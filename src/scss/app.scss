@@ -195,7 +195,7 @@ ion-toolbar {
         padding: 5px;
       }
     }
-    .matchday__results__card,
+    .matchday__card,
     .main__table__container,
     .side__table__container {
       flex-wrap: wrap;
@@ -207,7 +207,7 @@ ion-toolbar {
       margin: 10px;
     }
 
-    .matchday__results__card:last-child { margin-bottom: 10px; }
+    .matchday__card:last-child { margin-bottom: 10px; }
 
     .side__table__card {
       width: 100%;
@@ -390,7 +390,6 @@ ion-toolbar {
 }
 
 .team__info {
-  width: 100%;
   min-height: 25px;
   display: flex;
   align-items: center;
@@ -401,13 +400,13 @@ ion-toolbar {
     align-items: center;
     justify-content: flex-end;
     flex-shrink: 0;
-    width: 24px;
+    width: 20px;
     @include to-xs { width: 18px }
   }
 
   .team__logo {
     width: 20px;
-    margin: 3px 10px;
+    margin: 3px 5px;
     flex-shrink: 0;
 
     @include to-xs {
@@ -453,10 +452,17 @@ ion-toolbar {
 
 
   @include to-xs { margin: 10px auto !important; }
+
+  .main__table__skeleton {
+    .team__info { width: 100% }
+    .team__container { width: 420px; }
+    .team__position {
+      margin-left: 5px;
+      span { margin-left: 2px }
+    }
+  }
 }
 .side__table__container {
-  @include from-xs { width: 200px; }
-
   .team__stats .team__result__item {
     width: calc(100% / 6);
   }
@@ -464,10 +470,27 @@ ion-toolbar {
     width: calc(100% / 6);
   }
 }
-.matchday__results__card {
+.matchday__card {
   height: fit-content;
   width: 470px;
   margin: 10px !important;
+
+  .matchday__card__skeleton {
+    .home__team {
+      span + ion-skeleton-text { margin-left: 10px;}
+    }
+    .away__team > ion-skeleton-text {
+      margin-right: 10px;
+    }
+
+    .home__team,
+    .away__team,
+    .matchday__position {
+      display: flex;
+      width: 25px;
+      #position__dot { margin-left: 3px; }
+    }
+  }
 }
 
 .list_title {

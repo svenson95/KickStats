@@ -203,7 +203,7 @@ let MatchDays = ({ ...props }) => {
                 route={props.route}
                 matchDay={25} // matchDay variable
                 data={props.data}
-                name="currentMatchday"
+                name="Next"
                 isLoading={isLoading}
             />
             <MatchdayResults
@@ -211,7 +211,7 @@ let MatchDays = ({ ...props }) => {
                 route={props.route}
                 matchDay={25} // matchDay variable
                 data={props.data}
-                name="lastMatchday"
+                name="Current"
                 isLoading={isLoading}
             />
             <MatchdayResults
@@ -219,7 +219,7 @@ let MatchDays = ({ ...props }) => {
                 route={props.route}
                 matchDay={25} // matchDay variable
                 data={props.data}
-                name="nextToLastMatchday"
+                name="Last"
                 isLoading={isLoading}
             />
         </div>

@@ -3,21 +3,22 @@ import {IonCard, IonItem, IonList, IonProgressBar, IonSkeletonText} from "@ionic
 
 let MatchdayResults = ({ ...props }) => {
 
-    let [title, setTitle] = useState();
-    let [index, setIndex] = useState();
+    let [matches, setMatches] = useState();
+    let [matchDay, setMatchDay] = useState();
 
     useEffect(() => {
-        if (props.name === "currentMatchday") {
-            setTitle(`Next | ${props.matchDay}. Matchday`);
-            setIndex(0);
-        } else if (props.name === "lastMatchday") {
-            setTitle(`Current | ${props.matchDay - 1}. Matchday`);
-            setIndex(1);
-        } else if (props.name === "nextToLastMatchday") {
-            setTitle(`Last | ${props.matchDay - 2}. Matchday`);
-            setIndex(2);
+        if (props.name === "Next") {
+            setMatchDay(props.matchDay);
+            setMatches(props.matchesData?.matches.filter((allMatches: any) => allMatches.matchday === props.matchDay));
+            // matches.filter(el => el.utcDate);
+        } else if (props.name === "Current") {
+            setMatchDay(props.matchDay-1);
+            setMatches(props.matchesData?.matches.filter((allMatches: any) => allMatches.matchday === props.matchDay-1));
+        } else if (props.name === "Last") {
+            setMatchDay(props.matchDay-2);
+            setMatches(props.matchesData?.matches.filter((allMatches: any) => allMatches.matchday === props.matchDay-2));
         }
-    });
+    }, [props.matchesData]);
 
     return (
         <IonCard className="matchday__card">
@@ -25,16 +26,11 @@ let MatchdayResults = ({ ...props }) => {
                 <IonProgressBar value={1} type={props.isLoading ? 'indeterminate' : 'determinate'}/>
                 <div className="card__title absolute-position">
                     <div className="table__name">
-                        {title && title}
+                        {props.name} | {matchDay}. Matchday
                     </div>
                 </div>
-                {props.matchesData &&
-                    <MatchDayCard
-                        matchDay={props.matchDay}
-                        index={index}
-                        matchesData={props.matchesData}
-                        data={props.data}
-                    />
+                {props.matchesData && matches &&
+                    <MatchDayCard matches={matches} data={props.data} />
                 }
                 {props.isLoading && <MatchDayCardSkeleton/>}
             </div>
@@ -49,11 +45,9 @@ const MatchDayCard = ({ ...props }) => {
         return ranking.position;
     }
 
-    const matches: [] = props.matchesData.matches.filter((allMatches: any) => allMatches.matchday === props.matchDay - props.index);
-
     return (<>
         <IonList>
-            {props.matchesData && matches.map((match: any, index: number) => {
+            {props.matches && props.matches.map((match: any, index: number) => {
                 const homeScore = match.score.fullTime.homeTeam;
                 const awayScore = match.score.fullTime.awayTeam;
                 const trimmedHomeTeam = match.homeTeam.name.toLowerCase().split(' ').join('').split('.').join('').split('&').join('and');

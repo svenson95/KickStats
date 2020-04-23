@@ -45,7 +45,7 @@ const MatchDayCard = ({ ...props }) => {
         return ranking.position;
     }
 
-    return (<>
+    return (
         <IonList>
             {props.matches && props.matches.map((match: any, index: number) => {
                 const homeScore = match.score.fullTime.homeTeam;
@@ -76,11 +76,11 @@ const MatchDayCard = ({ ...props }) => {
                 )
             })}
         </IonList>
-    </>);
+    );
 };
 
 const MatchDayCardSkeleton = () => {
-    const skeletonItems = Array(9).fill(null);
+    const skeletonItems = Array(9).fill(0);
     const items = skeletonItems.map((_, index) =>
         <IonItem key={index} className="team__item">
             <div className="team__container">

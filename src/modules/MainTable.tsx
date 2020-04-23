@@ -86,7 +86,7 @@ const TableItems = ({ ...props }) =>
     </IonList>;
 
 const MainTableSkeleton = () => {
-    const skeletonItems = Array(18).fill(null);
+    const skeletonItems = Array(18).fill(0);
 
     const items = skeletonItems.map((_, index) =>
         <IonItem className="team__item" key={index}>

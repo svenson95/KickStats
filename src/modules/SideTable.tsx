@@ -25,7 +25,8 @@ const SideTable = ({ ...props }) =>
                     <div className="team__result__item goals--minus"><div className="ball">-</div></div>
                 </div>
             </div>
-            <SideTableItems data={props.data} name={props.name} isLoading={props.isLoading} />
+            {props.data.standings && <SideTableItems data={props.data} name={props.name} isLoading={props.isLoading} />}
+            {props.isLoading && <SideTableSkeleton />}
         </div>
     </IonCard>;
 
@@ -58,11 +59,10 @@ const SideTableItems = ({ ...props }) =>
                 </IonItem>
             )
         })}
-        {props.isLoading && <SideTableSkeleton />}
     </IonList>;
 
 const SideTableSkeleton = () => {
-    const skeletonItems = Array(18).fill(null);
+    const skeletonItems = Array(18).fill(0);
 
     const items = skeletonItems.map((_, index) =>
         <IonItem className="team__item" key={index}>

@@ -8,8 +8,6 @@ import {
 import React from 'react';
 import {markItems} from "../components/LeagueView";
 
-
-
 const SideTable = ({ ...props }) =>
     <IonCard className="side__table__container">
         <div className="side__table__card">
@@ -31,9 +29,6 @@ const SideTable = ({ ...props }) =>
         </div>
     </IonCard>;
 
-const trimmedName = (string: string) =>
-    string.toLowerCase().split(' ').join('').split('.').join('').split('&').join('and');
-
 const SideTableItems = ({ ...props }) =>
     <IonList>
         <div className="vertical__line line__1" />
@@ -43,24 +38,27 @@ const SideTableItems = ({ ...props }) =>
         <div className="vertical__line line__5" />
         {props.data.standings ? (
             <>
-                {props.data.standings[(props.name === "Home" ? 1 : 2)].table.map((team: any, index: number) =>
-                    <IonItem key={index} className="team__item">
-                        <div className="team__container">
-                            <div className={`team__info team__info__${trimmedName(team.team.name)}`} onClick={() => markItems(trimmedName(team.team.name))} >
-                                <div className="team__position">{team.position}.</div>
-                                <div className="team__logo"><img src={team.team.crestUrl} alt={""}/></div>
+                {props.data.standings[(props.name === "Home" ? 1 : 2)].table.map((team: any, index: number) => {
+                    const trimmedTeamName = team.team.name.toLowerCase().split(' ').join('').split('.').join('').split('&').join('and');
+                    return (
+                        <IonItem key={index} className="team__item">
+                            <div className="team__container">
+                                <div className={`team__info team__info__${trimmedTeamName}`} onClick={() => markItems(trimmedTeamName)}>
+                                    <div className="team__position">{team.position}.</div>
+                                    <div className="team__logo"><img src={team.team.crestUrl} alt={""}/></div>
+                                </div>
+                                <div className="team__stats">
+                                    <div className="team__result__item">{team.playedGames}</div>
+                                    <div className="team__result__item">{team.won}</div>
+                                    <div className="team__result__item">{team.draw}</div>
+                                    <div className="team__result__item">{team.lost}</div>
+                                    <div className="team__result__item">{team.goalsFor}</div>
+                                    <div className="team__result__item">{team.goalsAgainst}</div>
+                                </div>
                             </div>
-                            <div className="team__stats">
-                                <div className="team__result__item">{team.playedGames}</div>
-                                <div className="team__result__item">{team.won}</div>
-                                <div className="team__result__item">{team.draw}</div>
-                                <div className="team__result__item">{team.lost}</div>
-                                <div className="team__result__item">{team.goalsFor}</div>
-                                <div className="team__result__item">{team.goalsAgainst}</div>
-                            </div>
-                        </div>
-                    </IonItem>
-                )}
+                        </IonItem>
+                    )
+                })}
             </>
         ) : (<SideTableSkeleton />)}
     </IonList>;

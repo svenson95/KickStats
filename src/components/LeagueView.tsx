@@ -118,8 +118,10 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
         const league_id = Object.values(league_ids)[pageTitles.findIndex(el => el.title === url_parameter)];
 
         fetchData(basePath + `/competitions/${league_id}/standings`).then(data => {
-            data.standings[0].table.forEach((el: any) => {
-                el.team.name = shortClubName(el.team.name, history);
+            data.standings.forEach((standing: any) => {
+                standing.table.forEach((el: any) => {
+                    el.team.name = shortClubName(el.team.name, history);
+                });
             });
             setCompetitionData(data);
             setLoading(false);

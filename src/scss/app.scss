@@ -159,7 +159,6 @@ ion-toolbar {
     .table__card {
       height: fit-content;
       background-color: white;
-      margin: 10px;
       @include to-xs {
         .team__stats {
           font-size: 11px;
@@ -452,9 +451,7 @@ ion-toolbar {
 .main__table__container {
   display: flex;
   @include to-md { width: 100%; }
-
-
-  @include to-xs { margin: 10px auto !important; }
+  @include to-xs { margin: 10px 10px 0 !important; }
 
   .main__table__skeleton {
     .team__info { width: 100% }

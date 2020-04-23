@@ -34,7 +34,6 @@ let MatchdayResults = ({ ...props }) => {
                         index={index}
                         matchesData={props.matchesData}
                         data={props.data}
-                        name={props.name}
                     />
                 }
                 {props.isLoading && <MatchDayCardSkeleton/>}

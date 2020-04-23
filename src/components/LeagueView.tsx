@@ -68,8 +68,30 @@ let shortClubName = (str: string, history: any) => {
         if (str === "SV Werder Bremen") return "Werder Bremen";
         if (str === "SC Paderborn 07") return "SC Paderborn";
         return str;
-    } else if (history.location.pathname.substring(1) === "premiereleague") {
-
+    } if (history.location.pathname.substring(1) === "premierleague") {
+        if (str === "Liverpool FC") return "Liverpool";
+        if (str === "Manchester City FC") return "Manchester City";
+        if (str === "Leicester City FC") return "Leicester City";
+        if (str === "Chelsea FC") return "Chelsea";
+        if (str === "Manchester United FC") return "Manchester United";
+        if (str === "Wolverhampton Wanderers FC") return "Wolverhampton";
+        if (str === "Sheffield United FC") return "Sheffield United";
+        if (str === "Tottenham Hotspur FC") return "Tottenham Hotspurs";
+        if (str === "Arsenal FC") return "Arsenal";
+        if (str === "Burnley FC") return "Burnley";
+        if (str === "Crystal Palace FC") return "Crystal Palace";
+        if (str === "Everton FC") return "Everton";
+        if (str === "Newcastle United FC") return "Newcastle United";
+        if (str === "Southampton FC") return "Southampton";
+        if (str === "Brighton & Hove Albion FC") return "Brighton & Hove Albion";
+        if (str === "West Ham United FC") return "West Ham";
+        if (str === "Watford FC") return "Watford";
+        if (str === "AFC Bournemouth") return "Bournemouth";
+        if (str === "Aston Villa FC") return "Aston Villa";
+        if (str === "Norwich City FC") return "Norwich City";
+        return str;
+    } else {
+        return str;
     }
 };
 

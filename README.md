@@ -1,1 +1,1 @@
-# kickticker
+# kickstats

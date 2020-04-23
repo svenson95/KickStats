@@ -231,11 +231,11 @@ ion-toolbar {
         @include to-xs { margin-left: 2px; }
       }
 
-      .line__1 { right: 24px; @include to-xs { right: 24px; } }
-      .line__2 { right: 44px; @include to-xs { right: 43.5px; } }
-      .line__3 { right: 64px; @include to-xs { right: 63px; } }
-      .line__4 { right: 84px; @include to-xs { right: 82px; } }
-      .line__5 { right: 104px; @include to-xs { right: 100.5px; } }
+      .line__1 { right: 24.5px; @include to-xs { right: 24px; } }
+      .line__2 { right: 44.5px; @include to-xs { right: 43.5px; } }
+      .line__3 { right: 65px; @include to-xs { right: 63px; } }
+      .line__4 { right: 85px; @include to-xs { right: 82px; } }
+      .line__5 { right: 105px; @include to-xs { right: 100.5px; } }
     }
     ion-card {
       border-radius: 0;
@@ -278,12 +278,12 @@ ion-toolbar {
       transform: translateY(-25px);
     }
     .line__1 { right: 30px; @include to-xs { right: 26px; } }
-    .line__2 { right: 54px; @include to-xs { right: 46px; } }
-    .line__3 { right: 79px; @include to-xs { right: 66px; } }
-    .line__4 { right: 104px; @include to-xs { right: 87px; } }
-    .line__5 { right: 129px; @include to-xs { right: 108px; } }
-    .line__6 { right: 155px; @include to-xs { right: 128px; } }
-    .line__7 { right: 179px; @include to-xs { right: 148px; } }
+    .line__2 { right: 55px; @include to-xs { right: 46px; } }
+    .line__3 { right: 80px; @include to-xs { right: 66px; } }
+    .line__4 { right: 105px; @include to-xs { right: 87px; } }
+    .line__5 { right: 130px; @include to-xs { right: 108px; } }
+    .line__6 { right: 155px; @include to-xs { right: 129px; } }
+    .line__7 { right: 180px; @include to-xs { right: 149px; } }
   }
 }
 

@@ -54,9 +54,9 @@ export function markItems(teamName: string) {
 
 let shortClubName = (str: string, history: any) => {
     if (history.location.pathname.substring(1) === "bundesliga") {
-        if (str === "FC Bayern München") return "FC Bayern München";
+        if (str === "FC Bayern München") return "Bayern München";
         if (str === "BV Borussia 09 Dortmund") return "Borussia Dortmund";
-        if (str === "Borussia Mönchengladbach") return "B. Mönchengladbach";
+        if (str === "Borussia Mönchengladbach") return "Mönchengladbach";
         if (str === "Bayer 04 Leverkusen") return "Bayer Leverkusen";
         if (str === "FC Schalke 04") return "FC Schalke";
         if (str === "TSG 1899 Hoffenheim") return "TSG Hoffenheim";
@@ -161,7 +161,11 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
             </IonHeader>
             <IonContent>
                 <div className="content__div">
-                    <Tables competitionData={competitionData} isLoading={isLoading} />
+                    <MainTable data={competitionData} isLoading={isLoading} />
+                    <div className="home__and__away__container">
+                        <SideTable data={competitionData} isLoading={isLoading} name={"Home"} />
+                        <SideTable data={competitionData} isLoading={isLoading} name={"Away"} />
+                    </div>
                     {competitionData.competition &&
                         <MatchDays data={competitionData} isLoading={isLoading} route={match}/>
                     }
@@ -169,19 +173,6 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
             </IonContent>
         </IonPage>
     );
-};
-
-let Tables = ({ ...props }) => {
-
-    return (
-        <div className="tables__container">
-            <MainTable data={props.competitionData} isLoading={props.isLoading} />
-            <div className="home__and__away__container">
-                <SideTable data={props.competitionData} isLoading={props.isLoading} name={"Home"} />
-                <SideTable data={props.competitionData} isLoading={props.isLoading} name={"Away"} />
-            </div>
-        </div>
-    )
 };
 
 let MatchDays = ({ ...props }) => {

@@ -13,7 +13,7 @@ const SideTable = ({ ...props }) =>
         <div className="side__table__card">
             <IonProgressBar value={1} type={props.isLoading ? 'indeterminate' : 'determinate'}/>
             <div className="card__title">
-                <div className="table__name">{props.name}</div>
+                <div className="table__name">{props.name} Table</div>
             </div>
             <div className="team__header__stats">
                 <div className="team__header">

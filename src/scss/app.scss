@@ -131,22 +131,41 @@ ion-toolbar {
   .home__and__away__container {
     display: flex;
 
+    @include from-xs {
+      padding-bottom: 10px;
+    }
+
+    @include from-sm {
+      padding: 10px;
+    }
+
     @include to-md {
       width: 100%;
       justify-content: center;
       flex-wrap: wrap;
     }
 
-    @include to-xs {
-      justify-content: space-evenly;
+    ion-card + ion-card {
+      margin-left: 10px;
+    }
+
+    ion-card {
+      @include to-xs { margin: 10px !important; }
     }
   }
   .matches__container {
-    @include to-md {
+    @include to-sm {
       width: 100%;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      padding: 10px; // HERE
+    }
+
+    @include to-md { padding-top: 0 }
+
+    ion-card:not(:first-child) {
+      margin-top: 10px;
     }
   }
 
@@ -164,7 +183,7 @@ ion-toolbar {
         min-width: 420px;
       }
 
-      @include to-xs {
+      @include to-tiny {
         .team__stats {
           font-size: 11px;
         };
@@ -211,10 +230,8 @@ ion-toolbar {
     }
     .side__table__container {
       height: fit-content;
-      margin: 10px;
+      margin: 0;
     }
-
-    .matchday__card:last-child { margin-bottom: 10px; }
 
     .side__table__card {
       width: 100%;
@@ -222,7 +239,7 @@ ion-toolbar {
       .team__stats,
       .team__header {
         width: 120px;
-        @include to-xs { width: 116px; }
+        @include to-tiny { width: 116px; }
       }
 
       .team__name,
@@ -232,14 +249,14 @@ ion-toolbar {
       };
 
       .team__logo {
-        @include to-xs { margin-left: 2px; }
+        @include to-tiny { margin-left: 2px; }
       }
 
-      .line__1 { right: 24.5px; @include to-xs { right: 24px; } }
-      .line__2 { right: 44.5px; @include to-xs { right: 43.5px; } }
-      .line__3 { right: 65px; @include to-xs { right: 63px; } }
-      .line__4 { right: 85px; @include to-xs { right: 82px; } }
-      .line__5 { right: 105px; @include to-xs { right: 100.5px; } }
+      .line__1 { right: 24.5px; @include to-tiny { right: 24px; } }
+      .line__2 { right: 44.5px; @include to-tiny { right: 43.5px; } }
+      .line__3 { right: 65px; @include to-tiny { right: 63px; } }
+      .line__4 { right: 85px; @include to-tiny { right: 82px; } }
+      .line__5 { right: 105px; @include to-tiny { right: 100.5px; } }
     }
     ion-card {
       border-radius: 0;
@@ -249,11 +266,9 @@ ion-toolbar {
       --ion-background-color: white !important;
       --background: white !important;
 
-      margin-bottom: 0;
-
       @include to-xs { margin-top: 0; margin-bottom: 0; }
 
-      @include to-xs {
+      @include to-tiny {
         -webkit-margin-start: 0;
         margin-inline-start: 0;
         -webkit-margin-end: 0;
@@ -278,16 +293,16 @@ ion-toolbar {
       height: 91%;
       @supports (-webkit-appearance: none) { top: 19px; }
       @supports (-webkit-appearance: none) { height: 99%; }
-      background-color: #d1d1d1;
+      background-color: rgba(var(--ion-color-primary-contrast-rgb), 0.12);
       transform: translateY(-25px);
     }
-    .line__1 { right: 30px; @include to-xs { right: 26px; } }
-    .line__2 { right: 55px; @include to-xs { right: 46px; } }
-    .line__3 { right: 80px; @include to-xs { right: 66px; } }
-    .line__4 { right: 105px; @include to-xs { right: 87px; } }
-    .line__5 { right: 130px; @include to-xs { right: 108px; } }
-    .line__6 { right: 155px; @include to-xs { right: 129px; } }
-    .line__7 { right: 180px; @include to-xs { right: 149px; } }
+    .line__1 { right: 30px; @include to-tiny { right: 26px; } }
+    .line__2 { right: 55px; @include to-tiny { right: 46px; } }
+    .line__3 { right: 80px; @include to-tiny { right: 66px; } }
+    .line__4 { right: 105px; @include to-tiny { right: 87px; } }
+    .line__5 { right: 130px; @include to-tiny { right: 108px; } }
+    .line__6 { right: 155px; @include to-tiny { right: 129px; } }
+    .line__7 { right: 180px; @include to-tiny { right: 149px; } }
   }
 }
 
@@ -322,7 +337,7 @@ ion-toolbar {
     padding-bottom: 2px;
     border-bottom: 1px solid black;
     width: 200px;
-    @include to-xs { width: 165px; }
+    @include to-tiny { width: 165px; }
     justify-content: space-between;
     flex-shrink: 0;
 
@@ -334,7 +349,7 @@ ion-toolbar {
 
       font-weight: 500;
       font-size: 9px;
-      @include to-xs { font-size: 8px; }
+      @include to-tiny { font-size: 8px; }
       //background-repeat: no-repeat;
       //background-position: 6px 100%,0 0;
       //background-size: 68% 10%;
@@ -408,7 +423,7 @@ ion-toolbar {
     justify-content: flex-end;
     flex-shrink: 0;
     width: 20px;
-    @include to-xs { width: 18px }
+    @include to-tiny { width: 18px }
   }
 
   .team__logo {
@@ -416,7 +431,7 @@ ion-toolbar {
     margin: 3px 5px;
     flex-shrink: 0;
 
-    @include to-xs {
+    @include to-tiny {
       margin: 3px 6px;
       width: 15px;
     }
@@ -440,7 +455,7 @@ ion-toolbar {
   display: flex;
   align-items: center;
   width: 200px;
-  @include to-xs { width: 165px; }
+  @include to-tiny { width: 165px; }
   justify-content: space-between;
   flex-shrink: 0;
 
@@ -455,8 +470,9 @@ ion-toolbar {
 
 .main__table__container {
   display: flex;
+
   @include to-md { width: 100%; }
-  @include to-xs { margin: 10px 10px 0 !important; }
+  @include to-xs { padding: 10px 10px 0 !important; }
 
   .main__table__skeleton {
     .team__info { width: 100% }
@@ -483,7 +499,6 @@ ion-toolbar {
 .matchday__card {
   height: fit-content;
   width: 470px;
-  margin: 10px !important;
 
   .matchday__card__skeleton {
     .home__team {

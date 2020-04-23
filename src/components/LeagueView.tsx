@@ -1,6 +1,6 @@
 import {IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from '@ionic/react';
 import React, {useEffect, useRef, useState} from 'react';
-import {RouteComponentProps, withRouter} from "react-router";
+import {RouteComponentProps, useHistory, withRouter} from "react-router";
 import {pageTitles} from "../App";
 import MainTable from "../modules/MainTable";
 import SideTable from "../modules/SideTable";
@@ -53,10 +53,31 @@ export function markItems(teamName: string) {
     }
 }
 
+let shortClubName = (str: string, history: any) => {
+    if (history.location.pathname.substring(1) === "bundesliga") {
+        if (str === "FC Bayern München") return "FC Bayern";
+        if (str === "BV Borussia 09 Dortmund") return "Dortmund";
+        if (str === "Borussia Mönchengladbach") return "Mönchengladbach";
+        if (str === "Bayer 04 Leverkusen") return "Bayer Leverkusen";
+        if (str === "FC Schalke 04") return "FC Schalke";
+        if (str === "TSG 1899 Hoffenheim") return "TSG Hoffenheim";
+        if (str === "1. FC Köln") return "Köln";
+        if (str === "1. FC Union Berlin") return "Union Berlin";
+        if (str === "1. FSV Mainz 05") return "Mainz 05";
+        if (str === "TSV Fortuna 95 Düsseldorf") return "Fortuna Düsseldorf";
+        if (str === "SV Werder Bremen") return "Werder Bremen";
+        if (str === "SC Paderborn 07") return "SC Paderborn";
+        return str;
+    } else if (history.location.pathname.substring(1) === "premiereleague") {
+
+    }
+};
+
 const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match }) => {
 
-    const [competitionData, setCompetitionData] = useState([] as any);
-    const [isLoading, setLoading] = useState();
+    let [competitionData, setCompetitionData] = useState([] as any);
+    let [isLoading, setLoading] = useState();
+    let history = useHistory();
 
     // componentDidMount
     const mounted = useRef(false);
@@ -75,6 +96,9 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
         const league_id = Object.values(league_ids)[pageTitles.findIndex(el => el.title === url_parameter)];
 
         fetchData(basePath + `/competitions/${league_id}/standings`).then(data => {
+            data.standings[0].table.forEach((el: any) => {
+                el.team.name = shortClubName(el.team.name, history);
+            });
             setCompetitionData(data);
             setLoading(false);
         });
@@ -101,7 +125,11 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
                         <SideTable data={competitionData} name={"Home"} />
                         <SideTable data={competitionData} name={"Away"} />
                     </div>
-                    <MatchDays route={match} data={competitionData} isLoading={isLoading} />
+                    {competitionData.competition && <MatchDays
+                        route={match}
+                        data={competitionData}
+                        isLoading={isLoading}/>
+                    }
                 </div>
             </IonContent>
         </IonPage>
@@ -110,9 +138,10 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
 
 let MatchDays = ({ ...props }) => {
 
-    const [matchesData, setMatchesData] = useState();
-    const [isLoading, setLoading] = useState();
-    // let matchDay = props.data.competition.match.matchDay;
+    let [matchesData, setMatchesData] = useState();
+    let [isLoading, setLoading] = useState();
+    let history = useHistory();
+    // let matchDay = props.data.season.currentMatchday;
 
     const mounted = useRef(false);
     useEffect(() => {
@@ -121,6 +150,8 @@ let MatchDays = ({ ...props }) => {
         mounted.current = true;
 
         fetchMatches();
+
+        console.log(props.data);
 
         return () => setMatchesData([]);
     }, [setLoading]);
@@ -131,6 +162,11 @@ let MatchDays = ({ ...props }) => {
         const league_id = Object.values(league_ids)[pageTitles.findIndex(el => el.title === url_parameter)];
 
         fetchData(basePath + `/competitions/${league_id}/matches`).then(data => {
+            data.matches.forEach((el: any) => {
+                el.awayTeam.name = shortClubName(el.awayTeam.name, history);
+                el.homeTeam.name = shortClubName(el.homeTeam.name, history);
+            });
+            console.log(data);
             setMatchesData(data);
             setLoading(false)
         });
@@ -141,7 +177,7 @@ let MatchDays = ({ ...props }) => {
             <MatchdayResults
                 matchesData={matchesData}
                 route={props.route}
-                matchDay={25}
+                matchDay={25} // matchDay variable
                 data={props.data}
                 name="currentMatchday"
                 isLoading={isLoading}
@@ -149,7 +185,7 @@ let MatchDays = ({ ...props }) => {
             <MatchdayResults
                 matchesData={matchesData}
                 route={props.route}
-                matchDay={26}
+                matchDay={25} // matchDay variable
                 data={props.data}
                 name="lastMatchday"
                 isLoading={isLoading}
@@ -157,7 +193,7 @@ let MatchDays = ({ ...props }) => {
             <MatchdayResults
                 matchesData={matchesData}
                 route={props.route}
-                matchDay={27}
+                matchDay={25} // matchDay variable
                 data={props.data}
                 name="nextToLastMatchday"
                 isLoading={isLoading}

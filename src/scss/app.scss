@@ -165,6 +165,9 @@ ion-toolbar {
           font-size: 11px;
         };
       }
+      @include to-tiny {
+        width: 100%;
+      }
     }
     .league__view__card {
       height: fit-content;

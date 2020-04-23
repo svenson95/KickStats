@@ -88,42 +88,42 @@ const TableItems = ({ ...props }) =>
 const MainTableSkeleton = () => {
     const skeletonItems = Array(18).fill(null);
 
-    const items = skeletonItems.map((_, index) => {
-        return (
-            <IonItem className="team__item" key={index}>
-                <div className="team__container">
-                    <div className="team__info">
-                        <div className="team__position"><IonSkeletonText animated style={{ width: '95%' }} /><span>.</span></div>
-                        <div className="team__logo"><IonSkeletonText animated style={{ width: '95%' }} /></div>
-                        <div className="team__name">
-                            <IonSkeletonText animated style={{ width: '95%' }} />
-                        </div>
-                    </div>
-                    <div className="team__stats">
-                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
-                        <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+    const items = skeletonItems.map((_, index) =>
+        <IonItem className="team__item" key={index}>
+            <div className="team__container">
+                <div className="team__info">
+                    <div className="team__position"><IonSkeletonText animated style={{ width: '95%' }} /><span>.</span></div>
+                    <div className="team__logo"><IonSkeletonText animated style={{ width: '95%' }} /></div>
+                    <div className="team__name">
+                        <IonSkeletonText animated style={{ width: '95%' }} />
                     </div>
                 </div>
-            </IonItem>
-        )
-    });
+                <div className="team__stats">
+                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                    <div className="team__result__item"><IonSkeletonText animated style={{ width: '80%' }} /></div>
+                </div>
+            </div>
+        </IonItem>
+    );
 
-    return <IonList className="main__table__skeleton">
-        <div className="vertical__line line__1" />
-        <div className="vertical__line line__2" />
-        <div className="vertical__line line__3" />
-        <div className="vertical__line line__4" />
-        <div className="vertical__line line__5" />
-        <div className="vertical__line line__6" />
-        <div className="vertical__line line__7" />
-        {items}
-    </IonList>
+    return (
+        <IonList className="main__table__skeleton">
+            <div className="vertical__line line__1" />
+            <div className="vertical__line line__2" />
+            <div className="vertical__line line__3" />
+            <div className="vertical__line line__4" />
+            <div className="vertical__line line__5" />
+            <div className="vertical__line line__6" />
+            <div className="vertical__line line__7" />
+            {items}
+        </IonList>
+    )
 };
 
 export default MainTable;

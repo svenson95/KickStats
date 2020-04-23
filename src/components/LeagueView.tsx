@@ -108,7 +108,7 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
         if (mounted.current) return;
         mounted.current = true;
 
-        fetchTables();
+        fetchTables()
 
     }, [setLoading]);
 
@@ -117,15 +117,17 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
         const url_parameter = match.path.substr(1, match.path.length);
         const league_id = Object.values(league_ids)[pageTitles.findIndex(el => el.title === url_parameter)];
 
-        fetchData(basePath + `/competitions/${league_id}/standings`).then(data => {
-            data.standings.forEach((standing: any) => {
-                standing.table.forEach((el: any) => {
-                    el.team.name = shortClubName(el.team.name, history);
+        fetchData(basePath + `/competitions/${league_id}/standings`)
+            .then(data => {
+                data.standings.forEach((standing: any) => {
+                    standing.table.forEach((el: any) => {
+                        el.team.name = shortClubName(el.team.name, history);
+                    });
                 });
-            });
-            setCompetitionData(data);
-            setLoading(false);
-        });
+                setCompetitionData(data);
+                setLoading(false);
+            })
+            .catch(err => console.log(err));
     };
 
     return (
@@ -146,13 +148,11 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
                 <div className="content__div">
                     <MainTable data={competitionData} isLoading={isLoading} />
                     <div className="home__and__away__container">
-                        <SideTable data={competitionData} name={"Home"} />
-                        <SideTable data={competitionData} name={"Away"} />
+                        <SideTable data={competitionData} isLoading={isLoading} name={"Home"} />
+                        <SideTable data={competitionData} isLoading={isLoading} name={"Away"} />
                     </div>
-                    {competitionData.competition && <MatchDays
-                        route={match}
-                        data={competitionData}
-                        isLoading={isLoading}/>
+                    {competitionData.competition &&
+                        <MatchDays data={competitionData} isLoading={isLoading} route={match}/>
                     }
                 </div>
             </IonContent>
@@ -185,15 +185,16 @@ let MatchDays = ({ ...props }) => {
         const url_parameter = props.route.path.substr(1, props.route.path.length);
         const league_id = Object.values(league_ids)[pageTitles.findIndex(el => el.title === url_parameter)];
 
-        fetchData(basePath + `/competitions/${league_id}/matches`).then(data => {
-            data.matches.forEach((el: any) => {
-                el.awayTeam.name = shortClubName(el.awayTeam.name, history);
-                el.homeTeam.name = shortClubName(el.homeTeam.name, history);
-            });
-            console.log(data);
-            setMatchesData(data);
-            setLoading(false)
-        });
+        fetchData(basePath + `/competitions/${league_id}/matches`)
+            .then(data => {
+                data.matches.forEach((el: any) => {
+                    el.awayTeam.name = shortClubName(el.awayTeam.name, history);
+                    el.homeTeam.name = shortClubName(el.homeTeam.name, history);
+                });
+                setMatchesData(data);
+                setLoading(false)
+            })
+            .catch(err => console.log(err));
     };
 
     return (

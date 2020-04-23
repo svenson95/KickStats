@@ -469,6 +469,11 @@ ion-toolbar {
   .team__header__stats .team__header .team__result__item {
     width: calc(100% / 6);
   }
+
+  .side__table__skeleton {
+    padding: 0;
+    #position__dot { margin-left: 3px; }
+  }
 }
 .matchday__card {
   height: fit-content;

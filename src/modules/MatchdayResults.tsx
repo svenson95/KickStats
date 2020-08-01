@@ -3,36 +3,59 @@ import {IonCard, IonItem, IonList, IonProgressBar, IonSkeletonText} from "@ionic
 
 let MatchdayResults = ({ ...props }) => {
 
-    let [matches, setMatches] = useState();
-    let [matchDay, setMatchDay] = useState();
+    let [matches, setMatches] = useState(null as any);
 
     useEffect(() => {
-        if (props.name === "Next") {
-            setMatchDay(props.matchDay);
-            setMatches(props.matchesData?.matches.filter((allMatches: any) => allMatches.matchday === props.matchDay));
-            // matches.filter(el => el.utcDate);
-        } else if (props.name === "Current") {
-            setMatchDay(props.matchDay-1);
-            setMatches(props.matchesData?.matches.filter((allMatches: any) => allMatches.matchday === props.matchDay-1));
-        } else if (props.name === "Last") {
-            setMatchDay(props.matchDay-2);
-            setMatches(props.matchesData?.matches.filter((allMatches: any) => allMatches.matchday === props.matchDay-2));
+        if (props.marked) {
+            if (props.name === "Next") {
+                setMatches(props.matchesData?.matches.filter((matches: any) => {
+                    return matches.homeTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay ||
+                            matches.awayTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay ||
+                            matches.homeTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay ||
+                            matches.awayTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay
+                }));
+            } else if (props.name === "Current") {
+                setMatches(props.matchesData?.matches.filter((matches: any) => {
+                    return matches.homeTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay-1 ||
+                        matches.awayTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay-1 ||
+                        matches.homeTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay-1 ||
+                        matches.awayTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay-1
+                }));
+            } else if (props.name === "Last") {
+                setMatches(props.matchesData?.matches.filter((matches: any) => {
+                    return matches.homeTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay-2 ||
+                        matches.awayTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay-2 ||
+                        matches.homeTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay-2 ||
+                        matches.awayTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay-2
+                }));
+            }
+        } else {
+            if (props.name === "Next") {
+                setMatches(props.matchesData?.matches.filter((allMatches: any) => allMatches.matchday === props.matchDay));
+            } else if (props.name === "Current") {
+                setMatches(props.matchesData?.matches.filter((allMatches: any) => allMatches.matchday === props.matchDay-1));
+            } else if (props.name === "Last") {
+                setMatches(props.matchesData?.matches.filter((allMatches: any) => allMatches.matchday === props.matchDay-2));
+            }
         }
-    }, [props.matchesData]);
+    }, [props.marked, props.matchesData]);
 
     return (
         <IonCard className="matchday__card">
             <div className="league__view__card">
                 <IonProgressBar value={1} type={props.isLoading ? 'indeterminate' : 'determinate'}/>
-                <div className="card__title absolute-position">
-                    <div className="table__name">
-                        {props.name} | {matchDay}. Matchday
-                    </div>
-                </div>
-                {props.matchesData && matches &&
-                    <MatchDayCard matches={matches} data={props.data} />
+                {props.matchesData?.matches.length ?
+                    <>
+                        <div className="card__title absolute-position">
+                            <div className="table__name">
+                                {props.matchDay}. Matchday
+                            </div>
+                        </div>
+                        {props.matchesData && <MatchDayCard matches={matches} data={props.data} />}
+                    </>
+                    :
+                    !props.isLoading && <div className="no-data"><p>No data available</p></div>
                 }
-                {props.isLoading && <MatchDayCardSkeleton/>}
             </div>
         </IonCard>
     );
@@ -77,37 +100,6 @@ const MatchDayCard = ({ ...props }) => {
             })}
         </IonList>
     );
-};
-
-const MatchDayCardSkeleton = () => {
-    const skeletonItems = Array(9).fill(0);
-    const items = skeletonItems.map((_, index) =>
-        <IonItem key={index} className="team__item">
-            <div className="team__container">
-                <span className="home__team">
-                    <span className="matchday__position">
-                        <IonSkeletonText animated style={{ width: '100%' }} />
-                        <span id="position__dot">.</span>
-                    </span>
-                    <IonSkeletonText animated style={{ width: '100%' }} />
-                </span>
-                <span className="match__result">
-                    <IonSkeletonText animated style={{ width: '100%' }} />
-                    <span>:</span>
-                    <IonSkeletonText animated style={{ width: '100%' }} />
-                </span>
-                <span className="away__team">
-                    <IonSkeletonText animated style={{ width: '100%' }} />
-                    <span className="matchday__position">
-                        <IonSkeletonText animated style={{ width: '100%' }} />
-                        <span id="position__dot">.</span>
-                    </span>
-                </span>
-            </div>
-        </IonItem>
-    );
-
-    return <IonList className="matchday__card__skeleton">{items}</IonList>;
 };
 
 export default MatchdayResults;

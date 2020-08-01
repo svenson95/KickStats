@@ -192,10 +192,12 @@ ion-toolbar {
         width: 100%;
       }
     }
+
     .league__view__card {
-      height: fit-content;
       background-color: white;
       width: 100%;
+      height: 100%;
+      display: grid;
 
       .match__result {
         display: flex;
@@ -219,6 +221,10 @@ ion-toolbar {
         font-size: 12px;
         align-self: center;
         padding: 5px;
+      }
+      .no-data {
+        height: 50px;
+        text-align: center;
       }
     }
     .matchday__card,
@@ -261,7 +267,6 @@ ion-toolbar {
     ion-card {
       border-radius: 0;
       box-shadow: 0 0 5px black;
-      min-height: 200px;
       --color: black;
       --ion-background-color: white !important;
       --background: white !important;
@@ -497,25 +502,8 @@ ion-toolbar {
   }
 }
 .matchday__card {
-  height: fit-content;
   width: 470px;
-
-  .matchday__card__skeleton {
-    .home__team {
-      span + ion-skeleton-text { margin-left: 10px;}
-    }
-    .away__team > ion-skeleton-text {
-      margin-right: 10px;
-    }
-
-    .home__team,
-    .away__team,
-    .matchday__position {
-      display: flex;
-      width: 25px;
-      #position__dot { margin-left: 3px; }
-    }
-  }
+  display: grid;
 }
 
 .list_title {

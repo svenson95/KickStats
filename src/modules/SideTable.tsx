@@ -6,7 +6,6 @@ import {
     IonSkeletonText,
 } from '@ionic/react';
 import React from 'react';
-import {markItems} from "../components/LeagueView";
 
 const SideTable = ({ ...props }) =>
     <IonCard className="side__table__container">
@@ -43,7 +42,7 @@ const SideTableItems = ({ ...props }) =>
                 <IonItem key={index} className="team__item">
                     <div className="team__container">
                         <div className={`team__info team__info__${trimmedTeamName}`}
-                             onClick={() => markItems(trimmedTeamName)}>
+                             onClick={() => props.markItems(team.team.name, trimmedTeamName)}>
                             <div className="team__position">{team.position}.</div>
                             <div className="team__logo"><img src={team.team.crestUrl} alt={""}/></div>
                         </div>

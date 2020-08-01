@@ -19,39 +19,6 @@ export const league_ids = {
     // "brazil": "2013"
 };
 
-let counter = 0;
-export function markItems(teamName: string) {
-    let marked1 = document.querySelector(`.team__info__${teamName}`)?.classList.contains('marked1');
-    if (marked1) {
-        document.querySelectorAll(`.team__info__${teamName}`)?.forEach(el => el.classList.remove('marked1'));
-        counter -= 1;
-    } else if (document.querySelector(`.team__info__${teamName}`)?.classList.contains('marked2')) {
-        document.querySelectorAll(`.team__info__${teamName}`)?.forEach(el => el.classList.remove('marked2'));
-        counter -= 1;
-    } else if (counter >= 2) {
-        document.querySelectorAll(`.team__info`)?.forEach(el => {
-            el.classList.remove('marked1');
-            el.classList.remove('marked2');
-        });
-        document.querySelectorAll(".home__team")?.forEach(el => {
-            el.classList.remove('marked1');
-            el.classList.remove('marked2');
-        });
-        document.querySelectorAll(".away__team")?.forEach(el => {
-            el.classList.remove('marked1');
-            el.classList.remove('marked2');
-        });
-        counter = 0;
-    } else {
-        if (counter === 0) {
-            document.querySelectorAll(`.team__info__${teamName}`)?.forEach(el => el.classList.add('marked1'));
-        } else {
-            document.querySelectorAll(`.team__info__${teamName}`)?.forEach(el => el.classList.add('marked2'));
-        }
-        counter += 1;
-    }
-}
-
 let shortClubName = (str: string, history: any) => {
     if (history.location.pathname.substring(1) === "bundesliga") {
         if (str === "FC Bayern München") return "Bayern München";
@@ -114,6 +81,43 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
 
     let [competitionData, setCompetitionData] = useState([] as any);
     let [isLoading, setLoading] = useState();
+    let [teamsMarked, setTeamsMarked] = useState(false as any);
+    let [counter, setCounter] = useState(0);
+
+    function markItems(name: string, shortName: string) {
+        let marked1 = document.querySelector(`.team__info__${shortName}`)?.classList.contains('marked1');
+        if (marked1) {
+            document.querySelectorAll(`.team__info__${shortName}`)?.forEach(el => el.classList.remove('marked1'));
+            setCounter(counter - 1);
+        } else if (document.querySelector(`.team__info__${shortName}`)?.classList.contains('marked2')) {
+            document.querySelectorAll(`.team__info__${shortName}`)?.forEach(el => el.classList.remove('marked2'));
+            setCounter(counter - 1);
+        } else if (counter >= 2) {
+            document.querySelectorAll(`.team__info`)?.forEach(el => {
+                el.classList.remove('marked1');
+                el.classList.remove('marked2');
+            });
+            document.querySelectorAll(".home__team")?.forEach(el => {
+                el.classList.remove('marked1');
+                el.classList.remove('marked2');
+            });
+            document.querySelectorAll(".away__team")?.forEach(el => {
+                el.classList.remove('marked1');
+                el.classList.remove('marked2');
+            });
+            setCounter(0);
+            setTeamsMarked(false);
+        } else {
+            if (counter === 0) {
+                setTeamsMarked({ team1: { name: name, shortName: shortName }, team2: null });
+                document.querySelectorAll(`.team__info__${shortName}`)?.forEach(el => el.classList.add('marked1'));
+            } else {
+                setTeamsMarked({ team1: teamsMarked.team1, team2: { name: name, shortName: shortName } });
+                document.querySelectorAll(`.team__info__${shortName}`)?.forEach(el => el.classList.add('marked2'));
+            }
+            setCounter(counter + 1);
+        }
+    }
     let history = useHistory();
 
     // componentDidMount
@@ -161,13 +165,13 @@ const LeagueView: React.FC<RouteComponentProps<{ name: string; }>> = ({ match })
             </IonHeader>
             <IonContent>
                 <div className="content__div">
-                    <MainTable data={competitionData} isLoading={isLoading} />
+                    <MainTable data={competitionData} isLoading={isLoading} markItems={markItems} />
                     <div className="home__and__away__container">
-                        <SideTable data={competitionData} isLoading={isLoading} name={"Home"} />
-                        <SideTable data={competitionData} isLoading={isLoading} name={"Away"} />
+                        <SideTable data={competitionData} isLoading={isLoading} name={"Home"} markItems={markItems} />
+                        <SideTable data={competitionData} isLoading={isLoading} name={"Away"} markItems={markItems} />
                     </div>
                     {competitionData.competition &&
-                        <MatchDays data={competitionData} isLoading={isLoading} route={match}/>
+                        <MatchDays data={competitionData} isLoading={isLoading} route={match} marked={teamsMarked}/>
                     }
                 </div>
             </IonContent>
@@ -219,22 +223,43 @@ let MatchDays = ({ ...props }) => {
                 data={props.data}
                 name="Next"
                 isLoading={isLoading}
+                marked={props.marked}
             />
             <MatchdayResults
                 matchesData={matchesData}
                 route={props.route}
-                matchDay={matchDay}
+                matchDay={matchDay-1}
                 data={props.data}
                 name="Current"
                 isLoading={isLoading}
+                marked={props.marked}
             />
             <MatchdayResults
                 matchesData={matchesData}
                 route={props.route}
-                matchDay={matchDay}
+                matchDay={matchDay-2}
                 data={props.data}
                 name="Last"
                 isLoading={isLoading}
+                marked={props.marked}
+            />
+            <MatchdayResults
+                matchesData={matchesData}
+                route={props.route}
+                matchDay={matchDay-3}
+                data={props.data}
+                name="Last"
+                isLoading={isLoading}
+                marked={props.marked}
+            />
+            <MatchdayResults
+                matchesData={matchesData}
+                route={props.route}
+                matchDay={matchDay-4}
+                data={props.data}
+                name="Last"
+                isLoading={isLoading}
+                marked={props.marked}
             />
         </div>
     )

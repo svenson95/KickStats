@@ -184,7 +184,6 @@ let MatchDays = ({ ...props }) => {
     let [matchesData, setMatchesData] = useState();
     let [isLoading, setLoading] = useState();
     let history = useHistory();
-    let matchDay = props.data.season.currentMatchday;
 
     const mounted = useRef(false);
     useEffect(() => {
@@ -219,48 +218,54 @@ let MatchDays = ({ ...props }) => {
             <MatchdayResults
                 matchesData={matchesData}
                 route={props.route}
-                matchDay={matchDay}
+                matchDay={props.data.season.currentMatchday}
                 data={props.data}
-                name="Next"
+                name="1"
                 isLoading={isLoading}
                 marked={props.marked}
             />
             <MatchdayResults
                 matchesData={matchesData}
                 route={props.route}
-                matchDay={matchDay-1}
+                matchDay={props.data.season.currentMatchday}
                 data={props.data}
-                name="Current"
+                name="2"
                 isLoading={isLoading}
                 marked={props.marked}
             />
-            <MatchdayResults
-                matchesData={matchesData}
-                route={props.route}
-                matchDay={matchDay-2}
-                data={props.data}
-                name="Last"
-                isLoading={isLoading}
-                marked={props.marked}
-            />
-            <MatchdayResults
-                matchesData={matchesData}
-                route={props.route}
-                matchDay={matchDay-3}
-                data={props.data}
-                name="Last"
-                isLoading={isLoading}
-                marked={props.marked}
-            />
-            <MatchdayResults
-                matchesData={matchesData}
-                route={props.route}
-                matchDay={matchDay-4}
-                data={props.data}
-                name="Last"
-                isLoading={isLoading}
-                marked={props.marked}
-            />
+            {props.data.season.currentMatchday-2 > 0 &&
+                <MatchdayResults
+                    matchesData={matchesData}
+                    route={props.route}
+                    matchDay={props.data.season.currentMatchday}
+                    data={props.data}
+                    name="3"
+                    isLoading={isLoading}
+                    marked={props.marked}
+                />
+            }
+            {props.data.season.currentMatchday-3 > 0 &&
+                <MatchdayResults
+                    matchesData={matchesData}
+                    route={props.route}
+                    matchDay={props.data.season.currentMatchday}
+                    data={props.data}
+                    name="4"
+                    isLoading={isLoading}
+                    marked={props.marked}
+                />
+            }
+            {props.data.season.currentMatchday-4 > 0 &&
+                <MatchdayResults
+                    matchesData={matchesData}
+                    route={props.route}
+                    matchDay={props.data.season.currentMatchday}
+                    data={props.data}
+                    name="5"
+                    isLoading={isLoading}
+                    marked={props.marked}
+                />
+            }
         </div>
     )
 };

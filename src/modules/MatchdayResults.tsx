@@ -7,35 +7,53 @@ let MatchdayResults = ({ ...props }) => {
 
     useEffect(() => {
         if (props.marked) {
-            if (props.name === "Next") {
+            if (props.name === "1") {
                 setMatches(props.matchesData?.matches.filter((matches: any) => {
                     return matches.homeTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay ||
                             matches.awayTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay ||
                             matches.homeTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay ||
                             matches.awayTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay
                 }));
-            } else if (props.name === "Current") {
+            } else if (props.name === "2") {
                 setMatches(props.matchesData?.matches.filter((matches: any) => {
                     return matches.homeTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay-1 ||
                         matches.awayTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay-1 ||
                         matches.homeTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay-1 ||
                         matches.awayTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay-1
                 }));
-            } else if (props.name === "Last") {
+            } else if (props.name === "3") {
                 setMatches(props.matchesData?.matches.filter((matches: any) => {
                     return matches.homeTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay-2 ||
                         matches.awayTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay-2 ||
                         matches.homeTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay-2 ||
                         matches.awayTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay-2
                 }));
+            } else if (props.name === "4") {
+                setMatches(props.matchesData?.matches.filter((matches: any) => {
+                    return matches.homeTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay-3 ||
+                        matches.awayTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay-3 ||
+                        matches.homeTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay-3 ||
+                        matches.awayTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay-3
+                }));
+            } else if (props.name === "5") {
+                setMatches(props.matchesData?.matches.filter((matches: any) => {
+                    return matches.homeTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay-4 ||
+                        matches.awayTeam.name === props.marked.team1?.name && matches.matchday === props.matchDay-4 ||
+                        matches.homeTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay-4 ||
+                        matches.awayTeam.name === props.marked.team2?.name && matches.matchday === props.matchDay-4
+                }));
             }
         } else {
-            if (props.name === "Next") {
-                setMatches(props.matchesData?.matches.filter((allMatches: any) => allMatches.matchday === props.matchDay));
-            } else if (props.name === "Current") {
-                setMatches(props.matchesData?.matches.filter((allMatches: any) => allMatches.matchday === props.matchDay-1));
-            } else if (props.name === "Last") {
-                setMatches(props.matchesData?.matches.filter((allMatches: any) => allMatches.matchday === props.matchDay-2));
+            if (props.name === "1") {
+                setMatches(props.matchesData?.matches.filter((match: any) => match.matchday === props.matchDay));
+            } else if (props.name === "2") {
+                setMatches(props.matchesData?.matches.filter((match: any) => match.matchday === props.matchDay-1));
+            } else if (props.name === "3") {
+                setMatches(props.matchesData?.matches.filter((match: any) => match.matchday === props.matchDay-2));
+            } else if (props.name === "4") {
+                setMatches(props.matchesData?.matches.filter((match: any) => match.matchday === props.matchDay-3));
+            } else if (props.name === "5") {
+                setMatches(props.matchesData?.matches.filter((match: any) => match.matchday === props.matchDay-4));
             }
         }
     }, [props.marked, props.matchesData]);
@@ -48,7 +66,7 @@ let MatchdayResults = ({ ...props }) => {
                     <>
                         <div className="card__title absolute-position">
                             <div className="table__name">
-                                {props.matchDay}. Matchday
+                                {props.matchDay - props.name+1}. Matchday
                             </div>
                         </div>
                         {props.matchesData && <MatchDayCard matches={matches} data={props.data} />}
